@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLC Skunk Works | Command Center</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- FullCalendar -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+
+    <!-- html2pdf for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flc-blue': '#003366',
+                        'flc-gold': '#C4A000',
+                        'flc-light': '#4A90D9',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #1f2937; }
+        ::-webkit-scrollbar-thumb { background: #C4A000; border-radius: 3px; }
+
+        /* Animated counter */
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .counter-animate { animation: countUp 0.5s ease-out; }
+
+        /* Glow effect */
+        .glow-gold { box-shadow: 0 0 20px rgba(196, 160, 0, 0.3); }
+
+        /* Presentation mode styles */
+        .presentation-mode .edit-control { display: none !important; }
+        .presentation-mode .view-only { display: block !important; }
+
+        /* Status colors */
+        .status-planning { background: rgba(234, 179, 8, 0.2); color: #eab308; }
+        .status-active { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .status-blocked { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .status-complete { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+
+        /* Log category colors */
+        .log-decision { border-left-color: #8b5cf6; }
+        .log-progress { border-left-color: #22c55e; }
+        .log-blocker { border-left-color: #ef4444; }
+        .log-win { border-left-color: #eab308; }
+        .log-note { border-left-color: #6b7280; }
+
+        /* Print styles */
+        @media print {
+            .no-print { display: none !important; }
+            .print-break { page-break-before: always; }
+        }
+
+        /* FullCalendar overrides */
+        .fc { background: transparent; }
+        .fc-theme-standard td, .fc-theme-standard th { border-color: #374151; }
+        .fc-theme-standard .fc-scrollgrid { border-color: #374151; }
+        .fc-col-header-cell-cushion, .fc-daygrid-day-number { color: #9ca3af; }
+        .fc-day-today { background: rgba(196, 160, 0, 0.1) !important; }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white font-sans min-h-screen">
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 h-16">
+        <div class="h-full px-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-flc-gold rounded-lg flex items-center justify-center font-bold text-flc-blue">
+                    FLC
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg">Skunk Works Command Center</h1>
+                    <p class="text-xs text-gray-400">Institutional Research Innovation Lab</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <!-- Presentation Mode Toggle -->
+                <button id="presentationToggle" onclick="togglePresentationMode()"
+                        class="edit-control flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span id="modeText">Presentation Mode</span>
+                </button>
+
+                <!-- PDF Export -->
+                <button onclick="exportToPDF()"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg bg-flc-gold text-flc-blue font-semibold hover:bg-yellow-500 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    Export PDF
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <div class="flex pt-16">
+        <!-- Sidebar -->
+        <aside class="fixed left-0 top-16 bottom-0 w-64 bg-gray-800/50 border-r border-gray-700 p-4 no-print">
+            <nav class="space-y-2">
+                <button onclick="showView('dashboard')" data-view="dashboard"
+                        class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:bg-gray-700 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                    </svg>
+                    Dashboard
+                </button>
+
+                <button onclick="showView('initiatives')" data-view="initiatives"
+                        class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:bg-gray-700 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                    </svg>
+                    Initiatives
+                </button>
+
+                <button onclick="showView('calendar')" data-view="calendar"
+                        class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:bg-gray-700 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    Calendar
+                </button>
+
+                <button onclick="showView('log')" data-view="log"
+                        class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:bg-gray-700 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    Captain's Log
+                </button>
+
+                <button onclick="showView('stakeholders')" data-view="stakeholders"
+                        class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left hover:bg-gray-700 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    Stakeholders
+                </button>
+            </nav>
+
+            <!-- Quick Log Entry -->
+            <div class="mt-8 edit-control">
+                <h3 class="text-sm font-semibold text-gray-400 mb-3">Quick Log Entry</h3>
+                <textarea id="quickLog" rows="3" placeholder="Add a quick note..."
+                          class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-sm resize-none focus:border-flc-gold focus:outline-none"></textarea>
+                <button onclick="addQuickLog()" class="w-full mt-2 py-2 bg-flc-gold text-flc-blue rounded-lg font-semibold text-sm hover:bg-yellow-500 transition">
+                    Add Entry
+                </button>
+            </div>
+
+            <!-- Keyboard Shortcuts -->
+            <div class="mt-8 text-xs text-gray-500">
+                <p class="font-semibold mb-2">Shortcuts</p>
+                <p><kbd class="px-1 bg-gray-700 rounded">P</kbd> Presentation</p>
+                <p><kbd class="px-1 bg-gray-700 rounded">D</kbd> Dashboard</p>
+                <p><kbd class="px-1 bg-gray-700 rounded">I</kbd> Initiatives</p>
+                <p><kbd class="px-1 bg-gray-700 rounded">N</kbd> New Log</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="ml-64 flex-1 p-6 min-h-screen" id="mainContent">
+
+            <!-- DASHBOARD VIEW -->
+            <div id="view-dashboard" class="view">
+                <!-- Value Cards -->
+                <div class="grid grid-cols-4 gap-4 mb-8">
+                    <div class="bg-gradient-to-br from-green-900/50 to-green-800/30 rounded-xl p-6 border border-green-700/50">
+                        <p class="text-green-400 text-sm font-medium mb-1">Total Value</p>
+                        <p class="text-4xl font-bold text-white">$<span id="totalValue" class="counter-animate">0</span></p>
+                        <p class="text-green-400/60 text-xs mt-2">Projected annual</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-900/50 to-blue-800/30 rounded-xl p-6 border border-blue-700/50">
+                        <p class="text-blue-400 text-sm font-medium mb-1">Cost Savings</p>
+                        <p class="text-4xl font-bold text-white">$<span id="totalSavings" class="counter-animate">0</span></p>
+                        <p class="text-blue-400/60 text-xs mt-2">Annual savings</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-yellow-900/50 to-yellow-800/30 rounded-xl p-6 border border-yellow-700/50">
+                        <p class="text-yellow-400 text-sm font-medium mb-1">Revenue Potential</p>
+                        <p class="text-4xl font-bold text-white">$<span id="totalRevenue" class="counter-animate">0</span></p>
+                        <p class="text-yellow-400/60 text-xs mt-2">New revenue streams</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-900/50 to-purple-800/30 rounded-xl p-6 border border-purple-700/50">
+                        <p class="text-purple-400 text-sm font-medium mb-1">Active Initiatives</p>
+                        <p class="text-4xl font-bold text-white"><span id="activeCount" class="counter-animate">0</span></p>
+                        <p class="text-purple-400/60 text-xs mt-2">In progress</p>
+                    </div>
+                </div>
+
+                <!-- Initiatives Grid -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold">Initiative Status</h2>
+                        <button onclick="showAddInitiativeModal()" class="edit-control px-4 py-2 bg-flc-gold text-flc-blue rounded-lg font-semibold text-sm hover:bg-yellow-500 transition">
+                            + Add Initiative
+                        </button>
+                    </div>
+                    <div id="initiativesGrid" class="grid grid-cols-3 gap-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Executive Summary & Recent Log -->
+                <div class="grid grid-cols-2 gap-6">
+                    <!-- Executive Summary -->
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-lg">Executive Summary</h3>
+                            <button onclick="copyExecutiveSummary()" class="text-sm text-flc-gold hover:text-yellow-400">
+                                Copy to Clipboard
+                            </button>
+                        </div>
+                        <div id="executiveSummary" class="text-gray-300 text-sm space-y-2">
+                            <!-- Generated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Recent Log -->
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-lg">Recent Activity</h3>
+                            <button onclick="showView('log')" class="text-sm text-flc-gold hover:text-yellow-400">
+                                View All
+                            </button>
+                        </div>
+                        <div id="recentLog" class="space-y-3">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INITIATIVES VIEW -->
+            <div id="view-initiatives" class="view hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Initiatives</h2>
+                    <button onclick="showAddInitiativeModal()" class="edit-control px-4 py-2 bg-flc-gold text-flc-blue rounded-lg font-semibold hover:bg-yellow-500 transition">
+                        + Add Initiative
+                    </button>
+                </div>
+                <div id="initiativesList" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- CALENDAR VIEW -->
+            <div id="view-calendar" class="view hidden">
+                <h2 class="text-2xl font-bold mb-6">Project Timeline</h2>
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+
+            <!-- CAPTAIN'S LOG VIEW -->
+            <div id="view-log" class="view hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Captain's Log</h2>
+                    <div class="flex gap-3">
+                        <button onclick="exportLog()" class="px-4 py-2 bg-gray-700 rounded-lg text-sm hover:bg-gray-600 transition">
+                            Export Markdown
+                        </button>
+                        <button onclick="showAddLogModal()" class="edit-control px-4 py-2 bg-flc-gold text-flc-blue rounded-lg font-semibold hover:bg-yellow-500 transition">
+                            + New Entry
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="flex gap-4 mb-6 edit-control">
+                    <input type="text" id="logSearch" placeholder="Search logs..." oninput="filterLogs()"
+                           class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                    <select id="logCategoryFilter" onchange="filterLogs()"
+                            class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                        <option value="">All Categories</option>
+                        <option value="decision">Decisions</option>
+                        <option value="progress">Progress</option>
+                        <option value="blocker">Blockers</option>
+                        <option value="win">Wins</option>
+                        <option value="note">Notes</option>
+                    </select>
+                </div>
+
+                <div id="logList" class="space-y-3">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- STAKEHOLDER IMPACT VIEW -->
+            <div id="view-stakeholders" class="view hidden">
+                <h2 class="text-2xl font-bold mb-6">Stakeholder Impact Matrix</h2>
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th class="text-left p-3 border-b border-gray-700">Initiative</th>
+                                <th class="text-center p-3 border-b border-gray-700">VP</th>
+                                <th class="text-center p-3 border-b border-gray-700">Exec Team</th>
+                                <th class="text-center p-3 border-b border-gray-700">Faculty</th>
+                                <th class="text-center p-3 border-b border-gray-700">Staff</th>
+                                <th class="text-center p-3 border-b border-gray-700">Students</th>
+                                <th class="text-center p-3 border-b border-gray-700">Board</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stakeholderMatrix">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4 text-sm text-gray-400">
+                    <span class="inline-flex items-center gap-1"><span class="w-4 h-4 bg-green-500 rounded"></span> High Impact</span>
+                    <span class="inline-flex items-center gap-1 ml-4"><span class="w-4 h-4 bg-yellow-500 rounded"></span> Medium Impact</span>
+                    <span class="inline-flex items-center gap-1 ml-4"><span class="w-4 h-4 bg-gray-500 rounded"></span> Low/Indirect</span>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Value Footer Bar -->
+    <footer class="fixed bottom-0 left-64 right-0 h-12 bg-gray-800/95 backdrop-blur-sm border-t border-gray-700 flex items-center justify-center gap-8 text-sm no-print">
+        <span class="text-gray-400">Total Projected Value: <strong class="text-flc-gold">$<span id="footerValue">0</span></strong></span>
+        <span class="text-gray-600">|</span>
+        <span class="text-gray-400">Initiatives: <strong class="text-white"><span id="footerCount">0</span></strong></span>
+        <span class="text-gray-600">|</span>
+        <span class="text-gray-400">ROI: <strong class="text-green-400"><span id="footerROI">0</span>%</strong></span>
+    </footer>
+
+    <!-- MODALS -->
+
+    <!-- Initiative Modal -->
+    <div id="initiativeModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4">
+            <div class="p-6 border-b border-gray-700 flex justify-between items-center">
+                <h3 id="modalTitle" class="text-xl font-bold">Add Initiative</h3>
+                <button onclick="closeModal('initiativeModal')" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="initiativeForm" onsubmit="saveInitiative(event)" class="p-6 space-y-4">
+                <input type="hidden" id="initId">
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="block text-sm text-gray-400 mb-1">Initiative Name</label>
+                        <input type="text" id="initName" required
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                    </div>
+
+                    <div class="col-span-2">
+                        <label class="block text-sm text-gray-400 mb-1">Description</label>
+                        <textarea id="initDescription" rows="2"
+                                  class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Status</label>
+                        <select id="initStatus"
+                                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                            <option value="planning">Planning</option>
+                            <option value="active">Active</option>
+                            <option value="blocked">Blocked</option>
+                            <option value="complete">Complete</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Priority</label>
+                        <select id="initPriority"
+                                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                            <option value="critical">Critical</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Start Date</label>
+                        <input type="date" id="initStartDate"
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Target Date</label>
+                        <input type="date" id="initTargetDate"
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                    </div>
+                </div>
+
+                <hr class="border-gray-700 my-4">
+                <h4 class="font-semibold text-flc-gold">Value Tracking</h4>
+
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Annual Savings ($)</label>
+                        <input type="number" id="initSavings" value="0"
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Revenue Potential ($)</label>
+                        <input type="number" id="initRevenue" value="0"
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Productivity Value ($)</label>
+                        <input type="number" id="initProductivity" value="0"
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Investment Required ($)</label>
+                        <input type="number" id="initInvestment" value="0"
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Ongoing Cost ($/year)</label>
+                        <input type="number" id="initOngoing" value="0"
+                               class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                    </div>
+                </div>
+
+                <hr class="border-gray-700 my-4">
+                <h4 class="font-semibold text-flc-gold">Stakeholder Impact</h4>
+                <div class="grid grid-cols-3 gap-4 text-sm">
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" id="impact-vp" class="rounded bg-gray-700 border-gray-600">
+                        <span>VP</span>
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" id="impact-exec" class="rounded bg-gray-700 border-gray-600">
+                        <span>Exec Team</span>
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" id="impact-faculty" class="rounded bg-gray-700 border-gray-600">
+                        <span>Faculty</span>
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" id="impact-staff" class="rounded bg-gray-700 border-gray-600">
+                        <span>Staff</span>
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" id="impact-students" class="rounded bg-gray-700 border-gray-600">
+                        <span>Students</span>
+                    </label>
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" id="impact-board" class="rounded bg-gray-700 border-gray-600">
+                        <span>Board</span>
+                    </label>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeModal('initiativeModal')" class="px-6 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-6 py-2 bg-flc-gold text-flc-blue rounded-lg font-semibold hover:bg-yellow-500 transition">
+                        Save Initiative
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Log Entry Modal -->
+    <div id="logModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-800 rounded-2xl w-full max-w-lg m-4">
+            <div class="p-6 border-b border-gray-700 flex justify-between items-center">
+                <h3 class="text-xl font-bold">New Log Entry</h3>
+                <button onclick="closeModal('logModal')" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form onsubmit="saveLogEntry(event)" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Category</label>
+                    <select id="logCategory"
+                            class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                        <option value="note">Note</option>
+                        <option value="progress">Progress</option>
+                        <option value="decision">Decision</option>
+                        <option value="win">Win</option>
+                        <option value="blocker">Blocker</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Related Initiative (Optional)</label>
+                    <select id="logInitiative"
+                            class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
+                        <option value="">General (No specific initiative)</option>
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">Entry</label>
+                    <textarea id="logContent" rows="4" required
+                              class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none"></textarea>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeModal('logModal')" class="px-6 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-6 py-2 bg-flc-gold text-flc-blue rounded-lg font-semibold hover:bg-yellow-500 transition">
+                        Save Entry
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ================== DATA MANAGEMENT ==================
+
+        const DEFAULT_DATA = {
+            initiatives: [
+                {
+                    id: 'whova-replacement',
+                    name: 'Conference App (Whova Replacement)',
+                    description: 'Build in-house conference management PWA to replace Whova, saving $4k/year and creating potential licensing revenue.',
+                    status: 'planning',
+                    priority: 'high',
+                    startDate: '2025-01-15',
+                    targetDate: '2025-06-01',
+                    costs: { investment: 0, ongoing: 0 },
+                    value: { savings: 4000, revenue: 5000, productivity: 0 },
+                    stakeholders: ['vp', 'staff'],
+                    color: '#3b82f6'
+                },
+                {
+                    id: 'otter-ai-replacement',
+                    name: 'AI Transcription (Otter AI Replacement)',
+                    description: 'Deploy open-source AI transcription for campus-wide meeting transcription using Whisper.',
+                    status: 'planning',
+                    priority: 'high',
+                    startDate: '2025-02-01',
+                    targetDate: '2025-05-01',
+                    costs: { investment: 0, ongoing: 0 },
+                    value: { savings: 3000, revenue: 0, productivity: 2000 },
+                    stakeholders: ['vp', 'exec', 'faculty', 'staff'],
+                    color: '#22c55e'
+                },
+                {
+                    id: 'vp-presentation',
+                    name: 'VP Presentation & Program Launch',
+                    description: 'Create interactive presentation to showcase Skunk Works program and secure stipend/bonus.',
+                    status: 'active',
+                    priority: 'critical',
+                    startDate: '2025-12-15',
+                    targetDate: '2025-12-18',
+                    costs: { investment: 0, ongoing: 0 },
+                    value: { savings: 0, revenue: 0, productivity: 1000 },
+                    stakeholders: ['vp'],
+                    color: '#eab308'
+                }
+            ],
+            captainsLog: [
+                {
+                    id: 'log-001',
+                    timestamp: '2025-12-15T10:00:00',
+                    category: 'progress',
+                    initiativeId: null,
+                    content: 'Initialized FLC Skunk Works program - created charter, folder structure, and governance documents.'
+                },
+                {
+                    id: 'log-002',
+                    timestamp: '2025-12-15T11:30:00',
+                    category: 'decision',
+                    initiativeId: null,
+                    content: 'Identified three high-value initiatives: Whova replacement, Otter AI replacement, and VP presentation.'
+                },
+                {
+                    id: 'log-003',
+                    timestamp: '2025-12-15T14:00:00',
+                    category: 'win',
+                    initiativeId: 'vp-presentation',
+                    content: 'Built interactive HTML showcase with ROI calculator and animated value counters.'
+                },
+                {
+                    id: 'log-004',
+                    timestamp: '2025-12-15T16:00:00',
+                    category: 'progress',
+                    initiativeId: 'vp-presentation',
+                    content: 'Created Command Center dashboard with initiative tracking, captain\'s log, and presentation mode.'
+                }
+            ],
+            settings: {
+                presentationMode: false
+            }
+        };
+
+        // Load or initialize data
+        function loadData() {
+            const stored = localStorage.getItem('flc-skunkworks-data');
+            if (stored) {
+                return JSON.parse(stored);
+            }
+            saveData(DEFAULT_DATA);
+            return DEFAULT_DATA;
+        }
+
+        function saveData(data) {
+            localStorage.setItem('flc-skunkworks-data', JSON.stringify(data));
+        }
+
+        let appData = loadData();
+
+        // ================== VIEW MANAGEMENT ==================
+
+        let currentView = 'dashboard';
+        let calendar = null;
+
+        function showView(viewName) {
+            currentView = viewName;
+            document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+            document.getElementById(`view-${viewName}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-flc-gold/20', 'text-flc-gold');
+                if (btn.dataset.view === viewName) {
+                    btn.classList.add('bg-flc-gold/20', 'text-flc-gold');
+                }
+            });
+
+            if (viewName === 'calendar' && !calendar) {
+                initCalendar();
+            }
+            if (viewName === 'calendar' && calendar) {
+                setTimeout(() => calendar.render(), 100);
+            }
+
+            renderView();
+        }
+
+        function renderView() {
+            updateValueCards();
+            renderInitiativesGrid();
+            renderInitiativesList();
+            renderRecentLog();
+            renderLogList();
+            renderStakeholderMatrix();
+            generateExecutiveSummary();
+            updateFooter();
+            populateLogInitiativeDropdown();
+        }
+
+        // ================== VALUE CALCULATIONS ==================
+
+        function calculateTotals() {
+            let totalSavings = 0;
+            let totalRevenue = 0;
+            let totalProductivity = 0;
+            let activeCount = 0;
+
+            appData.initiatives.forEach(init => {
+                totalSavings += init.value.savings || 0;
+                totalRevenue += init.value.revenue || 0;
+                totalProductivity += init.value.productivity || 0;
+                if (init.status === 'active' || init.status === 'planning') {
+                    activeCount++;
+                }
+            });
+
+            return {
+                totalValue: totalSavings + totalRevenue + totalProductivity,
+                totalSavings,
+                totalRevenue,
+                activeCount,
+                roi: Math.round(((totalSavings + totalRevenue + totalProductivity) / 4000) * 100) // Assuming ~$4k time investment
+            };
+        }
+
+        function animateCounter(element, target) {
+            const duration = 1000;
+            const start = parseInt(element.textContent.replace(/,/g, '')) || 0;
+            const increment = (target - start) / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if ((increment > 0 && current >= target) || (increment < 0 && current <= target)) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        }
+
+        function updateValueCards() {
+            const totals = calculateTotals();
+            animateCounter(document.getElementById('totalValue'), totals.totalValue);
+            animateCounter(document.getElementById('totalSavings'), totals.totalSavings);
+            animateCounter(document.getElementById('totalRevenue'), totals.totalRevenue);
+            animateCounter(document.getElementById('activeCount'), totals.activeCount);
+        }
+
+        function updateFooter() {
+            const totals = calculateTotals();
+            document.getElementById('footerValue').textContent = totals.totalValue.toLocaleString();
+            document.getElementById('footerCount').textContent = totals.activeCount;
+            document.getElementById('footerROI').textContent = totals.roi;
+        }
+
+        // ================== INITIATIVES ==================
+
+        function renderInitiativesGrid() {
+            const grid = document.getElementById('initiativesGrid');
+            grid.innerHTML = appData.initiatives.map(init => `
+                <div onclick="editInitiative('${init.id}')"
+                     class="glow-card bg-gray-800 rounded-xl p-5 border border-gray-700 cursor-pointer hover:border-flc-gold/50 transition"
+                     style="border-left: 4px solid ${init.color}">
+                    <div class="flex justify-between items-start mb-3">
+                        <h4 class="font-semibold">${init.name}</h4>
+                        <span class="status-${init.status} px-2 py-1 rounded text-xs font-medium capitalize">${init.status}</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">${init.description}</p>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-green-400">$${(init.value.savings + init.value.revenue + init.value.productivity).toLocaleString()}</span>
+                        <span class="text-gray-500">${init.targetDate || 'No date'}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderInitiativesList() {
+            const list = document.getElementById('initiativesList');
+            list.innerHTML = appData.initiatives.map(init => `
+                <div class="bg-gray-800 rounded-xl p-6 border border-gray-700" style="border-left: 4px solid ${init.color}">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold">${init.name}</h3>
+                            <p class="text-gray-400">${init.description}</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <span class="status-${init.status} px-3 py-1 rounded-full text-sm font-medium capitalize">${init.status}</span>
+                            <button onclick="editInitiative('${init.id}')" class="edit-control p-2 bg-gray-700 rounded-lg hover:bg-gray-600">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-4 text-center">
+                        <div class="bg-gray-700/50 rounded-lg p-3">
+                            <p class="text-2xl font-bold text-green-400">$${init.value.savings.toLocaleString()}</p>
+                            <p class="text-xs text-gray-400">Savings</p>
+                        </div>
+                        <div class="bg-gray-700/50 rounded-lg p-3">
+                            <p class="text-2xl font-bold text-yellow-400">$${init.value.revenue.toLocaleString()}</p>
+                            <p class="text-xs text-gray-400">Revenue</p>
+                        </div>
+                        <div class="bg-gray-700/50 rounded-lg p-3">
+                            <p class="text-2xl font-bold text-blue-400">$${init.value.productivity.toLocaleString()}</p>
+                            <p class="text-xs text-gray-400">Productivity</p>
+                        </div>
+                        <div class="bg-gray-700/50 rounded-lg p-3">
+                            <p class="text-2xl font-bold text-white">$${(init.value.savings + init.value.revenue + init.value.productivity).toLocaleString()}</p>
+                            <p class="text-xs text-gray-400">Total Value</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex gap-4 text-sm text-gray-400">
+                        <span>Start: ${init.startDate || 'TBD'}</span>
+                        <span>Target: ${init.targetDate || 'TBD'}</span>
+                        <span>Priority: <span class="capitalize">${init.priority}</span></span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showAddInitiativeModal() {
+            document.getElementById('modalTitle').textContent = 'Add Initiative';
+            document.getElementById('initiativeForm').reset();
+            document.getElementById('initId').value = '';
+            document.getElementById('initiativeModal').classList.remove('hidden');
+        }
+
+        function editInitiative(id) {
+            const init = appData.initiatives.find(i => i.id === id);
+            if (!init) return;
+
+            document.getElementById('modalTitle').textContent = 'Edit Initiative';
+            document.getElementById('initId').value = init.id;
+            document.getElementById('initName').value = init.name;
+            document.getElementById('initDescription').value = init.description;
+            document.getElementById('initStatus').value = init.status;
+            document.getElementById('initPriority').value = init.priority;
+            document.getElementById('initStartDate').value = init.startDate;
+            document.getElementById('initTargetDate').value = init.targetDate;
+            document.getElementById('initSavings').value = init.value.savings;
+            document.getElementById('initRevenue').value = init.value.revenue;
+            document.getElementById('initProductivity').value = init.value.productivity;
+            document.getElementById('initInvestment').value = init.costs.investment;
+            document.getElementById('initOngoing').value = init.costs.ongoing;
+
+            ['vp', 'exec', 'faculty', 'staff', 'students', 'board'].forEach(s => {
+                document.getElementById(`impact-${s}`).checked = init.stakeholders?.includes(s) || false;
+            });
+
+            document.getElementById('initiativeModal').classList.remove('hidden');
+        }
+
+        function saveInitiative(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('initId').value || `init-${Date.now()}`;
+            const stakeholders = [];
+            ['vp', 'exec', 'faculty', 'staff', 'students', 'board'].forEach(s => {
+                if (document.getElementById(`impact-${s}`).checked) stakeholders.push(s);
+            });
+
+            const initiative = {
+                id,
+                name: document.getElementById('initName').value,
+                description: document.getElementById('initDescription').value,
+                status: document.getElementById('initStatus').value,
+                priority: document.getElementById('initPriority').value,
+                startDate: document.getElementById('initStartDate').value,
+                targetDate: document.getElementById('initTargetDate').value,
+                costs: {
+                    investment: parseInt(document.getElementById('initInvestment').value) || 0,
+                    ongoing: parseInt(document.getElementById('initOngoing').value) || 0
+                },
+                value: {
+                    savings: parseInt(document.getElementById('initSavings').value) || 0,
+                    revenue: parseInt(document.getElementById('initRevenue').value) || 0,
+                    productivity: parseInt(document.getElementById('initProductivity').value) || 0
+                },
+                stakeholders,
+                color: ['#3b82f6', '#22c55e', '#eab308', '#ef4444', '#8b5cf6', '#06b6d4'][Math.floor(Math.random() * 6)]
+            };
+
+            const existingIndex = appData.initiatives.findIndex(i => i.id === id);
+            if (existingIndex >= 0) {
+                initiative.color = appData.initiatives[existingIndex].color;
+                appData.initiatives[existingIndex] = initiative;
+            } else {
+                appData.initiatives.push(initiative);
+            }
+
+            saveData(appData);
+            closeModal('initiativeModal');
+            renderView();
+            if (calendar) updateCalendar();
+        }
+
+        // ================== CAPTAIN'S LOG ==================
+
+        function renderRecentLog() {
+            const container = document.getElementById('recentLog');
+            const recent = [...appData.captainsLog].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 5);
+
+            container.innerHTML = recent.map(log => `
+                <div class="border-l-4 log-${log.category} bg-gray-700/30 rounded-r-lg p-3">
+                    <div class="flex justify-between text-xs text-gray-400 mb-1">
+                        <span class="capitalize font-medium">${log.category}</span>
+                        <span>${new Date(log.timestamp).toLocaleDateString()} ${new Date(log.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                    </div>
+                    <p class="text-sm">${log.content}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderLogList() {
+            const container = document.getElementById('logList');
+            const searchTerm = document.getElementById('logSearch')?.value.toLowerCase() || '';
+            const categoryFilter = document.getElementById('logCategoryFilter')?.value || '';
+
+            let filtered = [...appData.captainsLog].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            if (searchTerm) {
+                filtered = filtered.filter(log => log.content.toLowerCase().includes(searchTerm));
+            }
+            if (categoryFilter) {
+                filtered = filtered.filter(log => log.category === categoryFilter);
+            }
+
+            container.innerHTML = filtered.map(log => {
+                const init = log.initiativeId ? appData.initiatives.find(i => i.id === log.initiativeId) : null;
+                return `
+                    <div class="border-l-4 log-${log.category} bg-gray-800 rounded-r-xl p-4">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="flex gap-2">
+                                <span class="px-2 py-1 bg-gray-700 rounded text-xs capitalize">${log.category}</span>
+                                ${init ? `<span class="px-2 py-1 rounded text-xs" style="background: ${init.color}20; color: ${init.color}">${init.name}</span>` : ''}
+                            </div>
+                            <span class="text-xs text-gray-400">${new Date(log.timestamp).toLocaleString()}</span>
+                        </div>
+                        <p class="text-gray-200">${log.content}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterLogs() {
+            renderLogList();
+        }
+
+        function showAddLogModal() {
+            document.getElementById('logContent').value = '';
+            document.getElementById('logCategory').value = 'note';
+            document.getElementById('logInitiative').value = '';
+            document.getElementById('logModal').classList.remove('hidden');
+        }
+
+        function populateLogInitiativeDropdown() {
+            const select = document.getElementById('logInitiative');
+            if (!select) return;
+            select.innerHTML = '<option value="">General (No specific initiative)</option>' +
+                appData.initiatives.map(init => `<option value="${init.id}">${init.name}</option>`).join('');
+        }
+
+        function saveLogEntry(event) {
+            event.preventDefault();
+
+            const entry = {
+                id: `log-${Date.now()}`,
+                timestamp: new Date().toISOString(),
+                category: document.getElementById('logCategory').value,
+                initiativeId: document.getElementById('logInitiative').value || null,
+                content: document.getElementById('logContent').value
+            };
+
+            appData.captainsLog.push(entry);
+            saveData(appData);
+            closeModal('logModal');
+            renderView();
+        }
+
+        function addQuickLog() {
+            const content = document.getElementById('quickLog').value.trim();
+            if (!content) return;
+
+            const entry = {
+                id: `log-${Date.now()}`,
+                timestamp: new Date().toISOString(),
+                category: 'note',
+                initiativeId: null,
+                content
+            };
+
+            appData.captainsLog.push(entry);
+            saveData(appData);
+            document.getElementById('quickLog').value = '';
+            renderView();
+        }
+
+        function exportLog() {
+            const sorted = [...appData.captainsLog].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            let markdown = "# FLC Skunk Works - Captain's Log\n\n";
+            markdown += `Exported: ${new Date().toLocaleString()}\n\n---\n\n`;
+
+            sorted.forEach(log => {
+                const init = log.initiativeId ? appData.initiatives.find(i => i.id === log.initiativeId) : null;
+                markdown += `## ${new Date(log.timestamp).toLocaleString()}\n`;
+                markdown += `**Category:** ${log.category}\n`;
+                if (init) markdown += `**Initiative:** ${init.name}\n`;
+                markdown += `\n${log.content}\n\n---\n\n`;
+            });
+
+            const blob = new Blob([markdown], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `captains-log-${new Date().toISOString().split('T')[0]}.md`;
+            a.click();
+        }
+
+        // ================== CALENDAR ==================
+
+        function initCalendar() {
+            const calendarEl = document.getElementById('calendar');
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listWeek'
+                },
+                events: getCalendarEvents(),
+                eventClick: function(info) {
+                    const initId = info.event.extendedProps.initiativeId;
+                    if (initId) editInitiative(initId);
+                },
+                height: 'auto'
+            });
+            calendar.render();
+        }
+
+        function getCalendarEvents() {
+            const events = [];
+            appData.initiatives.forEach(init => {
+                if (init.startDate && init.targetDate) {
+                    events.push({
+                        title: init.name,
+                        start: init.startDate,
+                        end: init.targetDate,
+                        color: init.color,
+                        extendedProps: { initiativeId: init.id }
+                    });
+                }
+                if (init.targetDate) {
+                    events.push({
+                        title: `${init.name} - Target`,
+                        start: init.targetDate,
+                        color: init.color,
+                        extendedProps: { initiativeId: init.id }
+                    });
+                }
+            });
+            return events;
+        }
+
+        function updateCalendar() {
+            if (calendar) {
+                calendar.removeAllEvents();
+                calendar.addEventSource(getCalendarEvents());
+            }
+        }
+
+        // ================== STAKEHOLDER MATRIX ==================
+
+        function renderStakeholderMatrix() {
+            const tbody = document.getElementById('stakeholderMatrix');
+            const stakeholderList = ['vp', 'exec', 'faculty', 'staff', 'students', 'board'];
+
+            tbody.innerHTML = appData.initiatives.map(init => `
+                <tr class="border-b border-gray-700">
+                    <td class="p-3 font-medium">${init.name}</td>
+                    ${stakeholderList.map(s => `
+                        <td class="p-3 text-center">
+                            ${init.stakeholders?.includes(s)
+                                ? '<span class="inline-block w-6 h-6 bg-green-500 rounded-full"></span>'
+                                : '<span class="inline-block w-6 h-6 bg-gray-600 rounded-full"></span>'}
+                        </td>
+                    `).join('')}
+                </tr>
+            `).join('');
+        }
+
+        // ================== EXECUTIVE SUMMARY ==================
+
+        function generateExecutiveSummary() {
+            const container = document.getElementById('executiveSummary');
+            const totals = calculateTotals();
+            const activeInits = appData.initiatives.filter(i => i.status === 'active' || i.status === 'planning');
+            const wins = appData.captainsLog.filter(l => l.category === 'win').slice(-3);
+
+            let summary = `<p><strong>Program Status:</strong> ${activeInits.length} active initiatives delivering $${totals.totalValue.toLocaleString()} in projected annual value.</p>`;
+
+            summary += `<p class="mt-2"><strong>Active Initiatives:</strong></p><ul class="list-disc list-inside text-gray-400">`;
+            activeInits.forEach(init => {
+                summary += `<li>${init.name} (${init.status}) - $${(init.value.savings + init.value.revenue + init.value.productivity).toLocaleString()}</li>`;
+            });
+            summary += `</ul>`;
+
+            if (wins.length > 0) {
+                summary += `<p class="mt-2"><strong>Recent Wins:</strong></p><ul class="list-disc list-inside text-gray-400">`;
+                wins.forEach(w => summary += `<li>${w.content}</li>`);
+                summary += `</ul>`;
+            }
+
+            summary += `<p class="mt-2"><strong>ROI:</strong> ${totals.roi}% projected return on time invested.</p>`;
+
+            container.innerHTML = summary;
+        }
+
+        function copyExecutiveSummary() {
+            const totals = calculateTotals();
+            const activeInits = appData.initiatives.filter(i => i.status === 'active' || i.status === 'planning');
+
+            let text = `FLC Skunk Works Status Update\n\n`;
+            text += `Total Projected Value: $${totals.totalValue.toLocaleString()}/year\n`;
+            text += `Active Initiatives: ${activeInits.length}\n\n`;
+            text += `Initiatives:\n`;
+            activeInits.forEach(init => {
+                text += `- ${init.name}: $${(init.value.savings + init.value.revenue + init.value.productivity).toLocaleString()}\n`;
+            });
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Executive summary copied to clipboard!');
+            });
+        }
+
+        // ================== PRESENTATION MODE ==================
+
+        function togglePresentationMode() {
+            appData.settings.presentationMode = !appData.settings.presentationMode;
+            saveData(appData);
+
+            if (appData.settings.presentationMode) {
+                document.body.classList.add('presentation-mode');
+                document.getElementById('modeText').textContent = 'Edit Mode';
+                document.getElementById('presentationToggle').classList.add('bg-flc-gold', 'text-flc-blue');
+                document.getElementById('presentationToggle').classList.remove('bg-gray-800');
+            } else {
+                document.body.classList.remove('presentation-mode');
+                document.getElementById('modeText').textContent = 'Presentation Mode';
+                document.getElementById('presentationToggle').classList.remove('bg-flc-gold', 'text-flc-blue');
+                document.getElementById('presentationToggle').classList.add('bg-gray-800');
+            }
+        }
+
+        // ================== PDF EXPORT ==================
+
+        function exportToPDF() {
+            const element = document.getElementById('mainContent');
+            const opt = {
+                margin: 0.5,
+                filename: `flc-skunkworks-report-${new Date().toISOString().split('T')[0]}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, backgroundColor: '#111827' },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+            };
+
+            // Show dashboard view for export
+            showView('dashboard');
+
+            setTimeout(() => {
+                html2pdf().set(opt).from(element).save();
+            }, 500);
+        }
+
+        // ================== MODALS ==================
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // ================== KEYBOARD SHORTCUTS ==================
+
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+
+            switch(e.key.toLowerCase()) {
+                case 'p': togglePresentationMode(); break;
+                case 'd': showView('dashboard'); break;
+                case 'i': showView('initiatives'); break;
+                case 'c': showView('calendar'); break;
+                case 'l': showView('log'); break;
+                case 'n': showAddLogModal(); break;
+                case 'escape':
+                    closeModal('initiativeModal');
+                    closeModal('logModal');
+                    break;
+            }
+        });
+
+        // ================== INITIALIZE ==================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showView('dashboard');
+
+            // Check presentation mode
+            if (appData.settings.presentationMode) {
+                document.body.classList.add('presentation-mode');
+                document.getElementById('modeText').textContent = 'Edit Mode';
+                document.getElementById('presentationToggle').classList.add('bg-flc-gold', 'text-flc-blue');
+            }
+        });
+    </script>
+</body>
+</html>
