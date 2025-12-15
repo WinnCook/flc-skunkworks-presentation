@@ -803,38 +803,6 @@
             `).join('');
         }
 
-        function showAddInitiativeModal() {
-            document.getElementById('modalTitle').textContent = 'Add Initiative';
-            document.getElementById('initiativeForm').reset();
-            document.getElementById('initId').value = '';
-            document.getElementById('initiativeModal').classList.remove('hidden');
-        }
-
-        function editInitiative(id) {
-            const init = appData.initiatives.find(i => i.id === id);
-            if (!init) return;
-
-            document.getElementById('modalTitle').textContent = 'Edit Initiative';
-            document.getElementById('initId').value = init.id;
-            document.getElementById('initName').value = init.name;
-            document.getElementById('initDescription').value = init.description;
-            document.getElementById('initStatus').value = init.status;
-            document.getElementById('initPriority').value = init.priority;
-            document.getElementById('initStartDate').value = init.startDate;
-            document.getElementById('initTargetDate').value = init.targetDate;
-            document.getElementById('initSavings').value = init.value.savings;
-            document.getElementById('initRevenue').value = init.value.revenue;
-            document.getElementById('initProductivity').value = init.value.productivity;
-            document.getElementById('initInvestment').value = init.costs.investment;
-            document.getElementById('initOngoing').value = init.costs.ongoing;
-
-            ['vp', 'exec', 'faculty', 'staff', 'students', 'board'].forEach(s => {
-                document.getElementById(`impact-${s}`).checked = init.stakeholders?.includes(s) || false;
-            });
-
-            document.getElementById('initiativeModal').classList.remove('hidden');
-        }
-
         function saveInitiative(event) {
             event.preventDefault();
 
@@ -877,6 +845,91 @@
             closeModal('initiativeModal');
             renderView();
             if (calendar) updateCalendar();
+        }
+
+        // Live update totals as user types in modal
+        function setupLiveValueUpdates() {
+            const valueFields = ['initSavings', 'initRevenue', 'initProductivity'];
+            valueFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    field.addEventListener('input', updateLiveTotals);
+                }
+            });
+        }
+
+        function updateLiveTotals() {
+            const editingId = document.getElementById('initId').value;
+
+            // Get current modal values
+            const modalSavings = parseInt(document.getElementById('initSavings').value) || 0;
+            const modalRevenue = parseInt(document.getElementById('initRevenue').value) || 0;
+            const modalProductivity = parseInt(document.getElementById('initProductivity').value) || 0;
+            const modalTotal = modalSavings + modalRevenue + modalProductivity;
+
+            // Calculate totals from all OTHER initiatives (excluding the one being edited)
+            let otherSavings = 0;
+            let otherRevenue = 0;
+            let otherProductivity = 0;
+
+            appData.initiatives.forEach(init => {
+                if (init.id !== editingId) {
+                    otherSavings += init.value.savings || 0;
+                    otherRevenue += init.value.revenue || 0;
+                    otherProductivity += init.value.productivity || 0;
+                }
+            });
+
+            // Combined totals
+            const totalSavings = otherSavings + modalSavings;
+            const totalRevenue = otherRevenue + modalRevenue;
+            const totalValue = totalSavings + totalRevenue + (otherProductivity + modalProductivity);
+            const activeCount = appData.initiatives.filter(i => i.status === 'active' || i.status === 'planning').length;
+
+            // Update dashboard cards with animation
+            animateCounter(document.getElementById('totalValue'), totalValue);
+            animateCounter(document.getElementById('totalSavings'), totalSavings);
+            animateCounter(document.getElementById('totalRevenue'), totalRevenue);
+
+            // Update footer
+            document.getElementById('footerValue').textContent = totalValue.toLocaleString();
+            const roi = Math.round((totalValue / 4000) * 100);
+            document.getElementById('footerROI').textContent = roi;
+        }
+
+        // Initialize live updates when modal opens
+        function showAddInitiativeModal() {
+            document.getElementById('modalTitle').textContent = 'Add Initiative';
+            document.getElementById('initiativeForm').reset();
+            document.getElementById('initId').value = '';
+            document.getElementById('initiativeModal').classList.remove('hidden');
+            setupLiveValueUpdates();
+        }
+
+        function editInitiative(id) {
+            const init = appData.initiatives.find(i => i.id === id);
+            if (!init) return;
+
+            document.getElementById('modalTitle').textContent = 'Edit Initiative';
+            document.getElementById('initId').value = init.id;
+            document.getElementById('initName').value = init.name;
+            document.getElementById('initDescription').value = init.description;
+            document.getElementById('initStatus').value = init.status;
+            document.getElementById('initPriority').value = init.priority;
+            document.getElementById('initStartDate').value = init.startDate;
+            document.getElementById('initTargetDate').value = init.targetDate;
+            document.getElementById('initSavings').value = init.value.savings;
+            document.getElementById('initRevenue').value = init.value.revenue;
+            document.getElementById('initProductivity').value = init.value.productivity;
+            document.getElementById('initInvestment').value = init.costs.investment;
+            document.getElementById('initOngoing').value = init.costs.ongoing;
+
+            ['vp', 'exec', 'faculty', 'staff', 'students', 'board'].forEach(s => {
+                document.getElementById(`impact-${s}`).checked = init.stakeholders?.includes(s) || false;
+            });
+
+            document.getElementById('initiativeModal').classList.remove('hidden');
+            setupLiveValueUpdates();
         }
 
         // ================== CAPTAIN'S LOG ==================
