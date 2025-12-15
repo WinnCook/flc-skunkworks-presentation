@@ -95,11 +95,20 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-lg">Skunk Works Command Center</h1>
-                    <p class="text-xs text-gray-400">Institutional Research Innovation Lab</p>
+                    <p class="text-xs text-gray-400">AI Exploration Initiative</p>
                 </div>
             </div>
 
             <div class="flex items-center gap-4">
+                <!-- Back to Presentation -->
+                <a href="index.html"
+                   class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 border border-gray-600 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    <span>Presentation</span>
+                </a>
+
                 <!-- Presentation Mode Toggle -->
                 <button id="presentationToggle" onclick="togglePresentationMode()"
                         class="edit-control flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 transition">
@@ -550,22 +559,23 @@
         const DEFAULT_DATA = {
             initiatives: [
                 {
-                    id: 'whova-replacement',
-                    name: 'Conference App (Whova Replacement)',
-                    description: 'Build in-house conference management PWA to replace Whova, saving $4k/year and creating potential licensing revenue.',
+                    id: 'conference-app',
+                    name: 'Conference App (Phase 1 Project)',
+                    description: 'Build AI-powered conference management PWA. Demonstrates AI-assisted development capability. ~$5K* stipend project.',
                     status: 'planning',
                     priority: 'high',
                     startDate: '2025-01-15',
-                    targetDate: '2025-06-01',
+                    targetDate: '2025-04-01',
                     costs: { investment: 0, ongoing: 0 },
                     value: { savings: 4000, revenue: 5000, productivity: 0 },
                     stakeholders: ['vp', 'staff'],
-                    color: '#3b82f6'
+                    color: '#3b82f6',
+                    stipendRange: '~$5K*'
                 },
                 {
-                    id: 'otter-ai-replacement',
-                    name: 'AI Transcription (Otter AI Replacement)',
-                    description: 'Deploy open-source AI transcription for campus-wide meeting transcription using Whisper.',
+                    id: 'ai-transcription',
+                    name: 'AI Transcription (Phase 1 Project)',
+                    description: 'Deploy local Whisper-based transcription. Data stays on-premise, FERPA compliant. ~$5K* stipend project.',
                     status: 'planning',
                     priority: 'high',
                     startDate: '2025-02-01',
@@ -573,12 +583,27 @@
                     costs: { investment: 0, ongoing: 0 },
                     value: { savings: 3000, revenue: 0, productivity: 2000 },
                     stakeholders: ['vp', 'exec', 'faculty', 'staff'],
-                    color: '#22c55e'
+                    color: '#22c55e',
+                    stipendRange: '~$5K*'
                 },
                 {
-                    id: 'vp-presentation',
-                    name: 'VP Presentation & Program Launch',
-                    description: 'Create interactive presentation to showcase Skunk Works program and secure stipend/bonus.',
+                    id: 'software-replication',
+                    name: 'Software Replication Workflow (Phase 1 Project)',
+                    description: 'Duplicate existing software FLC pays for using AI. Focus on needed features, add stakeholder-requested enhancements, own the program in-house. Target: 1 app/month. ~$5K* stipend project.',
+                    status: 'planning',
+                    priority: 'high',
+                    startDate: '2025-02-15',
+                    targetDate: '2025-06-30',
+                    costs: { investment: 0, ongoing: 0 },
+                    value: { savings: 5000, revenue: 3000, productivity: 2000 },
+                    stakeholders: ['vp', 'exec', 'staff'],
+                    color: '#8b5cf6',
+                    stipendRange: '~$5K*'
+                },
+                {
+                    id: 'initiative-launch',
+                    name: 'AI Exploration Initiative Launch',
+                    description: 'Present phased proposal to VP, secure Phase 1 approval with per-project stipend structure.',
                     status: 'active',
                     priority: 'critical',
                     startDate: '2025-12-15',
