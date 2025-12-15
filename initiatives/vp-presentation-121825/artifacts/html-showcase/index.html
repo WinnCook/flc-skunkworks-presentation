@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLC Skunk Works | Institutional Research Innovation Lab</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'flc-blue': '#003366',
+                        'flc-gold': '#C4A000',
+                        'flc-light': '#4A90D9',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom animations */
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gradient-bg {
+            background: linear-gradient(-45deg, #003366, #1e3a5f, #2d4a6f, #003366);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Smooth scrolling offset for fixed nav */
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C4A000;
+            border-radius: 4px;
+        }
+
+        /* Glowing effect for cards */
+        .glow-card {
+            transition: all 0.3s ease;
+        }
+        .glow-card:hover {
+            box-shadow: 0 0 30px rgba(196, 160, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        /* Number counter animation */
+        .value-counter {
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white font-sans">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-flc-gold rounded-lg flex items-center justify-center font-bold text-flc-blue">
+                        FLC
+                    </div>
+                    <span class="font-semibold text-lg">Skunk Works</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#hero" class="text-gray-300 hover:text-flc-gold transition">Home</a>
+                    <a href="#program" class="text-gray-300 hover:text-flc-gold transition">Program</a>
+                    <a href="#initiatives" class="text-gray-300 hover:text-flc-gold transition">Initiatives</a>
+                    <a href="#roi" class="text-gray-300 hover:text-flc-gold transition">ROI</a>
+                    <a href="#capabilities" class="text-gray-300 hover:text-flc-gold transition">Capabilities</a>
+                    <a href="#ask" class="bg-flc-gold text-flc-blue px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition">The Ask</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="gradient-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute w-96 h-96 bg-flc-gold/10 rounded-full blur-3xl -top-48 -left-48 animate-pulse"></div>
+            <div class="absolute w-96 h-96 bg-flc-light/10 rounded-full blur-3xl -bottom-48 -right-48 animate-pulse" style="animation-delay: 1s;"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <div data-aos="fade-down" data-aos-duration="1000">
+                <span class="inline-block px-4 py-2 bg-flc-gold/20 text-flc-gold rounded-full text-sm font-medium mb-6">
+                    Institutional Research Innovation Lab
+                </span>
+            </div>
+
+            <h1 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"
+                class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                FLC <span class="text-flc-gold">Skunk Works</span>
+            </h1>
+
+            <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"
+               class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                Transforming Institutional Research into a strategic innovation engine
+                delivering measurable ROI for Fort Lewis College
+            </p>
+
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600"
+                 class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#program" class="bg-flc-gold text-flc-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-500 transition transform hover:scale-105">
+                    Explore the Program
+                </a>
+                <a href="#roi" class="border-2 border-white/30 px-8 py-4 rounded-lg font-semibold text-lg hover:border-flc-gold hover:text-flc-gold transition">
+                    See the Numbers
+                </a>
+            </div>
+
+            <!-- Quick stats -->
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800"
+                 class="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-flc-gold counter" id="stat-initiatives">3</div>
+                    <div class="text-gray-400 text-sm">Active Initiatives</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-flc-gold">$<span class="counter" id="stat-value">10</span>K+</div>
+                    <div class="text-gray-400 text-sm">Projected Annual Value</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-flc-gold counter" id="stat-roi">250</div>%
+                    <div class="text-gray-400 text-sm">Expected ROI</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Program Overview Section -->
+    <section id="program" class="py-24 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 data-aos="fade-up" class="text-4xl font-bold mb-4">The <span class="text-flc-gold">Skunk Works</span> Model</h2>
+                <p data-aos="fade-up" data-aos-delay="100" class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    An agile, experimental approach to institutional innovation that delivers rapid, high-impact results
+                </p>
+            </div>
+
+            <!-- Mission Statement -->
+            <div data-aos="fade-up" data-aos-delay="200" class="bg-gradient-to-r from-flc-blue to-gray-800 rounded-2xl p-8 mb-16">
+                <div class="flex items-start gap-6">
+                    <div class="w-16 h-16 bg-flc-gold rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-8 h-8 text-flc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3">Our Mission</h3>
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            To generate high-value innovation initiatives that demonstrate measurable ROI for Fort Lewis College,
+                            positioning Institutional Research as an indispensable strategic asset beyond traditional reporting functions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Operating Principles -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div data-aos="fade-up" data-aos-delay="100" class="glow-card bg-gray-800 rounded-xl p-6 border border-gray-700">
+                    <div class="w-12 h-12 bg-flc-gold/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-flc-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Bias Toward Action</h3>
+                    <p class="text-gray-400">Ship early, iterate fast, demonstrate results. Speed is a competitive advantage.</p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="200" class="glow-card bg-gray-800 rounded-xl p-6 border border-gray-700">
+                    <div class="w-12 h-12 bg-flc-gold/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-flc-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Value Visibility</h3>
+                    <p class="text-gray-400">Track and communicate ROI relentlessly. Every initiative must show measurable impact.</p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="300" class="glow-card bg-gray-800 rounded-xl p-6 border border-gray-700">
+                    <div class="w-12 h-12 bg-flc-gold/20 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-flc-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">AI-Augmented</h3>
+                    <p class="text-gray-400">Leverage AI tools to multiply output. One person with AI can accomplish the work of many.</p>
+                </div>
+            </div>
+
+            <!-- Track Record -->
+            <div data-aos="fade-up" class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                <h3 class="text-2xl font-bold mb-6 text-center">Established Track Record</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-1">AI Conference Leadership</h4>
+                            <p class="text-gray-400">Hosted the only regional AI conference in 2024. Doubled attendance for 2025 (tomorrow!).</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg mb-1">Workday Transition Navigation</h4>
+                            <p class="text-gray-400">Successfully managing reporting through major system transition from Banner to Workday.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Initiatives Section -->
+    <section id="initiatives" class="py-24 bg-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 data-aos="fade-up" class="text-4xl font-bold mb-4">Active <span class="text-flc-gold">Initiatives</span></h2>
+                <p data-aos="fade-up" data-aos-delay="100" class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    High-impact projects delivering measurable value to Fort Lewis College
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Whova Replacement -->
+                <div data-aos="fade-right" data-aos-delay="100" class="glow-card bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Conference App</h3>
+                            <span class="text-sm text-flc-gold">Whova Replacement</span>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-300 mb-6">
+                        Build an in-house conference management PWA to replace Whova, eliminating $4,000/year in licensing while creating potential licensing revenue from other small colleges.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Annual Savings</span>
+                            <span class="text-2xl font-bold text-green-400">$4,000</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Revenue Potential</span>
+                            <span class="text-2xl font-bold text-flc-gold">$2,000-10,000</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Status</span>
+                            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">Planning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Otter AI Replacement -->
+                <div data-aos="fade-left" data-aos-delay="200" class="glow-card bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">AI Transcription</h3>
+                            <span class="text-sm text-flc-gold">Otter AI Replacement</span>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-300 mb-6">
+                        Deploy open-source AI transcription (Whisper) for campus-wide meeting transcription. No per-seat licensing, data stays on FLC-controlled systems.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Cost Avoidance</span>
+                            <span class="text-2xl font-bold text-green-400">$1,200-6,000/yr</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Beneficiaries</span>
+                            <span class="text-xl font-bold text-flc-gold">All Staff</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Status</span>
+                            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">Planning</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Future Pipeline -->
+            <div data-aos="fade-up" data-aos-delay="300" class="mt-12 bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <svg class="w-8 h-8 text-flc-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                    </svg>
+                    Future Initiative Pipeline
+                </h3>
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="bg-gray-700/50 rounded-xl p-4 text-center">
+                        <div class="text-flc-gold font-semibold">Workday Analytics</div>
+                        <div class="text-gray-400 text-sm">Automated reporting</div>
+                    </div>
+                    <div class="bg-gray-700/50 rounded-xl p-4 text-center">
+                        <div class="text-flc-gold font-semibold">Enrollment Prediction</div>
+                        <div class="text-gray-400 text-sm">ML forecasting</div>
+                    </div>
+                    <div class="bg-gray-700/50 rounded-xl p-4 text-center">
+                        <div class="text-flc-gold font-semibold">Student Success</div>
+                        <div class="text-gray-400 text-sm">Early warning system</div>
+                    </div>
+                    <div class="bg-gray-700/50 rounded-xl p-4 text-center">
+                        <div class="text-flc-gold font-semibold">Data Visualization</div>
+                        <div class="text-gray-400 text-sm">Interactive dashboards</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Section -->
+    <section id="roi" class="py-24 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 data-aos="fade-up" class="text-4xl font-bold mb-4">Return on <span class="text-flc-gold">Investment</span></h2>
+                <p data-aos="fade-up" data-aos-delay="100" class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Projected value from current initiatives - conservative estimates
+                </p>
+            </div>
+
+            <!-- Value Calculator -->
+            <div data-aos="fade-up" data-aos-delay="200" class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 border border-flc-gold/30 mb-12">
+                <h3 class="text-2xl font-bold mb-8 text-center">Interactive ROI Calculator</h3>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Inputs -->
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-gray-400 mb-2">Current Whova Cost ($/year)</label>
+                            <input type="number" id="whova-cost" value="4000"
+                                   class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-flc-gold focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-2">Potential College Licenses (count)</label>
+                            <input type="range" id="college-licenses" min="0" max="20" value="5"
+                                   class="w-full accent-flc-gold">
+                            <div class="text-center text-flc-gold font-bold" id="license-display">5 colleges</div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-2">License Price ($/year)</label>
+                            <input type="number" id="license-price" value="750"
+                                   class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-flc-gold focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-2">Transcription Users Enabled</label>
+                            <input type="number" id="transcription-users" value="30"
+                                   class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-flc-gold focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="bg-gray-800 rounded-xl p-6">
+                        <h4 class="text-lg font-semibold text-gray-400 mb-4">Projected Annual Value</h4>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                                <span>Conference App Savings</span>
+                                <span class="text-green-400 font-bold" id="result-whova">$4,000</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                                <span>Licensing Revenue</span>
+                                <span class="text-flc-gold font-bold" id="result-licensing">$3,750</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                                <span>Transcription Value</span>
+                                <span class="text-blue-400 font-bold" id="result-transcription">$3,000</span>
+                            </div>
+                            <div class="flex justify-between items-center py-4 border-t-2 border-flc-gold">
+                                <span class="text-xl font-bold">Total Annual Value</span>
+                                <span class="text-3xl font-bold text-flc-gold" id="result-total">$10,750</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 text-center">
+                            <div class="text-gray-400 text-sm mb-2">Estimated ROI</div>
+                            <div class="text-5xl font-bold text-green-400" id="result-roi">250%+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div data-aos="fade-up" data-aos-delay="300" class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                <h3 class="text-2xl font-bold mb-6">3-Year Value Projection</h3>
+                <canvas id="valueChart" class="max-h-80"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Capabilities Section -->
+    <section id="capabilities" class="py-24 bg-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 data-aos="fade-up" class="text-4xl font-bold mb-4">AI <span class="text-flc-gold">Capabilities</span></h2>
+                <p data-aos="fade-up" data-aos-delay="100" class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    What we can build with AI-augmented development
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div data-aos="fade-up" data-aos-delay="100" class="glow-card bg-gray-800 rounded-2xl p-6 border border-gray-700 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Web Applications</h3>
+                    <p class="text-gray-400">Full-stack web apps, dashboards, and tools built rapidly with AI assistance</p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="200" class="glow-card bg-gray-800 rounded-2xl p-6 border border-gray-700 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Data Analysis</h3>
+                    <p class="text-gray-400">Automated reporting, predictive models, and data visualization</p>
+                </div>
+
+                <div data-aos="fade-up" data-aos-delay="300" class="glow-card bg-gray-800 rounded-2xl p-6 border border-gray-700 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Process Automation</h3>
+                    <p class="text-gray-400">Streamline workflows, automate repetitive tasks, integrate systems</p>
+                </div>
+            </div>
+
+            <!-- This Presentation Note -->
+            <div data-aos="fade-up" data-aos-delay="400" class="mt-12 bg-gradient-to-r from-flc-gold/20 to-transparent rounded-2xl p-8 border border-flc-gold/30">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-flc-gold rounded-xl flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-flc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">This Presentation is Proof of Concept</h3>
+                        <p class="text-gray-300">
+                            This interactive HTML application was built using AI-assisted development.
+                            It demonstrates the kind of rapid, professional output we can deliver.
+                            The same approach applies to all our initiatives.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Ask Section -->
+    <section id="ask" class="py-24 gradient-bg relative">
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 data-aos="fade-up" class="text-4xl md:text-5xl font-bold mb-6">
+                The <span class="text-flc-gold">Ask</span>
+            </h2>
+
+            <p data-aos="fade-up" data-aos-delay="100" class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+                Recognition for value delivered and investment in continued innovation
+            </p>
+
+            <div data-aos="fade-up" data-aos-delay="200" class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-12">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="text-left">
+                        <h3 class="text-2xl font-bold mb-4 text-flc-gold">Immediate Request</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Stipend/bonus for innovation work delivered</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Official approval for Skunk Works program</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Time allocation for innovation initiatives</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="text-left">
+                        <h3 class="text-2xl font-bold mb-4 text-flc-gold">Future Vision</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-flc-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                                <span>Full-time innovation/analytics role</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-flc-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                                <span>Salary commensurate with value delivered</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-flc-gold flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                                <span>Expanded resources and mandate</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Value Reminder -->
+            <div data-aos="fade-up" data-aos-delay="300" class="inline-block bg-flc-gold text-flc-blue px-8 py-4 rounded-xl">
+                <div class="text-sm font-medium mb-1">Projected Annual Value</div>
+                <div class="text-4xl font-bold">$10,000+</div>
+            </div>
+
+            <p data-aos="fade-up" data-aos-delay="400" class="mt-8 text-gray-400">
+                Questions? Let's discuss how we can maximize value for FLC together.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <div class="w-8 h-8 bg-flc-gold rounded-lg flex items-center justify-center font-bold text-flc-blue text-sm">
+                    FLC
+                </div>
+                <span class="font-semibold">Skunk Works</span>
+            </div>
+            <p class="text-gray-500 text-sm">
+                Fort Lewis College Institutional Research Innovation Lab
+            </p>
+            <p class="text-gray-600 text-xs mt-2">
+                Built with AI-assisted development | December 2025
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS animations
+        AOS.init({
+            once: true,
+            duration: 800
+        });
+
+        // ROI Calculator Logic
+        function calculateROI() {
+            const whovaCost = parseFloat(document.getElementById('whova-cost').value) || 0;
+            const collegeLicenses = parseFloat(document.getElementById('college-licenses').value) || 0;
+            const licensePrice = parseFloat(document.getElementById('license-price').value) || 0;
+            const transcriptionUsers = parseFloat(document.getElementById('transcription-users').value) || 0;
+
+            const whovaSavings = whovaCost;
+            const licensingRevenue = collegeLicenses * licensePrice;
+            const transcriptionValue = transcriptionUsers * 100; // $100/user value
+            const total = whovaSavings + licensingRevenue + transcriptionValue;
+
+            document.getElementById('result-whova').textContent = '$' + whovaSavings.toLocaleString();
+            document.getElementById('result-licensing').textContent = '$' + licensingRevenue.toLocaleString();
+            document.getElementById('result-transcription').textContent = '$' + transcriptionValue.toLocaleString();
+            document.getElementById('result-total').textContent = '$' + total.toLocaleString();
+            document.getElementById('license-display').textContent = collegeLicenses + ' colleges';
+
+            // ROI calculation (assuming ~$4k investment of time value)
+            const roi = Math.round((total / 4000) * 100);
+            document.getElementById('result-roi').textContent = roi + '%+';
+        }
+
+        // Add event listeners
+        document.getElementById('whova-cost').addEventListener('input', calculateROI);
+        document.getElementById('college-licenses').addEventListener('input', calculateROI);
+        document.getElementById('license-price').addEventListener('input', calculateROI);
+        document.getElementById('transcription-users').addEventListener('input', calculateROI);
+
+        // Initialize calculator
+        calculateROI();
+
+        // Chart.js - 3-Year Projection
+        const ctx = document.getElementById('valueChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3'],
+                datasets: [
+                    {
+                        label: 'Cost Savings',
+                        data: [4000, 4000, 4000],
+                        backgroundColor: 'rgba(74, 222, 128, 0.8)',
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Revenue Potential',
+                        data: [2000, 5000, 8000],
+                        backgroundColor: 'rgba(196, 160, 0, 0.8)',
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Productivity Value',
+                        data: [3000, 4500, 6000],
+                        backgroundColor: 'rgba(96, 165, 250, 0.8)',
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#9CA3AF'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        ticks: { color: '#9CA3AF' },
+                        grid: { color: 'rgba(75, 85, 99, 0.3)' }
+                    },
+                    y: {
+                        stacked: true,
+                        ticks: {
+                            color: '#9CA3AF',
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        },
+                        grid: { color: 'rgba(75, 85, 99, 0.3)' }
+                    }
+                }
+            }
+        });
+
+        // Animated counters on scroll
+        const animateCounter = (element, target, duration = 2000) => {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        };
+
+        // Trigger counters when hero section is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(document.getElementById('stat-initiatives'), 3, 1000);
+                    animateCounter(document.getElementById('stat-value'), 10, 1500);
+                    animateCounter(document.getElementById('stat-roi'), 250, 2000);
+                    observer.disconnect();
+                }
+            });
+        });
+        observer.observe(document.getElementById('hero'));
+    </script>
+</body>
+</html>

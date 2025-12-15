@@ -1,0 +1,75 @@
+# FLC Skunk Works - Git Ignore
+
+# Sensitive data - NEVER commit
+*.credentials
+*.secrets
+*.env
+.env.local
+.env.*.local
+credentials.json
+secrets.json
+
+# Sensitive intelligence
+/intelligence/sensitive/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Node.js (if we build any tools)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python (if we build any tools)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.venv/
+env/
+.eggs/
+*.egg-info/
+
+# Large data files (use Git LFS or track separately)
+*.xlsx
+*.csv
+*.xls
+/data/raw/
+/data/exports/
+
+# Build outputs
+dist/
+build/
+*.min.js
+*.min.css
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+.cache/
+
+# Claude Code local settings (keep)
+# !.claude/
+
+# Backup files
+*.bak
+*.backup
