@@ -553,10 +553,30 @@
         </div>
     </div>
 
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-800 rounded-2xl p-8 w-full max-w-md border border-gray-700">
+            <h3 class="text-xl font-bold mb-4 text-red-400">⚠️ Delete Initiative</h3>
+            <p class="text-gray-300 mb-2">Are you sure you want to delete this initiative?</p>
+            <p id="deleteInitName" class="font-semibold text-white mb-4"></p>
+            <p class="text-gray-400 text-sm mb-6">This initiative will be archived and can be recovered if needed.</p>
+            <input type="hidden" id="deleteInitId" value="">
+            <div class="flex justify-end gap-3">
+                <button onclick="closeModal('deleteModal')" class="px-6 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition">
+                    Cancel
+                </button>
+                <button onclick="confirmDelete()" class="px-6 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ================== DATA MANAGEMENT ==================
 
         const DEFAULT_DATA = {
+            archived: [],
             initiatives: [
                 {
                     id: 'conference-app',
@@ -564,8 +584,8 @@
                     description: 'Build AI-powered conference management PWA. Demonstrates AI-assisted development capability. ~$5K* stipend project.',
                     status: 'planning',
                     priority: 'high',
-                    startDate: '2025-01-15',
-                    targetDate: '2025-04-01',
+                    startDate: '2026-01-15',
+                    targetDate: '2026-04-01',
                     costs: { investment: 0, ongoing: 0 },
                     value: { savings: 4000, revenue: 5000, productivity: 0 },
                     stakeholders: ['vp', 'staff'],
@@ -578,8 +598,8 @@
                     description: 'Deploy local Whisper-based transcription. Data stays on-premise, FERPA compliant. ~$5K* stipend project.',
                     status: 'planning',
                     priority: 'high',
-                    startDate: '2025-02-01',
-                    targetDate: '2025-05-01',
+                    startDate: '2026-02-01',
+                    targetDate: '2026-05-01',
                     costs: { investment: 0, ongoing: 0 },
                     value: { savings: 3000, revenue: 0, productivity: 2000 },
                     stakeholders: ['vp', 'exec', 'faculty', 'staff'],
@@ -592,26 +612,13 @@
                     description: 'Duplicate existing software FLC pays for using AI. Focus on needed features, add stakeholder-requested enhancements, own the program in-house. Target: 1 app/month. ~$5K* stipend project.',
                     status: 'planning',
                     priority: 'high',
-                    startDate: '2025-02-15',
-                    targetDate: '2025-06-30',
+                    startDate: '2026-02-15',
+                    targetDate: '2026-06-30',
                     costs: { investment: 0, ongoing: 0 },
                     value: { savings: 5000, revenue: 3000, productivity: 2000 },
                     stakeholders: ['vp', 'exec', 'staff'],
                     color: '#8b5cf6',
                     stipendRange: '~$5K*'
-                },
-                {
-                    id: 'initiative-launch',
-                    name: 'AI Exploration Initiative Launch',
-                    description: 'Present phased proposal to VP, secure Phase 1 approval with per-project stipend structure.',
-                    status: 'active',
-                    priority: 'critical',
-                    startDate: '2025-12-15',
-                    targetDate: '2025-12-18',
-                    costs: { investment: 0, ongoing: 0 },
-                    value: { savings: 0, revenue: 0, productivity: 1000 },
-                    stakeholders: ['vp'],
-                    color: '#eab308'
                 }
             ],
             captainsLog: [
@@ -768,9 +775,16 @@
             const grid = document.getElementById('initiativesGrid');
             grid.innerHTML = appData.initiatives.map(init => `
                 <div onclick="editInitiative('${init.id}')"
-                     class="glow-card bg-gray-800 rounded-xl p-5 border border-gray-700 cursor-pointer hover:border-flc-gold/50 transition"
+                     class="glow-card bg-gray-800 rounded-xl p-5 border border-gray-700 cursor-pointer hover:border-flc-gold/50 transition relative group"
                      style="border-left: 4px solid ${init.color}">
-                    <div class="flex justify-between items-start mb-3">
+                    <button onclick="event.stopPropagation(); showDeleteModal('${init.id}')"
+                            class="absolute top-2 right-2 p-1.5 bg-red-600/0 hover:bg-red-600 rounded-lg opacity-0 group-hover:opacity-100 transition-all"
+                            title="Delete initiative">
+                        <svg class="w-4 h-4 text-red-400 hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                    </button>
+                    <div class="flex justify-between items-start mb-3 pr-6">
                         <h4 class="font-semibold">${init.name}</h4>
                         <span class="status-${init.status} px-2 py-1 rounded text-xs font-medium capitalize">${init.status}</span>
                     </div>
@@ -794,9 +808,14 @@
                         </div>
                         <div class="flex gap-2">
                             <span class="status-${init.status} px-3 py-1 rounded-full text-sm font-medium capitalize">${init.status}</span>
-                            <button onclick="editInitiative('${init.id}')" class="edit-control p-2 bg-gray-700 rounded-lg hover:bg-gray-600">
+                            <button onclick="editInitiative('${init.id}')" class="edit-control p-2 bg-gray-700 rounded-lg hover:bg-gray-600" title="Edit">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                </svg>
+                            </button>
+                            <button onclick="showDeleteModal('${init.id}')" class="edit-control p-2 bg-gray-700 rounded-lg hover:bg-red-600 transition" title="Delete">
+                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                 </svg>
                             </button>
                         </div>
@@ -1397,6 +1416,41 @@
             document.getElementById(modalId).classList.add('hidden');
         }
 
+        function showDeleteModal(initId) {
+            const init = appData.initiatives.find(i => i.id === initId);
+            if (!init) return;
+
+            document.getElementById('deleteInitId').value = initId;
+            document.getElementById('deleteInitName').textContent = init.name;
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
+
+        function confirmDelete() {
+            const initId = document.getElementById('deleteInitId').value;
+            const initIndex = appData.initiatives.findIndex(i => i.id === initId);
+
+            if (initIndex === -1) {
+                closeModal('deleteModal');
+                return;
+            }
+
+            // Archive the initiative (soft delete)
+            const deletedInit = appData.initiatives[initIndex];
+            deletedInit.deletedAt = new Date().toISOString();
+
+            if (!appData.archived) {
+                appData.archived = [];
+            }
+            appData.archived.push(deletedInit);
+
+            // Remove from active initiatives
+            appData.initiatives.splice(initIndex, 1);
+
+            saveData(appData);
+            closeModal('deleteModal');
+            renderView();
+        }
+
         // ================== KEYBOARD SHORTCUTS ==================
 
         document.addEventListener('keydown', (e) => {
@@ -1412,6 +1466,7 @@
                 case 'escape':
                     closeModal('initiativeModal');
                     closeModal('logModal');
+                    closeModal('deleteModal');
                     break;
             }
         });

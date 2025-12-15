@@ -1,5 +1,5 @@
 # VP Presentation 12/18 - Active State
-**Last Updated:** 2025-12-15
+**Last Updated:** 2025-12-15 (Session 6)
 **Phase:** Building
 **Health:** GREEN (on track)
 
@@ -7,9 +7,9 @@
 
 ## 1. CURRENT FOCUS
 
-**Working On:** Building interactive HTML showcase
+**Working On:** Refining presentation narrative and content
 **Blocked By:** Nothing
-**Next Milestone:** Complete scaffold with navigation by end of today
+**Next Milestone:** Complete all sections and final polish by 12/17
 
 ---
 
@@ -18,23 +18,32 @@
 ### Completed
 - [x] Initiative manifest created - 2025-12-15
 - [x] HTML showcase folder structure created
-- [x] Tech stack decided (Tailwind, Reveal.js, Chart.js via CDN)
+- [x] Tech stack decided (Tailwind, Chart.js, AOS via CDN)
+- [x] Hero section with FLC branding and animations
+- [x] Navigation structure (top nav + mobile)
+- [x] Program overview section ("The Skunk Works Model")
+- [x] Phased approach section with decision points
+- [x] Initiative showcase (Conference App, AI Transcription, Software Replication)
+- [x] ROI calculator with interactive inputs
+- [x] "The Ask" section with clear requests
+- [x] Track Record section added
+- [x] Command Center dashboard (dashboard.html)
+- [x] PDF export functionality
+- [x] Real-time value updates when editing initiatives
+- [x] **Redesigned "About Winn" section to "Building on AI Leadership"**
+  - Reframed from personal credentials to strategic opportunity narrative
+  - Left card: "The Institutional Opportunity" (Mario's leadership, FLC positioning, untapped potential)
+  - Right card: "The Right Practitioner" (credentials stated factually, track record)
+  - Added transition banner leading directly to Phases
+  - Updated navigation and hero CTA to match
 
 ### In Progress
-- [ ] Hero section with FLC branding - 0%
-- [ ] Navigation structure - 0%
-- [ ] Program overview section - 0%
+- [ ] Final review and polish - 80%
 
 ### Upcoming (by priority)
-1. [ ] Build hero section with animation
-2. [ ] Create navigation (sidebar or top)
-3. [ ] Program overview content
-4. [ ] Initiative showcase section (Whova, Otter AI)
-5. [ ] ROI calculator component
-6. [ ] Embedded Reveal.js slides
-7. [ ] "The Ask" section
-8. [ ] Polish animations and transitions
-9. [ ] Final testing and rehearsal
+1. [ ] Rehearsal and timing check
+2. [ ] Final content review with stakeholder input
+3. [ ] Backup/contingency planning
 
 ---
 
@@ -42,24 +51,29 @@
 
 | Artifact | Location | Status | Audience |
 |----------|----------|--------|----------|
-| HTML Showcase | /artifacts/html-showcase/index.html | Not started | VP |
-| Slide Deck: Overview | /artifacts/html-showcase/slides/ | Not started | VP |
+| HTML Showcase | /artifacts/html-showcase/index.html | Ready for review | VP |
+| Command Center | /artifacts/html-showcase/dashboard.html | Ready | VP |
 
 ---
 
 ## 4. KEY FINDINGS / INTELLIGENCE
 
-### Content to Include
-- FLC AI Conference success story (doubled in size)
-- Whova: $4k/year savings + revenue potential
-- Otter AI: Campus-wide productivity
-- Future pipeline: Workday analytics, enrollment prediction
-- The Ask: Specific stipend amount TBD
+### Content Structure (Final)
+1. Hero - FLC Skunk Works intro
+2. **The Opportunity** - Why this is needed + Why Winn is the right fit
+3. The Skunk Works Model - Operating principles
+4. A Measured Exploration - Phases and decision points
+5. Phase 1 Projects - Conference App, AI Transcription, Software Replication
+6. ROI - Interactive calculator and projections
+7. AI Capabilities - What we can build
+8. Where This Could Go - Future vision
+9. The Ask - Specific requests
 
-### Outstanding Questions
-- [ ] What stipend amount to request? ($500? $1000? $2000?)
-- [ ] VP's specific priorities to emphasize?
-- [ ] Any recent wins to highlight?
+### Key Messaging
+- Stipend: ~$5K per project (negotiated based on work)
+- Phase 1 Investment: ~$15K total
+- Projected Annual Value: $10,000+
+- Risk: Low (no permanent commitments)
 
 ---
 
@@ -75,10 +89,10 @@
 
 | Day | Date | Status | Deliverable |
 |-----|------|--------|-------------|
-| TODAY | 12/15 (Sun) | IN PROGRESS | Scaffold, navigation, hero |
-| Day 2 | 12/16 (Mon) | Pending | AI Conference + content |
-| Day 3 | 12/17 (Tue) | Pending | Complete + polish |
-| Day 4 | 12/18 (Thu) | Pending | DELIVER |
+| Day 1 | 12/15 (Sun) | COMPLETE | Scaffold, all sections, polish |
+| Day 2 | 12/16 (Mon) | Pending | Final content review |
+| Day 3 | 12/17 (Tue) | Pending | Rehearsal + final polish |
+| Day 4 | 12/18 (Wed) | Pending | DELIVER |
 
 **Days Remaining:** 3
 
@@ -88,9 +102,9 @@
 
 **For Next Session:**
 - Start by reading: This Active_State.md
-- Context: Building HTML showcase for Thursday VP presentation
-- Next action: Complete hero section and navigation
-- Files to work on: /artifacts/html-showcase/index.html
+- Context: Presentation is functionally complete, needs final review
+- Next action: Review full presentation flow, rehearse timing
+- Files to work on: /artifacts/html-showcase/index.html (content tweaks only)
 
 ---
 
@@ -99,3 +113,8 @@
 | Date | Focus | Outcome |
 |------|-------|---------|
 | 2025-12-15 | Initialization | Manifest, Active State, folder structure |
+| 2025-12-15 | Session 2 | Hero, navigation, program overview, phases |
+| 2025-12-15 | Session 3 | Initiatives, ROI calculator, Ask section |
+| 2025-12-15 | Session 4 | PDF export, Command Center dashboard |
+| 2025-12-15 | Session 5 | Track Record, ROI polish, navigation fixes |
+| 2025-12-15 | Session 6 | **Redesigned "About Winn" → "Building on AI Leadership"** - reframed narrative from credentials to strategic opportunity |
