@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-15 (Session 8)
+**Last Updated:** 2025-12-15 (Session 9)
 **AI Platform:** Claude
-**Session Type:** Origin Story Page Addition
+**Session Type:** GitHub Pages Deployment & Dashboard Fix
 
 ---
 
@@ -13,6 +13,12 @@
 
 ## 1. SNAPSHOT
 
+- **Session 9 Deployment & Fix:**
+  - Deployed presentation to GitHub Pages: https://winncook.github.io/flc-skunkworks-presentation/
+  - Created public repo `WinnCook/flc-skunkworks-presentation` for sharing
+  - Fixed Command Center dashboard math: added missing Productivity Savings card ($4K)
+  - All 5 metrics now display: Total ($24K) = Cost Savings ($12K) + Revenue ($8K) + Productivity ($4K)
+  - Updated PDF export to show all 5 metrics
 - **Session 8 Addition:**
   - Created new "Origin Story" page (`origin-story.html`) explaining Skunk Works history
   - Page covers: The 1943 problem, Kelly Johnson, the 6 rules, what they built (P-80, U-2, SR-71, F-117), why it worked, FLC mapping, executive framing
@@ -197,6 +203,7 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-15 | Claude | Final Polish | Names, stipends, 3rd project, nav link |
 | 2025-12-15 | Claude | Content Refinement | FERPA messaging, Locally Trained AI, PDF export |
 | 2025-12-15 | Claude | Origin Story Page | New page explaining Skunk Works history & FLC analogy |
+| 2025-12-15 | Claude | GitHub Deployment | Deployed to GitHub Pages, fixed dashboard Productivity card |
 
 ---
 
