@@ -1,6 +1,6 @@
 # VP Presentation 12/18 - Active State
-**Last Updated:** 2025-12-15 (Session 6)
-**Phase:** Building
+**Last Updated:** 2025-12-15 (Session 7)
+**Phase:** READY
 **Health:** GREEN (on track)
 
 ---
@@ -51,8 +51,9 @@
 
 | Artifact | Location | Status | Audience |
 |----------|----------|--------|----------|
-| HTML Showcase | /artifacts/html-showcase/index.html | Ready for review | VP |
+| HTML Showcase | /artifacts/html-showcase/index.html | Ready | VP |
 | Command Center | /artifacts/html-showcase/dashboard.html | Ready | VP |
+| PDF Export | /artifacts/html-showcase/FLC-Skunk-Works-Presentation.pdf | Ready | VP (backup) |
 
 ---
 
@@ -117,4 +118,5 @@
 | 2025-12-15 | Session 3 | Initiatives, ROI calculator, Ask section |
 | 2025-12-15 | Session 4 | PDF export, Command Center dashboard |
 | 2025-12-15 | Session 5 | Track Record, ROI polish, navigation fixes |
-| 2025-12-15 | Session 6 | **Redesigned "About Winn" → "Building on AI Leadership"** - reframed narrative from credentials to strategic opportunity |
+| 2025-12-15 | Session 6 | Redesigned "About Winn" → "Building on AI Leadership" |
+| 2025-12-15 | Session 7 | **Content refinement**: Winn Cook to bullet, FERPA compliance, Locally Trained AI card, PDF export |

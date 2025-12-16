@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-15 (Session 4)
+**Last Updated:** 2025-12-15 (Session 7)
 **AI Platform:** Claude
-**Session Type:** Final Polish
+**Session Type:** Content Refinement & PDF Export
 
 ---
 
@@ -13,19 +13,19 @@
 
 ## 1. SNAPSHOT
 
-- **Session 4 Polish completed:**
-  - All stipends now ~$5K* (with negotiation footnote)
-  - Proper names added: Winn Cook, Provost Mario Martinez
-  - Industry experience added (real estate, software, restaurant, consulting)
-  - AI tools specifically named: Claude, ChatGPT, Gemini, Grok, Llama
-  - Track Record → "AI Track Record at FLC" with AI Institute leader mention
-  - 3rd project added: Software Replication Workflow (1 app/month)
-  - Command Center navigation link added (purple button)
-  - "Built in Hours" → "Built in Minutes"
+- **Session 7 Refinements:**
+  - Moved "Winn Cook" from heading to first bullet (matches Mario Martinez treatment)
+  - Updated local AI bullet: "software development workflows for building institutional applications"
+  - Added FERPA/PII compliance to Measured Risk principle card
+  - Removed "Workday Analytics" from Future Pipeline (now 3-column grid)
+  - Rebranded "Data Security Leadership" → "Locally Trained AI" (fine-tuning, FERPA, strategic independence)
+  - Softened "The Fit" language (removed "rare combination")
+  - Generated full PDF export of presentation
 - **Key messaging now emphasizes:**
   - Low risk, clear decision points, built-in off-ramps
   - Per-project stipends (~$5K* each, negotiable)
-  - Summer 2025 decision framework
+  - Summer 2026 decision framework
+  - FERPA compliance and data protection throughout
   - Foundation/auxiliary entity as aspirational outcome
 - AI Conference is TOMORROW (12/16)
 - VP presentation Thursday 12/18
@@ -104,6 +104,14 @@
   - Added 3rd project: Software Replication Workflow (1 app/month, purple card)
   - Added Command Center nav link (purple gradient button)
   - Updated Dashboard DEFAULT_DATA with 4th initiative
+- [2025-12-15 Session 7] **Content Refinement & PDF Export:**
+  - Moved "Winn Cook" to first bullet point (matches Mario Martinez format)
+  - Updated AI deployment bullet to emphasize software development workflows
+  - Added FERPA/PII compliance messaging to Measured Risk card
+  - Removed "Workday Analytics" from Future Pipeline, fixed grid to 3 columns
+  - Rebranded "Data Security Leadership" → "Locally Trained AI"
+  - Softened "The Fit" callout (removed "rare combination")
+  - Generated full-page PDF export of presentation
 
 ---
 
@@ -181,6 +189,7 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-15 | Claude | Build | Dashboard, showcase, PDF export |
 | 2025-12-15 | Claude | Strategic Pivot | Complete presentation transformation |
 | 2025-12-15 | Claude | Final Polish | Names, stipends, 3rd project, nav link |
+| 2025-12-15 | Claude | Content Refinement | FERPA messaging, Locally Trained AI, PDF export |
 
 ---
 
