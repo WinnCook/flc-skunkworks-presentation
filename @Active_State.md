@@ -19,8 +19,13 @@
   - Research confirms FLC conflict of interest policy allows outside work with disclosure
   - FLC vendor requirements simple: just W-9, PO for >$5K purchases
   - Added teal/emerald nav button to all 4 presentation pages
-  - Page covers: Two paths comparison, FLC benefits, how it works, preferred partner offer
-  - Synced all files to root for GitHub Pages deployment
+  - Page covers: Two paths comparison, 7 FLC benefits, how it works, preferred partner offer
+  - Added "No Asset Overhead" benefit (equipment/subscriptions stay with consultant)
+  - Simplified nav: removed scroll links (Home, Opportunity, Phases, Projects, ROI)
+  - Shortened nav labels: Command Center→Dashboard, Origin Story→Origins, Partnership Path→Partnership
+  - Made FLC Skunk Works logo clickable as home button
+  - Final nav: [Logo] ... [The Ask] [Dashboard] [Origins] [Partnership]
+  - All files synced to root and deployed to GitHub Pages
 - **Session 10 Project Swap & Grade Labels:**
   - Replaced Phase 1 project: Software Replication → **Enrollment Forecasting Model v2**
   - New project highlights: <2% MAE (proven v1), admissions pipeline data, what-if scenario analysis
@@ -64,8 +69,9 @@
 **Final prep for VP presentation Thursday**
 - Review presentation flow in browser
 - Practice the pitch narrative
-- Be ready to discuss stipend amounts
-- Gather any additional insights from AI Conference tomorrow
+- Be ready to discuss BOTH options: Stipend OR Partnership Path (Altitude AI)
+- Partnership Path offers lower friction for FLC (vendor budget vs. HR/compensation)
+- Gather any additional insights from AI Conference (12/16)
 
 ---
 
@@ -76,8 +82,19 @@
 2. **CONFIDENCE + LOW RISK** - "Measured experiment with decision points and off-ramps"
 3. **IMPRESSED + TRUSTING** - "Winn has the credentials, this presentation is proof"
 
-### The Ask (Specific)
-- Per-project stipends of ~$5K* during Phase 1 (Jan-June 2025)
+### The Ask (Two Options)
+
+**Option A: Stipend Model**
+- Per-project stipends of ~$5K* during Phase 1 (Jan-June 2026)
+- Processed through HR/compensation
+
+**Option B: Partnership Path (Altitude AI)** ← *Lower friction*
+- Vendor invoicing through Altitude AI (Colorado LLC)
+- Uses existing procurement budget (no HR involvement)
+- FLC benefits: No asset tracking, no benefits burden, project-based accountability
+- Equipment/subscriptions owned by entity (no sunk costs for FLC)
+
+**Both Options Include:**
 - 3 Phase 1 projects: Conference App, AI Transcription, Enrollment Forecasting v2
 - Formal designation of AI Exploration Initiative
 - Quarterly review meetings
@@ -222,22 +239,23 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-15 | Claude | Origin Story Page | New page explaining Skunk Works history & FLC analogy |
 | 2025-12-15 | Claude | GitHub Deployment | Deployed to GitHub Pages, fixed dashboard Productivity card |
 | 2025-12-16 | Claude | Project Swap | Enrollment Forecasting v2, academic grades (C+/B+/A+), FLC Brandify |
-| 2025-12-16 | Claude | Partnership Path | Altitude AI entity alternative, vendor approach vs. stipend |
+| 2025-12-16 | Claude | Partnership Path | Altitude AI entity, vendor approach, simplified nav, 7 benefits |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
-Session 11 Changes (pending):
-- Added partnership-path.html (Altitude AI entity alternative)
-- Updated index.html, dashboard.html, origin-story.html (nav buttons)
-- Synced root copies for GitHub Pages
+Session 11 Commits (pushed to main):
+- 36e0001: Simplify nav: remove scroll links, make logo clickable home button
+- 53e794a: Shorten nav labels and add equipment benefit to Partnership Path
+- b865b13: Add Partnership Path page (Altitude AI entity alternative)
 
 Session 10 Commits (pushed to main):
-- e8863c1: Replace Software Replication with Enrollment Forecasting v2, add academic grades
-- bc100b6: Update root presentation files for GitHub Pages
+- 413a7e7: Update Active State for Session 10 handoff
 - 4011449: Add data versioning to dashboard for auto-refresh
+- bc100b6: Update root presentation files with Session 10 changes
+- e8863c1: Replace Software Replication with Enrollment Forecasting v2, add academic grades
 
 All changes committed and pushed to:
 https://github.com/WinnCook/flc-skunkworks-presentation
