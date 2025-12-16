@@ -580,6 +580,9 @@
     <script>
         // ================== DATA MANAGEMENT ==================
 
+        // Data version - increment when DEFAULT_DATA structure changes to force refresh
+        const DATA_VERSION = 2; // v2: Enrollment Forecasting replaces Software Replication
+
         const DEFAULT_DATA = {
             archived: [],
             initiatives: [
@@ -663,7 +666,17 @@
 
         // Load or initialize data
         function loadData() {
+            const storedVersion = localStorage.getItem('flc-skunkworks-version');
             const stored = localStorage.getItem('flc-skunkworks-data');
+
+            // If version mismatch or no version, reset to defaults
+            if (!storedVersion || parseInt(storedVersion) < DATA_VERSION) {
+                console.log('Data version updated - resetting to new defaults');
+                localStorage.setItem('flc-skunkworks-version', DATA_VERSION);
+                saveData(DEFAULT_DATA);
+                return DEFAULT_DATA;
+            }
+
             if (stored) {
                 return JSON.parse(stored);
             }
