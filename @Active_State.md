@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-15 (Session 9)
+**Last Updated:** 2025-12-16 (Session 10)
 **AI Platform:** Claude
-**Session Type:** GitHub Pages Deployment & Dashboard Fix
+**Session Type:** Project Swap & Academic Grade Labels
 
 ---
 
@@ -13,6 +13,13 @@
 
 ## 1. SNAPSHOT
 
+- **Session 10 Project Swap & Grade Labels:**
+  - Replaced Phase 1 project: Software Replication → **Enrollment Forecasting Model v2**
+  - New project highlights: <2% MAE (proven v1), admissions pipeline data, what-if scenario analysis
+  - Changed decision path labels to academic grades: C+ (Limited), B+ (Moderate), A+ (High Value)
+  - Updated Future Pipeline: "Enrollment Prediction" → "FLC Brandify" (document branding tool)
+  - Added dashboard data versioning to auto-clear cached localStorage
+  - All changes pushed to GitHub Pages
 - **Session 9 Deployment & Fix:**
   - Deployed presentation to GitHub Pages: https://winncook.github.io/flc-skunkworks-presentation/
   - Created public repo `WinnCook/flc-skunkworks-presentation` for sharing
@@ -63,7 +70,7 @@
 
 ### The Ask (Specific)
 - Per-project stipends of ~$5K* during Phase 1 (Jan-June 2025)
-- 3 Phase 1 projects: Conference App, AI Transcription, Software Replication
+- 3 Phase 1 projects: Conference App, AI Transcription, Enrollment Forecasting v2
 - Formal designation of AI Exploration Initiative
 - Quarterly review meetings
 
@@ -83,7 +90,7 @@
 
 1. ~~Customize placeholder names~~ ✓ (Winn Cook, Mario Martinez)
 2. ~~Add industry experience~~ ✓
-3. ~~Add 3rd project~~ ✓ (Software Replication)
+3. ~~Add 3rd project~~ ✓ (Enrollment Forecasting v2)
 4. Review presentation in browser before Thursday
 5. Practice pitch flow (About Winn → Phases → Ask)
 6. Gather AI Conference insights (12/16)
@@ -138,7 +145,7 @@
 - [x] Future entity: Foundation/auxiliary (revenue-generating)
 - [x] Credentials emphasis: Prominent dedicated section
 - [x] Emotional sell: All three (FOMO + Low Risk + Trust)
-- [x] 3rd project: Software Replication Workflow
+- [x] 3rd project: Enrollment Forecasting v2 (replaced Software Replication)
 
 ### Blocked Items
 - None
@@ -152,7 +159,7 @@
 | VP Presentation 12/18 | **READY** | Practice flow, deliver | CRITICAL |
 | Conference App (Phase 1) | PLANNING | Await VP approval | High |
 | AI Transcription (Phase 1) | PLANNING | Await VP approval | High |
-| Software Replication (Phase 1) | PLANNING | Await VP approval | High |
+| Enrollment Forecasting v2 (Phase 1) | PLANNING | Await VP approval | High |
 
 ---
 
@@ -181,7 +188,7 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 2. About Winn - Credentials and track record
 3. Program Overview - Mission + 5 principles (incl. Measured Risk, Transparency)
 4. Phased Approach - Timeline, decision point, three paths
-5. Phase 1 Projects - Conference App, AI Transcription, Software Replication
+5. Phase 1 Projects - Conference App, AI Transcription, Enrollment Forecasting v2
 6. ROI - Investment vs. Return breakdown
 7. AI Capabilities - What we can build
 8. Future Vision - Foundation entity, revenue, data security
@@ -204,16 +211,20 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-15 | Claude | Content Refinement | FERPA messaging, Locally Trained AI, PDF export |
 | 2025-12-15 | Claude | Origin Story Page | New page explaining Skunk Works history & FLC analogy |
 | 2025-12-15 | Claude | GitHub Deployment | Deployed to GitHub Pages, fixed dashboard Productivity card |
+| 2025-12-16 | Claude | Project Swap | Enrollment Forecasting v2, academic grades (C+/B+/A+), FLC Brandify |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
-Pending changes to commit:
-- Final polish of index.html (names, stipends, 3rd project)
-- Dashboard data update (4th initiative)
-- Active State update (Session 4)
+Session 10 Commits (pushed to main):
+- e8863c1: Replace Software Replication with Enrollment Forecasting v2, add academic grades
+- bc100b6: Update root presentation files for GitHub Pages
+- 4011449: Add data versioning to dashboard for auto-refresh
+
+All changes committed and pushed to:
+https://github.com/WinnCook/flc-skunkworks-presentation
 ```
 
 ---
