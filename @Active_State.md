@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-16 (Session 10)
+**Last Updated:** 2025-12-16 (Session 11)
 **AI Platform:** Claude
-**Session Type:** Project Swap & Academic Grade Labels
+**Session Type:** Partnership Path & Altitude AI Entity
 
 ---
 
@@ -13,6 +13,14 @@
 
 ## 1. SNAPSHOT
 
+- **Session 11 Partnership Path & Altitude AI:**
+  - Created new "Partnership Path" page (`partnership-path.html`) presenting vendor/entity alternative
+  - Introduced **Altitude AI** as Colorado LLC for FLC to engage as vendor vs. stipend model
+  - Research confirms FLC conflict of interest policy allows outside work with disclosure
+  - FLC vendor requirements simple: just W-9, PO for >$5K purchases
+  - Added teal/emerald nav button to all 4 presentation pages
+  - Page covers: Two paths comparison, FLC benefits, how it works, preferred partner offer
+  - Synced all files to root for GitHub Pages deployment
 - **Session 10 Project Swap & Grade Labels:**
   - Replaced Phase 1 project: Software Replication → **Enrollment Forecasting Model v2**
   - New project highlights: <2% MAE (proven v1), admissions pipeline data, what-if scenario analysis
@@ -172,6 +180,7 @@
 **Files to Open:**
 1. `initiatives/vp-presentation-121825/artifacts/html-showcase/index.html` - THE PITCH
 2. `initiatives/vp-presentation-121825/artifacts/html-showcase/dashboard.html` - Command Center
+3. `initiatives/vp-presentation-121825/artifacts/html-showcase/partnership-path.html` - ALTITUDE AI ALTERNATIVE
 
 **Key Paths:**
 ```
@@ -180,7 +189,8 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 ├── @Program_Charter.md          ← Program foundation
 └── initiatives/vp-presentation-121825/artifacts/html-showcase/
     ├── index.html               ← VP PITCH (fully transformed)
-    └── dashboard.html           ← COMMAND CENTER (updated)
+    ├── dashboard.html           ← COMMAND CENTER (updated)
+    └── partnership-path.html    ← ALTITUDE AI ALTERNATIVE (new)
 ```
 
 **Presentation Sections (in order):**
@@ -212,12 +222,18 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-15 | Claude | Origin Story Page | New page explaining Skunk Works history & FLC analogy |
 | 2025-12-15 | Claude | GitHub Deployment | Deployed to GitHub Pages, fixed dashboard Productivity card |
 | 2025-12-16 | Claude | Project Swap | Enrollment Forecasting v2, academic grades (C+/B+/A+), FLC Brandify |
+| 2025-12-16 | Claude | Partnership Path | Altitude AI entity alternative, vendor approach vs. stipend |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
+Session 11 Changes (pending):
+- Added partnership-path.html (Altitude AI entity alternative)
+- Updated index.html, dashboard.html, origin-story.html (nav buttons)
+- Synced root copies for GitHub Pages
+
 Session 10 Commits (pushed to main):
 - e8863c1: Replace Software Replication with Enrollment Forecasting v2, add academic grades
 - bc100b6: Update root presentation files for GitHub Pages
