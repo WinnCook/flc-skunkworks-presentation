@@ -82,6 +82,36 @@
         .fc-theme-standard .fc-scrollgrid { border-color: #374151; }
         .fc-col-header-cell-cushion, .fc-daygrid-day-number { color: #9ca3af; }
         .fc-day-today { background: rgba(196, 160, 0, 0.1) !important; }
+
+        /* Collapsible project sections */
+        .project-section { border-radius: 8px; overflow: hidden; margin-bottom: 8px; }
+        .project-header { cursor: pointer; transition: background-color 0.2s; }
+        .project-header:hover { background-color: rgba(255,255,255,0.05); }
+        .project-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+            opacity: 0;
+        }
+        .project-details.expanded {
+            max-height: 500px;
+            opacity: 1;
+            transition: max-height 0.4s ease-in, opacity 0.3s ease-in;
+        }
+        .chevron-icon {
+            transition: transform 0.3s ease;
+            transform: rotate(0deg);
+        }
+        .chevron-icon.expanded {
+            transform: rotate(180deg);
+        }
+
+        /* ROI Table styling */
+        .roi-table { border-collapse: separate; border-spacing: 0; }
+        .roi-table th { position: sticky; top: 0; background: #1f2937; z-index: 10; }
+        .roi-positive { color: #22c55e; }
+        .roi-negative { color: #ef4444; }
+        .roi-neutral { color: #9ca3af; }
     </style>
 </head>
 
@@ -95,7 +125,11 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-lg">Skunk Works Command Center</h1>
-                    <p class="text-xs text-gray-400">AI Exploration Initiative</p>
+                    <p class="text-xs text-gray-400 flex items-center gap-2">
+                        <span>AI Exploration Initiative</span>
+                        <span class="text-gray-600">|</span>
+                        <span class="text-amber-400/80 italic">Projected values for demonstration — edit to model scenarios</span>
+                    </p>
                 </div>
             </div>
 
@@ -210,27 +244,27 @@
 
             <!-- DASHBOARD VIEW -->
             <div id="view-dashboard" class="view">
-                <!-- Value Cards -->
+                <!-- Value Cards - All values are ANNUAL (per year) -->
                 <div class="grid grid-cols-5 gap-4 mb-8">
                     <div class="bg-gradient-to-br from-green-900/50 to-green-800/30 rounded-xl p-5 border border-green-700/50">
-                        <p class="text-green-400 text-sm font-medium mb-1">Total Value</p>
+                        <p class="text-green-400 text-sm font-medium mb-1">Annual Value</p>
                         <p class="text-3xl font-bold text-white">$<span id="totalValue" class="counter-animate">0</span></p>
-                        <p class="text-green-400/60 text-xs mt-2">Projected annual</p>
+                        <p class="text-green-400/60 text-xs mt-2">Per year (gross)</p>
                     </div>
                     <div class="bg-gradient-to-br from-blue-900/50 to-blue-800/30 rounded-xl p-5 border border-blue-700/50">
                         <p class="text-blue-400 text-sm font-medium mb-1">Cost Savings</p>
                         <p class="text-3xl font-bold text-white">$<span id="totalSavings" class="counter-animate">0</span></p>
-                        <p class="text-blue-400/60 text-xs mt-2">Annual savings</p>
+                        <p class="text-blue-400/60 text-xs mt-2">Per year</p>
                     </div>
                     <div class="bg-gradient-to-br from-yellow-900/50 to-yellow-800/30 rounded-xl p-5 border border-yellow-700/50">
                         <p class="text-yellow-400 text-sm font-medium mb-1">Revenue Potential</p>
                         <p class="text-3xl font-bold text-white">$<span id="totalRevenue" class="counter-animate">0</span></p>
-                        <p class="text-yellow-400/60 text-xs mt-2">New revenue streams</p>
+                        <p class="text-yellow-400/60 text-xs mt-2">Per year</p>
                     </div>
                     <div class="bg-gradient-to-br from-cyan-900/50 to-cyan-800/30 rounded-xl p-5 border border-cyan-700/50">
                         <p class="text-cyan-400 text-sm font-medium mb-1">Productivity Savings</p>
                         <p class="text-3xl font-bold text-white">$<span id="totalProductivity" class="counter-animate">0</span></p>
-                        <p class="text-cyan-400/60 text-xs mt-2">Time/efficiency gains</p>
+                        <p class="text-cyan-400/60 text-xs mt-2">Per year</p>
                     </div>
                     <div class="bg-gradient-to-br from-purple-900/50 to-purple-800/30 rounded-xl p-5 border border-purple-700/50">
                         <p class="text-purple-400 text-sm font-medium mb-1">Active Initiatives</p>
@@ -278,6 +312,24 @@
                         <div id="recentLog" class="space-y-3">
                             <!-- Populated by JS -->
                         </div>
+                    </div>
+                </div>
+
+                <!-- 5-Year Financial Projection Table -->
+                <div class="mt-6 bg-gray-800 rounded-xl p-6 border border-gray-700">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-lg flex items-center gap-2">
+                            <svg class="w-5 h-5 text-flc-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                            5-Year Financial Projection
+                        </h3>
+                        <div id="roiSummaryBadge" class="flex items-center gap-3">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div id="multiYearTable" class="overflow-x-auto">
+                        <!-- Generated by JS -->
                     </div>
                 </div>
             </div>
@@ -370,11 +422,11 @@
 
     <!-- Value Footer Bar -->
     <footer class="fixed bottom-0 left-64 right-0 h-12 bg-gray-800/95 backdrop-blur-sm border-t border-gray-700 flex items-center justify-center gap-8 text-sm no-print">
-        <span class="text-gray-400">Total Projected Value: <strong class="text-flc-gold">$<span id="footerValue">0</span></strong></span>
+        <span class="text-gray-400">Annual Value: <strong class="text-flc-gold">$<span id="footerValue">0</span>/yr</strong></span>
         <span class="text-gray-600">|</span>
         <span class="text-gray-400">Initiatives: <strong class="text-white"><span id="footerCount">0</span></strong></span>
         <span class="text-gray-600">|</span>
-        <span class="text-gray-400">ROI: <strong class="text-green-400"><span id="footerROI">0</span>%</strong></span>
+        <span class="text-gray-400">Annual ROI: <strong class="text-green-400"><span id="footerROI">0</span>%</strong></span>
     </footer>
 
     <!-- MODALS -->
@@ -474,6 +526,23 @@
                                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none">
                     </div>
                 </div>
+
+                <div class="mt-3">
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                        <input type="checkbox" id="initRecurringY1"
+                               class="w-5 h-5 rounded bg-gray-700 border-gray-600 text-flc-gold focus:ring-flc-gold focus:ring-offset-gray-800">
+                        <span class="text-sm text-gray-300 group-hover:text-white transition">
+                            Recurring costs begin Year 1
+                            <span class="text-gray-500 text-xs block">When unchecked, ongoing costs start in Year 2</span>
+                        </span>
+                    </label>
+                </div>
+
+                <hr class="border-gray-700 my-4">
+                <h4 class="font-semibold text-flc-gold">Value Propositions</h4>
+                <p class="text-xs text-gray-500 mb-2">One bullet point per line - explains the rationale behind projected value</p>
+                <textarea id="initValueProps" rows="4" placeholder="Enter value propositions (one per line)..."
+                          class="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 focus:border-flc-gold focus:outline-none text-sm"></textarea>
 
                 <hr class="border-gray-700 my-4">
                 <h4 class="font-semibold text-flc-gold">Stakeholder Impact</h4>
@@ -590,7 +659,7 @@
         // ================== DATA MANAGEMENT ==================
 
         // Data version - increment when DEFAULT_DATA structure changes to force refresh
-        const DATA_VERSION = 2; // v2: Enrollment Forecasting replaces Software Replication
+        const DATA_VERSION = 10; // v10: Replaced stipend with cost, updated to $7,500
 
         const DEFAULT_DATA = {
             archived: [],
@@ -598,44 +667,65 @@
                 {
                     id: 'conference-app',
                     name: 'Conference App (Phase 1 Project)',
-                    description: 'Build AI-powered conference management PWA. Demonstrates AI-assisted development capability. ~$5K* stipend project.',
+                    description: 'Build AI-powered conference management PWA. Demonstrates AI-assisted development capability. $7,500 project.',
                     status: 'planning',
                     priority: 'high',
                     startDate: '2026-01-15',
                     targetDate: '2026-04-01',
-                    costs: { investment: 0, ongoing: 0 },
-                    value: { savings: 4000, revenue: 5000, productivity: 0 },
+                    costs: { investment: 7500, ongoing: 1000 },
+                    recurringStartsY1: false,
+                    value: { savings: 4000, revenue: 2000, productivity: 1000 },
                     stakeholders: ['vp', 'staff'],
+                    valueProps: [
+                        'Eliminate off-the-shelf subscriptions and vendor negotiations',
+                        'Built exactly for FLC needs - everything we need, nothing we don\'t',
+                        'Scale to any campus event without additional cost',
+                        'Potential licensing revenue from regional partners'
+                    ],
                     color: '#3b82f6',
-                    stipendRange: '~$5K*'
+                    costRange: '$7,500'
                 },
                 {
                     id: 'ai-transcription',
                     name: 'AI Transcription (Phase 1 Project)',
-                    description: 'Deploy local Whisper-based transcription. Data stays on-premise, FERPA compliant. ~$5K* stipend project.',
+                    description: 'Deploy local Whisper-based transcription. Data stays on-premise, FERPA compliant. $7,500 project.',
                     status: 'planning',
                     priority: 'high',
                     startDate: '2026-02-01',
                     targetDate: '2026-05-01',
-                    costs: { investment: 0, ongoing: 0 },
-                    value: { savings: 3000, revenue: 0, productivity: 2000 },
+                    costs: { investment: 7500, ongoing: 1000 },
+                    recurringStartsY1: false,
+                    value: { savings: 3000, revenue: 1000, productivity: 2000 },
                     stakeholders: ['vp', 'exec', 'faculty', 'staff'],
+                    valueProps: [
+                        'Replace expensive cloud transcription services',
+                        'On-premise Whisper processing ensures FERPA compliance',
+                        'Automated meeting notes and action item tracking',
+                        'Deploy to internal, external, and regulatory meetings'
+                    ],
                     color: '#22c55e',
-                    stipendRange: '~$5K*'
+                    costRange: '$7,500'
                 },
                 {
                     id: 'enrollment-forecasting',
                     name: 'Enrollment Forecasting v2 (Phase 1 Project)',
-                    description: 'Ground-up rebuild of proven v1 model (<2% MAE). Incorporates admissions pipeline data and what-if scenario analysis for enrollment planning. ~$5K* stipend project.',
+                    description: 'Ground-up rebuild of proven v1 model (<2% MAE). Incorporates admissions pipeline data and what-if scenario analysis for enrollment planning. $7,500 project.',
                     status: 'planning',
                     priority: 'high',
                     startDate: '2026-02-15',
                     targetDate: '2026-06-30',
-                    costs: { investment: 0, ongoing: 0 },
-                    value: { savings: 15000, revenue: 4000, productivity: 2800 },
+                    costs: { investment: 7500, ongoing: 2000 },
+                    recurringStartsY1: false,
+                    value: { savings: 15000, revenue: 4500, productivity: 3000 },
                     stakeholders: ['vp', 'exec', 'enrollment'],
+                    valueProps: [
+                        'Replace expensive subscription-based what-if analysis tools',
+                        'Own the model - custom-fit and evolving with FLC needs',
+                        'Built on v1 prototype with <2% MAE accuracy',
+                        'Strategic planning tool with potential as a product'
+                    ],
                     color: '#8b5cf6',
-                    stipendRange: '~$5K*'
+                    costRange: '$7,500'
                 }
             ],
             captainsLog: [
@@ -669,7 +759,8 @@
                 }
             ],
             settings: {
-                presentationMode: false
+                presentationMode: false,
+                expandedProjects: {} // Track which projects are expanded (all expanded by default)
             }
         };
 
@@ -734,6 +825,7 @@
             renderLogList();
             renderStakeholderMatrix();
             generateExecutiveSummary();
+            generateMultiYearROI();
             updateFooter();
             populateLogInitiativeDropdown();
         }
@@ -744,58 +836,58 @@
             let totalSavings = 0;
             let totalRevenue = 0;
             let totalProductivity = 0;
+            let totalInvestment = 0;
+            let totalOngoing = 0;
             let activeCount = 0;
 
             appData.initiatives.forEach(init => {
                 totalSavings += init.value.savings || 0;
                 totalRevenue += init.value.revenue || 0;
                 totalProductivity += init.value.productivity || 0;
+                totalInvestment += init.costs?.investment || 0;
+                totalOngoing += init.costs?.ongoing || 0;
                 if (init.status === 'active' || init.status === 'planning') {
                     activeCount++;
                 }
             });
 
+            const totalValue = totalSavings + totalRevenue + totalProductivity;
+            const totalCosts = totalInvestment + totalOngoing;
+            // ROI = (Net Return / Investment) * 100
+            // Net Return = Annual Value - Ongoing Costs
+            // If no costs entered, show infinite/N/A
+            const netAnnualReturn = totalValue - totalOngoing;
+            const roi = totalCosts > 0 ? Math.round((netAnnualReturn / totalCosts) * 100) : (totalValue > 0 ? 999 : 0);
+
             return {
-                totalValue: totalSavings + totalRevenue + totalProductivity,
+                totalValue,
                 totalSavings,
                 totalRevenue,
                 totalProductivity,
+                totalInvestment,
+                totalOngoing,
+                totalCosts,
+                netAnnualReturn,
                 activeCount,
-                roi: Math.round(((totalSavings + totalRevenue + totalProductivity) / 4000) * 100) // Assuming ~$4k time investment
+                roi
             };
         }
 
-        function animateCounter(element, target) {
-            const duration = 1000;
-            const start = parseInt(element.textContent.replace(/,/g, '')) || 0;
-            const increment = (target - start) / (duration / 16);
-            let current = start;
-
-            const timer = setInterval(() => {
-                current += increment;
-                if ((increment > 0 && current >= target) || (increment < 0 && current <= target)) {
-                    element.textContent = target.toLocaleString();
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current).toLocaleString();
-                }
-            }, 16);
-        }
-
+        // Simple direct value update - no animation to avoid glitches
         function updateValueCards() {
             const totals = calculateTotals();
-            animateCounter(document.getElementById('totalValue'), totals.totalValue);
-            animateCounter(document.getElementById('totalSavings'), totals.totalSavings);
-            animateCounter(document.getElementById('totalRevenue'), totals.totalRevenue);
-            animateCounter(document.getElementById('totalProductivity'), totals.totalProductivity);
-            animateCounter(document.getElementById('activeCount'), totals.activeCount);
+            document.getElementById('totalValue').textContent = totals.totalValue.toLocaleString();
+            document.getElementById('totalSavings').textContent = totals.totalSavings.toLocaleString();
+            document.getElementById('totalRevenue').textContent = totals.totalRevenue.toLocaleString();
+            document.getElementById('totalProductivity').textContent = totals.totalProductivity.toLocaleString();
+            document.getElementById('activeCount').textContent = totals.activeCount;
         }
 
         function updateFooter() {
             const totals = calculateTotals();
             document.getElementById('footerValue').textContent = totals.totalValue.toLocaleString();
             document.getElementById('footerCount').textContent = totals.activeCount;
-            document.getElementById('footerROI').textContent = totals.roi;
+            document.getElementById('footerROI').textContent = totals.roi >= 999 ? '∞' : totals.roi;
         }
 
         // ================== INITIATIVES ==================
@@ -897,18 +989,24 @@
                     investment: parseInt(document.getElementById('initInvestment').value) || 0,
                     ongoing: parseInt(document.getElementById('initOngoing').value) || 0
                 },
+                recurringStartsY1: document.getElementById('initRecurringY1').checked,
                 value: {
                     savings: parseInt(document.getElementById('initSavings').value) || 0,
                     revenue: parseInt(document.getElementById('initRevenue').value) || 0,
                     productivity: parseInt(document.getElementById('initProductivity').value) || 0
                 },
                 stakeholders,
+                valueProps: document.getElementById('initValueProps').value
+                    .split('\n')
+                    .map(s => s.trim())
+                    .filter(s => s.length > 0),
                 color: ['#3b82f6', '#22c55e', '#eab308', '#ef4444', '#8b5cf6', '#06b6d4'][Math.floor(Math.random() * 6)]
             };
 
             const existingIndex = appData.initiatives.findIndex(i => i.id === id);
             if (existingIndex >= 0) {
                 initiative.color = appData.initiatives[existingIndex].color;
+                initiative.costRange = appData.initiatives[existingIndex].costRange;
                 appData.initiatives[existingIndex] = initiative;
             } else {
                 appData.initiatives.push(initiative);
@@ -922,34 +1020,44 @@
 
         // Live update totals as user types in modal
         function setupLiveValueUpdates() {
-            const valueFields = ['initSavings', 'initRevenue', 'initProductivity'];
+            const valueFields = ['initSavings', 'initRevenue', 'initProductivity', 'initInvestment', 'initOngoing'];
             valueFields.forEach(fieldId => {
                 const field = document.getElementById(fieldId);
                 if (field) {
                     field.addEventListener('input', updateLiveTotals);
                 }
             });
+            // Also listen for checkbox changes
+            const recurringCheckbox = document.getElementById('initRecurringY1');
+            if (recurringCheckbox) {
+                recurringCheckbox.addEventListener('change', updateLiveTotals);
+            }
         }
 
         function updateLiveTotals() {
             const editingId = document.getElementById('initId').value;
 
-            // Get current modal values
+            // Get current modal values (both value and cost fields)
             const modalSavings = parseInt(document.getElementById('initSavings').value) || 0;
             const modalRevenue = parseInt(document.getElementById('initRevenue').value) || 0;
             const modalProductivity = parseInt(document.getElementById('initProductivity').value) || 0;
-            const modalTotal = modalSavings + modalRevenue + modalProductivity;
+            const modalInvestment = parseInt(document.getElementById('initInvestment').value) || 0;
+            const modalOngoing = parseInt(document.getElementById('initOngoing').value) || 0;
 
             // Calculate totals from all OTHER initiatives (excluding the one being edited)
             let otherSavings = 0;
             let otherRevenue = 0;
             let otherProductivity = 0;
+            let otherInvestment = 0;
+            let otherOngoing = 0;
 
             appData.initiatives.forEach(init => {
                 if (init.id !== editingId) {
                     otherSavings += init.value.savings || 0;
                     otherRevenue += init.value.revenue || 0;
                     otherProductivity += init.value.productivity || 0;
+                    otherInvestment += init.costs?.investment || 0;
+                    otherOngoing += init.costs?.ongoing || 0;
                 }
             });
 
@@ -958,18 +1066,21 @@
             const totalRevenue = otherRevenue + modalRevenue;
             const totalProductivity = otherProductivity + modalProductivity;
             const totalValue = totalSavings + totalRevenue + totalProductivity;
-            const activeCount = appData.initiatives.filter(i => i.status === 'active' || i.status === 'planning').length;
+            const totalInvestment = otherInvestment + modalInvestment;
+            const totalOngoing = otherOngoing + modalOngoing;
+            const totalCosts = totalInvestment + totalOngoing;
 
-            // Update dashboard cards with animation
-            animateCounter(document.getElementById('totalValue'), totalValue);
-            animateCounter(document.getElementById('totalSavings'), totalSavings);
-            animateCounter(document.getElementById('totalRevenue'), totalRevenue);
-            animateCounter(document.getElementById('totalProductivity'), totalProductivity);
+            // Calculate dynamic ROI
+            const netAnnualReturn = totalValue - totalOngoing;
+            const roi = totalCosts > 0 ? Math.round((netAnnualReturn / totalCosts) * 100) : (totalValue > 0 ? 999 : 0);
 
-            // Update footer
+            // Update all displays with same values - simple direct update
+            document.getElementById('totalValue').textContent = totalValue.toLocaleString();
+            document.getElementById('totalSavings').textContent = totalSavings.toLocaleString();
+            document.getElementById('totalRevenue').textContent = totalRevenue.toLocaleString();
+            document.getElementById('totalProductivity').textContent = totalProductivity.toLocaleString();
             document.getElementById('footerValue').textContent = totalValue.toLocaleString();
-            const roi = Math.round((totalValue / 4000) * 100);
-            document.getElementById('footerROI').textContent = roi;
+            document.getElementById('footerROI').textContent = roi >= 999 ? '∞' : roi;
         }
 
         // Initialize live updates when modal opens
@@ -998,6 +1109,8 @@
             document.getElementById('initProductivity').value = init.value.productivity;
             document.getElementById('initInvestment').value = init.costs.investment;
             document.getElementById('initOngoing').value = init.costs.ongoing;
+            document.getElementById('initRecurringY1').checked = init.recurringStartsY1 || false;
+            document.getElementById('initValueProps').value = (init.valueProps || []).join('\n');
 
             ['vp', 'exec', 'faculty', 'staff', 'students', 'board'].forEach(s => {
                 document.getElementById(`impact-${s}`).checked = init.stakeholders?.includes(s) || false;
@@ -1201,6 +1314,189 @@
             `).join('');
         }
 
+        // ================== 5-YEAR FINANCIAL PROJECTION (Executive Format) ==================
+
+        function generateMultiYearROI() {
+            const container = document.getElementById('multiYearTable');
+            const badge = document.getElementById('roiSummaryBadge');
+
+            // Aggregate all initiatives
+            let totalInvestment = 0;
+            let totalRecurring = 0;
+            let totalRecurringY1 = 0; // Only if recurringStartsY1 is true
+            let totalSavings = 0;
+            let totalRevenue = 0;
+            let totalProductivity = 0;
+
+            appData.initiatives.forEach(init => {
+                totalInvestment += init.costs?.investment || 0;
+                const recurring = init.costs?.ongoing || 0;
+                totalRecurring += recurring;
+                if (init.recurringStartsY1) {
+                    totalRecurringY1 += recurring;
+                }
+                totalSavings += init.value?.savings || 0;
+                totalRevenue += init.value?.revenue || 0;
+                totalProductivity += init.value?.productivity || 0;
+            });
+
+            const annualValue = totalSavings + totalRevenue + totalProductivity;
+
+            // Calculate 5-year projection
+            const years = [1, 2, 3, 4, 5];
+            const data = years.map(year => {
+                const investment = year === 1 ? totalInvestment : 0;
+                const recurring = year === 1 ? totalRecurringY1 : totalRecurring;
+                const costs = investment + recurring;
+                const benefits = annualValue;
+                const netCash = benefits - costs;
+                return { year, investment, recurring, costs, benefits, netCash };
+            });
+
+            // Calculate cumulative values
+            let cumCash = 0;
+            data.forEach(d => {
+                cumCash += d.netCash;
+                d.cumCash = cumCash;
+                d.cumROI = totalInvestment > 0 ? Math.round((cumCash / totalInvestment) * 100) : (cumCash > 0 ? 999 : 0);
+            });
+
+            // 5-Year totals
+            const total5YrCosts = data.reduce((sum, d) => sum + d.costs, 0);
+            const total5YrBenefits = data.reduce((sum, d) => sum + d.benefits, 0);
+            const total5YrNet = data[4].cumCash;
+            const total5YrROI = totalInvestment > 0 ? Math.round((total5YrNet / totalInvestment) * 100) : (total5YrNet > 0 ? 999 : 0);
+
+            // Payback period (in months)
+            let paybackMonths = 0;
+            if (totalInvestment > 0 && annualValue > 0) {
+                const monthlyBenefit = annualValue / 12;
+                const monthlyRecurring = totalRecurring / 12;
+                let remaining = totalInvestment + totalRecurringY1;
+                for (let m = 1; m <= 60; m++) {
+                    remaining -= (monthlyBenefit - (m > 12 ? monthlyRecurring : 0));
+                    if (remaining <= 0) {
+                        paybackMonths = m;
+                        break;
+                    }
+                }
+            }
+            const paybackDisplay = paybackMonths > 0 ? (paybackMonths / 12).toFixed(1) + ' yrs' : 'Immediate';
+
+            // Format helpers
+            const fmt = (n) => n.toLocaleString();
+            const fmtCost = (n) => n > 0 ? `($${fmt(n)})` : '—';
+            const fmtVal = (n) => n > 0 ? `$${fmt(n)}` : '—';
+            const fmtNet = (n) => n >= 0 ? `$${fmt(n)}` : `-$${fmt(Math.abs(n))}`;
+            const fmtROI = (n, hasInvestment) => !hasInvestment ? '∞' : `${n.toLocaleString()}%`;
+            const roiColor = (n) => n >= 100 ? 'text-green-400' : n >= 0 ? 'text-yellow-400' : 'text-red-400';
+            const netColor = (n) => n >= 0 ? 'text-green-400' : 'text-red-400';
+            const hasInvestment = totalInvestment > 0;
+
+            // Update header badges
+            badge.innerHTML = `
+                <span class="px-3 py-1.5 rounded-lg text-sm font-bold bg-blue-500/20 text-blue-400">
+                    Payback: ${paybackDisplay}
+                </span>
+                <span class="px-3 py-1.5 rounded-lg text-sm font-bold bg-flc-gold/20 text-flc-gold">
+                    5-Yr Net: $${fmt(total5YrNet)}
+                </span>
+                <span class="px-3 py-1.5 rounded-lg text-sm font-bold ${total5YrROI >= 100 ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}">
+                    5-Yr ROI: ${fmtROI(total5YrROI, hasInvestment)}
+                </span>
+            `;
+
+            // Build the executive-grade table
+            container.innerHTML = `
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b-2 border-gray-600">
+                        <th class="text-left py-3 px-4 font-semibold text-gray-300 w-44"></th>
+                        ${years.map(y => `<th class="text-right py-3 px-4 font-semibold text-gray-400">Year ${y}</th>`).join('')}
+                        <th class="text-right py-3 px-4 font-bold text-flc-gold">5-Year Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- COSTS SECTION -->
+                    <tr class="bg-gray-800/50">
+                        <td colspan="7" class="py-2 px-4 font-bold text-red-400 text-xs uppercase tracking-wide">Costs</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/30">
+                        <td class="py-2 px-4 text-gray-400 pl-6">Initial Investment</td>
+                        ${years.map(y => `<td class="py-2 px-4 text-right text-red-400">${y === 1 ? fmtCost(totalInvestment) : '—'}</td>`).join('')}
+                        <td class="py-2 px-4 text-right text-red-400 font-semibold">${fmtCost(totalInvestment)}</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/30">
+                        <td class="py-2 px-4 text-gray-400 pl-6">Recurring Costs</td>
+                        ${data.map(d => `<td class="py-2 px-4 text-right text-red-400">${fmtCost(d.recurring)}</td>`).join('')}
+                        <td class="py-2 px-4 text-right text-red-400 font-semibold">${fmtCost(totalRecurringY1 + totalRecurring * 4)}</td>
+                    </tr>
+                    <tr class="border-b border-gray-600 bg-red-500/10">
+                        <td class="py-2 px-4 font-semibold text-red-300 pl-6">Total Costs</td>
+                        ${data.map(d => `<td class="py-2 px-4 text-right text-red-300 font-semibold">${fmtCost(d.costs)}</td>`).join('')}
+                        <td class="py-2 px-4 text-right text-red-300 font-bold">${fmtCost(total5YrCosts)}</td>
+                    </tr>
+
+                    <!-- BENEFITS SECTION -->
+                    <tr class="bg-gray-800/50">
+                        <td colspan="7" class="py-2 px-4 font-bold text-green-400 text-xs uppercase tracking-wide">Benefits (Annual)</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/30">
+                        <td class="py-2 px-4 text-gray-400 pl-6">Cost Savings</td>
+                        ${years.map(() => `<td class="py-2 px-4 text-right text-green-400">${fmtVal(totalSavings)}</td>`).join('')}
+                        <td class="py-2 px-4 text-right text-green-400 font-semibold">${fmtVal(totalSavings * 5)}</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/30">
+                        <td class="py-2 px-4 text-gray-400 pl-6">Revenue Potential</td>
+                        ${years.map(() => `<td class="py-2 px-4 text-right text-green-400">${fmtVal(totalRevenue)}</td>`).join('')}
+                        <td class="py-2 px-4 text-right text-green-400 font-semibold">${fmtVal(totalRevenue * 5)}</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/30">
+                        <td class="py-2 px-4 text-gray-400 pl-6">Productivity Gains</td>
+                        ${years.map(() => `<td class="py-2 px-4 text-right text-green-400">${fmtVal(totalProductivity)}</td>`).join('')}
+                        <td class="py-2 px-4 text-right text-green-400 font-semibold">${fmtVal(totalProductivity * 5)}</td>
+                    </tr>
+                    <tr class="border-b border-gray-600 bg-green-500/10">
+                        <td class="py-2 px-4 font-semibold text-green-300 pl-6">Total Annual Value</td>
+                        ${years.map(() => `<td class="py-2 px-4 text-right text-green-300 font-semibold">${fmtVal(annualValue)}</td>`).join('')}
+                        <td class="py-2 px-4 text-right text-green-300 font-bold">${fmtVal(total5YrBenefits)}</td>
+                    </tr>
+
+                    <!-- RETURNS SECTION -->
+                    <tr class="bg-gray-800/50">
+                        <td colspan="7" class="py-2 px-4 font-bold text-flc-gold text-xs uppercase tracking-wide">Returns</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/30">
+                        <td class="py-2 px-4 text-gray-300 pl-6">Annual Net Cash</td>
+                        ${data.map(d => `<td class="py-2 px-4 text-right font-semibold ${netColor(d.netCash)}">${fmtNet(d.netCash)}</td>`).join('')}
+                        <td class="py-2 px-4 text-right font-bold ${netColor(total5YrNet)}">${fmtNet(total5YrNet)}</td>
+                    </tr>
+                    <tr class="border-b border-gray-700/30 bg-flc-gold/5">
+                        <td class="py-2 px-4 text-white font-semibold pl-6">Cumulative Cash</td>
+                        ${data.map(d => `<td class="py-2 px-4 text-right font-bold ${netColor(d.cumCash)}">${fmtNet(d.cumCash)}</td>`).join('')}
+                        <td class="py-2 px-4 text-right text-gray-500">—</td>
+                    </tr>
+                    <tr class="bg-gradient-to-r from-flc-gold/20 to-flc-gold/5">
+                        <td class="py-3 px-4 text-white font-bold pl-6">Cumulative ROI</td>
+                        ${data.map(d => `<td class="py-3 px-4 text-right font-bold text-lg ${roiColor(d.cumROI)}">${fmtROI(d.cumROI, hasInvestment)}</td>`).join('')}
+                        <td class="py-3 px-4 text-right font-bold text-xl text-flc-gold">${fmtROI(total5YrROI, hasInvestment)}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Executive Summary Box -->
+            <div class="mt-4 p-4 bg-gradient-to-r from-flc-blue/20 to-gray-800/50 rounded-lg border border-flc-gold/30">
+                <p class="text-sm text-gray-300">
+                    <span class="text-flc-gold font-bold">Executive Summary:</span>
+                    ${hasInvestment
+                        ? `A <span class="text-white font-semibold">$${fmt(totalInvestment)}</span> investment generates <span class="text-green-400 font-semibold">$${fmt(total5YrNet)}</span> in net returns over 5 years — a <span class="text-flc-gold font-bold">${fmtROI(total5YrROI, true)} return</span> with payback in <span class="text-blue-400 font-semibold">${paybackDisplay}</span>.`
+                        : `Program delivers <span class="text-green-400 font-semibold">$${fmt(annualValue)}/year</span> in value (<span class="text-flc-gold font-semibold">$${fmt(total5YrBenefits)}</span> over 5 years). Add investment costs to calculate ROI.`
+                    }
+                </p>
+            </div>
+            `;
+        }
+
         // ================== EXECUTIVE SUMMARY ==================
 
         function generateExecutiveSummary() {
@@ -1213,7 +1509,16 @@
 
             summary += `<p class="mt-2"><strong>Active Initiatives:</strong></p><ul class="list-disc list-inside text-gray-400">`;
             activeInits.forEach(init => {
-                summary += `<li>${init.name} (${init.status}) - $${(init.value.savings + init.value.revenue + init.value.productivity).toLocaleString()}</li>`;
+                const initValue = (init.value.savings + init.value.revenue + init.value.productivity).toLocaleString();
+                summary += `<li><strong>${init.name}</strong> - $${initValue}/yr`;
+                if (init.valueProps && init.valueProps.length > 0) {
+                    summary += `<ul class="list-disc list-inside ml-4 text-gray-500 text-xs mt-1 mb-2">`;
+                    init.valueProps.forEach(prop => {
+                        summary += `<li>${prop}</li>`;
+                    });
+                    summary += `</ul>`;
+                }
+                summary += `</li>`;
             });
             summary += `</ul>`;
 
@@ -1223,7 +1528,13 @@
                 summary += `</ul>`;
             }
 
-            summary += `<p class="mt-2"><strong>ROI:</strong> ${totals.roi}% projected return on time invested.</p>`;
+            // Show investment and dynamic ROI
+            if (totals.totalCosts > 0) {
+                summary += `<p class="mt-2"><strong>Investment:</strong> $${totals.totalInvestment.toLocaleString()} one-time + $${totals.totalOngoing.toLocaleString()}/yr ongoing</p>`;
+                summary += `<p><strong>Annual ROI:</strong> <span class="${totals.roi >= 100 ? 'text-green-400' : totals.roi >= 50 ? 'text-yellow-400' : 'text-red-400'}">${totals.roi}%</span> return on investment</p>`;
+            } else {
+                summary += `<p class="mt-2 text-amber-400/80 italic"><strong>Note:</strong> Add investment costs to initiatives to calculate ROI</p>`;
+            }
 
             container.innerHTML = summary;
         }
