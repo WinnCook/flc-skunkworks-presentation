@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-15 (Session 7)
+**Last Updated:** 2025-12-15 (Session 8)
 **AI Platform:** Claude
-**Session Type:** Content Refinement & PDF Export
+**Session Type:** Origin Story Page Addition
 
 ---
 
@@ -13,6 +13,12 @@
 
 ## 1. SNAPSHOT
 
+- **Session 8 Addition:**
+  - Created new "Origin Story" page (`origin-story.html`) explaining Skunk Works history
+  - Page covers: The 1943 problem, Kelly Johnson, the 6 rules, what they built (P-80, U-2, SR-71, F-117), why it worked, FLC mapping, executive framing
+  - Added amber/orange "Origin Story" navigation button to index.html (right of Command Center)
+  - Includes back-to-presentation link, matching dark theme, AOS animations, SR-71 silhouette
+  - Removed decorative quote marks per user preference (kept title quotes only)
 - **Session 7 Refinements:**
   - Moved "Winn Cook" from heading to first bullet (matches Mario Martinez treatment)
   - Updated local AI bullet: "software development workflows for building institutional applications"
@@ -190,6 +196,7 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-15 | Claude | Strategic Pivot | Complete presentation transformation |
 | 2025-12-15 | Claude | Final Polish | Names, stipends, 3rd project, nav link |
 | 2025-12-15 | Claude | Content Refinement | FERPA messaging, Locally Trained AI, PDF export |
+| 2025-12-15 | Claude | Origin Story Page | New page explaining Skunk Works history & FLC analogy |
 
 ---
 
