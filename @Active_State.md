@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-16 (Session 11)
+**Last Updated:** 2025-12-16 (Session 12)
 **AI Platform:** Claude
-**Session Type:** Partnership Path & Altitude AI Entity
+**Session Type:** Pricing & Dashboard Financial Upgrades
 
 ---
 
@@ -13,6 +13,18 @@
 
 ## 1. SNAPSHOT
 
+- **Session 12 Pricing & Dashboard Financial Upgrades:**
+  - Updated pricing from ~$5K to **$7,500 per project** across all pages
+  - Total Phase 1 investment now **$22,500** (was ~$15K)
+  - Replaced "stipend" with "cost" throughout (except Stipend Model comparison page)
+  - Added **5-Year Executive-Grade Financial Projection** table to dashboard
+  - Table shows: Costs, Benefits (broken into Savings/Revenue/Productivity), Returns
+  - Added **Cumulative ROI** row showing compound returns over 5 years
+  - Added **valueProps** field to initiatives - editable bullet points explaining value rationale
+  - Value propositions display as sub-bullets in Executive Summary
+  - Fixed infinity (∞) bug - now only shows when investment is truly zero
+  - DATA_VERSION bumped to 10 for fresh cache on web visitors
+  - All root files synced and pushed to GitHub Pages
 - **Session 11 Partnership Path & Altitude AI:**
   - Created new "Partnership Path" page (`partnership-path.html`) presenting vendor/entity alternative
   - Introduced **Altitude AI** as Colorado LLC for FLC to engage as vendor vs. stipend model
@@ -55,7 +67,8 @@
   - Generated full PDF export of presentation
 - **Key messaging now emphasizes:**
   - Low risk, clear decision points, built-in off-ramps
-  - Per-project stipends (~$5K* each, negotiable)
+  - Per-project costs of **$7,500 each**
+  - Total Phase 1 investment: **$22,500**
   - Summer 2026 decision framework
   - FERPA compliance and data protection throughout
   - Foundation/auxiliary entity as aspirational outcome
@@ -85,7 +98,7 @@
 ### The Ask (Two Options)
 
 **Option A: Stipend Model**
-- Per-project stipends of ~$5K* during Phase 1 (Jan-June 2026)
+- Per-project costs of **$7,500** during Phase 1 (Jan-June 2026)
 - Processed through HR/compensation
 
 **Option B: Partnership Path (Altitude AI)** ← *Lower friction*
@@ -93,6 +106,8 @@
 - Uses existing procurement budget (no HR involvement)
 - FLC benefits: No asset tracking, no benefits burden, project-based accountability
 - Equipment/subscriptions owned by entity (no sunk costs for FLC)
+
+**Total Phase 1 Investment:** $22,500 (3 projects × $7,500)
 
 **Both Options Include:**
 - 3 Phase 1 projects: Conference App, AI Transcription, Enrollment Forecasting v2
@@ -106,7 +121,7 @@
 
 ### Objection Handling Built In
 - **Job displacement** → "AI augments humans, doesn't replace"
-- **Budget constraints** → "Max exposure $15K, no FTE costs"
+- **Budget constraints** → "Max exposure $22.5K, no FTE costs, 5-year ROI of 618%"
 - **Data security** → "Local AI models, FERPA compliant"
 
 ---
@@ -166,11 +181,14 @@
 - [x] Strategic direction - **DECIDED: Per-project stipends, phased approach**
 
 ### Decisions Made
-- [x] Stipend amount: ~$5K* per project (negotiable)
+- [x] Project cost: **$7,500 per project** (finalized)
+- [x] Total Phase 1: **$22,500** investment
 - [x] Future entity: Foundation/auxiliary (revenue-generating)
 - [x] Credentials emphasis: Prominent dedicated section
 - [x] Emotional sell: All three (FOMO + Low Risk + Trust)
 - [x] 3rd project: Enrollment Forecasting v2 (replaced Software Replication)
+- [x] Dashboard: 5-year executive-grade financial projection table
+- [x] Value props: Editable rationale bullets for each initiative
 
 ### Blocked Items
 - None
@@ -240,25 +258,27 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-15 | Claude | GitHub Deployment | Deployed to GitHub Pages, fixed dashboard Productivity card |
 | 2025-12-16 | Claude | Project Swap | Enrollment Forecasting v2, academic grades (C+/B+/A+), FLC Brandify |
 | 2025-12-16 | Claude | Partnership Path | Altitude AI entity, vendor approach, simplified nav, 7 benefits |
+| 2025-12-16 | Claude | Pricing & Financials | $7,500/project, 5-yr table, valueProps, stipend→cost |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
+Session 12 Commits (pushed to main):
+- 1eb7ca3: Sync root HTML files with showcase folder for GitHub Pages
+- c23b91d: Update pricing to $7,500 per project, add value propositions
+
 Session 11 Commits (pushed to main):
+- 7d6c485: Update Active State for Session 11 handoff
 - 36e0001: Simplify nav: remove scroll links, make logo clickable home button
 - 53e794a: Shorten nav labels and add equipment benefit to Partnership Path
 - b865b13: Add Partnership Path page (Altitude AI entity alternative)
 
-Session 10 Commits (pushed to main):
-- 413a7e7: Update Active State for Session 10 handoff
-- 4011449: Add data versioning to dashboard for auto-refresh
-- bc100b6: Update root presentation files with Session 10 changes
-- e8863c1: Replace Software Replication with Enrollment Forecasting v2, add academic grades
-
 All changes committed and pushed to:
 https://github.com/WinnCook/flc-skunkworks-presentation
+
+DATA_VERSION: 10 (forces fresh localStorage on web visitors)
 ```
 
 ---
