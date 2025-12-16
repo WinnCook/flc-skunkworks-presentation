@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\Users\\winnl\\Documents\\FLC - Skunk Works\" /s /b)",
+      "Bash(dir /s \"C:\\Users\\winnl\\Documents\\ClaudeCodePlayground\\New Gemini Workflow\\simple_stateless_workflow\")",
+      "Bash(dir \"C:\\Users\\winnl\\Documents\" /b)"
+    ]
+  }
+}
