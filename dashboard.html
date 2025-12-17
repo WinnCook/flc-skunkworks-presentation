@@ -155,14 +155,16 @@
 
         /* Mobile Sidebar Styles */
         @media (max-width: 767px) {
+            .sidebar:not(.open) {
+                transform: translateX(-100%) !important;
+            }
             .sidebar {
-                transform: translateX(-100%);
                 transition: transform 0.3s ease-in-out;
                 z-index: 40;
                 background: rgba(31, 41, 55, 0.98);
             }
             .sidebar.open {
-                transform: translateX(0);
+                transform: translateX(0) !important;
             }
             .sidebar-overlay {
                 position: fixed;
@@ -256,15 +258,6 @@
                     </svg>
                     <span class="nav-btn-text">Partnership</span>
                 </a>
-
-                <!-- Presentation Mode Toggle -->
-                <button id="presentationToggle" onclick="togglePresentationMode()"
-                        class="edit-control hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 border border-gray-700 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                    </svg>
-                    <span id="modeText" class="nav-btn-text">Presentation Mode</span>
-                </button>
 
                 <!-- PDF Export -->
                 <button onclick="exportToPDF()"
@@ -783,7 +776,7 @@
         // ================== DATA MANAGEMENT ==================
 
         // Data version - increment when DEFAULT_DATA structure changes to force refresh
-        const DATA_VERSION = 15; // v15: Session 18 - Monthly updates, continues in IR, 6 benefit boxes
+        const DATA_VERSION = 16; // v16: Session 19 - Removed Presentation Mode, fixed mobile sidebar
 
         // Scenario preset values (absolute values for each initiative)
         const SCENARIO_VALUES = {
@@ -1826,25 +1819,6 @@
             });
         }
 
-        // ================== PRESENTATION MODE ==================
-
-        function togglePresentationMode() {
-            appData.settings.presentationMode = !appData.settings.presentationMode;
-            saveData(appData);
-
-            if (appData.settings.presentationMode) {
-                document.body.classList.add('presentation-mode');
-                document.getElementById('modeText').textContent = 'Edit Mode';
-                document.getElementById('presentationToggle').classList.add('bg-flc-gold', 'text-flc-blue');
-                document.getElementById('presentationToggle').classList.remove('bg-gray-800');
-            } else {
-                document.body.classList.remove('presentation-mode');
-                document.getElementById('modeText').textContent = 'Presentation Mode';
-                document.getElementById('presentationToggle').classList.remove('bg-flc-gold', 'text-flc-blue');
-                document.getElementById('presentationToggle').classList.add('bg-gray-800');
-            }
-        }
-
         // ================== PDF EXPORT ==================
 
         function exportToPDF() {
@@ -2204,7 +2178,6 @@
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
 
             switch(e.key.toLowerCase()) {
-                case 'p': togglePresentationMode(); break;
                 case 'd': showView('dashboard'); break;
                 case 'i': showView('initiatives'); break;
                 case 'c': showView('calendar'); break;
@@ -2225,11 +2198,9 @@
             loadScenarioFromURL();
             showView('dashboard');
 
-            // Check presentation mode
-            if (appData.settings.presentationMode) {
-                document.body.classList.add('presentation-mode');
-                document.getElementById('modeText').textContent = 'Edit Mode';
-                document.getElementById('presentationToggle').classList.add('bg-flc-gold', 'text-flc-blue');
+            // Ensure sidebar is closed on mobile
+            if (window.innerWidth < 768) {
+                closeSidebar();
             }
         });
     </script>
