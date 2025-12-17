@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-16 (Session 16)
+**Last Updated:** 2025-12-17 (Session 17)
 **AI Platform:** Claude (Opus 4.5)
-**Session Type:** Description Polish & Dashboard UX Fix
+**Session Type:** Professional Pitch Overhaul & Repo Cleanup
 
 ---
 
@@ -13,6 +13,34 @@
 
 ## 1. SNAPSHOT
 
+- **Session 17 Professional Pitch Overhaul & Repo Cleanup:**
+  - **Critical audit performed** - identified and fixed math inconsistencies, gaps, and flaws
+  - **Fixed inflated value claims:**
+    - Changed "$15,000+ conservative" → accurate "Year 1: $9,300+ | Year 2+: $15,000+"
+    - ROI section now shows: Hard Savings $6,500 + Productivity $2,800 = $9,300
+  - **Added 50/50 payment structure:**
+    - $3,750 on approval, $3,750 on delivery
+    - "Pay for results, not promises" messaging
+  - **Added FLC Protections section to The Ask:**
+    - 50% held until delivery
+    - FLC owns all IP, code, documentation
+    - Can stop after any project
+  - **Added Worst Case Scenario callout:**
+    - Maximum exposure: $22,500
+    - FLC keeps all work products
+    - Winn returns to normal IR role
+  - **Changed quarterly → monthly progress reports**
+  - **Simplified AI Meeting Assistant description** (4 lines → 2)
+  - **Removed speculative revenue** from Event Management App
+  - **Fixed mobile viewport** to 0.5 initial scale (dashboard)
+  - **Updated partnership-path.html** with 50/50 payment terms
+  - **Updated pitch-script.md** with new terms and objection responses
+  - **REPO CLEANUP - Single source of truth:**
+    - Deleted duplicate HTML files from `initiatives/.../html-showcase/`
+    - Root files (index.html, dashboard.html, etc.) are now THE ONLY source
+    - Prevents future GitHub Pages sync issues
+  - DATA_VERSION bumped to 14
+  - All changes pushed to GitHub Pages
 - **Session 16 Description Polish & Dashboard UX:**
   - **AI Meeting Assistant pitch strengthened:**
     - Emphasizes regulatory compliance through comprehensive documentation
@@ -148,14 +176,16 @@
   - Generated full PDF export of presentation
 - **Key messaging now emphasizes:**
   - Low risk, clear decision points, built-in off-ramps
-  - Per-project costs of **$7,500 each**
+  - Per-project costs of **$7,500 each** (50/50 payment: $3,750 approval / $3,750 delivery)
   - Total Phase 1 investment: **$22,500**
-  - Annual Value Potential: **$15,000+** (conservative)
-  - Timeline: **Jan-August 2026**
+  - **Year 1 Value: $9,300+** (conservative, accurate math)
+  - **Year 2+ Value: $15,000+** with adoption
+  - **FLC Protections:** 50% held until delivery, FLC owns all IP, can stop anytime
+  - Timeline: **Jan-August 2026** with **monthly progress reports**
   - FERPA compliance and data protection throughout
   - Foundation/auxiliary entity as aspirational outcome
   - **Lead with Partnership Path** (Altitude AI) as recommended structure
-- VP presentation TOMORROW (12/18)
+- VP presentation TODAY (12/18)
 
 ---
 
@@ -294,22 +324,26 @@
 
 **Start Here:** Review the presentation in browser, practice pitch
 
-**Files to Open:**
-1. `initiatives/vp-presentation-121825/artifacts/html-showcase/index.html` - THE PITCH
-2. `initiatives/vp-presentation-121825/artifacts/html-showcase/dashboard.html` - Command Center
-3. `initiatives/vp-presentation-121825/artifacts/html-showcase/partnership-path.html` - ALTITUDE AI ALTERNATIVE
-4. `initiatives/vp-presentation-121825/artifacts/html-showcase/pitch-script.md` - PITCH BULLET POINTS & TIPS
+**Files to Open (ALL AT ROOT LEVEL):**
+1. `index.html` - THE PITCH (main presentation)
+2. `dashboard.html` - Command Center with 5-year projections
+3. `partnership-path.html` - ALTITUDE AI ALTERNATIVE
+4. `origin-story.html` - Skunk Works history
+5. `initiatives/vp-presentation-121825/artifacts/html-showcase/pitch-script.md` - PITCH BULLET POINTS & TIPS
 
 **Key Paths:**
 ```
 C:\Users\winnl\Documents\FLC - Skunk Works\
 ├── @Active_State.md             ← This file
 ├── @Program_Charter.md          ← Program foundation
+├── index.html                   ← VP PITCH (SINGLE SOURCE OF TRUTH)
+├── dashboard.html               ← COMMAND CENTER
+├── partnership-path.html        ← ALTITUDE AI ALTERNATIVE
+├── origin-story.html            ← SKUNK WORKS HISTORY
 └── initiatives/vp-presentation-121825/artifacts/html-showcase/
-    ├── index.html               ← VP PITCH (fully transformed)
-    ├── dashboard.html           ← COMMAND CENTER (updated)
-    ├── partnership-path.html    ← ALTITUDE AI ALTERNATIVE
-    └── pitch-script.md          ← PITCH BULLET POINTS (new)
+    ├── pitch-script.md          ← PITCH BULLET POINTS
+    ├── FLC-Skunk-Works-Presentation.pdf
+    └── (NO MORE HTML DUPLICATES - deleted Session 17)
 ```
 
 **Presentation Sections (in order):**
@@ -324,11 +358,16 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 9. The Ask - Specific stipend amounts and decision framework
 
 **Handoff Notes:**
-- Presentation is DONE and ready for Thursday
+- Presentation is DONE and ready for TODAY (Wednesday 12/18)
+- **Session 17 major improvements:**
+  - Math is now accurate and defensible ($9,300 Year 1, $15,000+ Year 2+)
+  - 50/50 payment structure adds FLC protection
+  - FLC Protections + Worst Case Scenario sections ease executive concerns
+  - Monthly progress reports show transparency
 - The pitch structure hits all three emotions (FOMO, confidence, trust)
 - Objections pre-addressed in the content
-- AI Conference tomorrow may provide additional talking points
-- Goal: Get Mario to say YES to Phase 1 per-project stipend structure
+- **IMPORTANT:** HTML files are now at ROOT LEVEL ONLY - no more nested duplicates
+- Goal: Get Mario to say YES to Phase 1 per-project structure (stipend or partnership)
 
 ### Session Log
 | Date | Platform | Focus | Key Outcomes |
@@ -346,30 +385,29 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-16 | Claude (Opus 4.5) | Pitch Perfection | Conservative defaults, $15K+ value, Jan-Aug timeline, pitch-script.md |
 | 2025-12-16 | Claude (Opus 4.5) | Final Polish | Expandable initiatives, mobile hamburger menu, ROI calc removed, exec-focused partnership section |
 | 2025-12-16 | Claude (Opus 4.5) | Description Polish | AI Meeting Assistant pitch (compliance, PD), dashboard expand-all fix |
+| 2025-12-17 | Claude (Opus 4.5) | **Professional Overhaul** | 50/50 payment, accurate math ($9,300 Y1), FLC protections, worst case, monthly reports, repo cleanup |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
+Session 17 Commits (pushed to main):
+- 6e255a8: Remove duplicate HTML files from nested folder (SINGLE SOURCE OF TRUTH)
+- 35367a4: Sync root files with showcase updates for GitHub Pages
+- 360e837: Professional pitch overhaul: accurate math, 50/50 payment terms, FLC protections
+
 Session 16 Commits (pushed to main):
 - c93726e: Fix initiative cards - click expands all three together
 - 301d69f: Strengthen AI Meeting Assistant pitch
 - 71c3c6c: Polish initiative descriptions, improve dashboard UX
 
-Session 15 Commits (pushed to main):
-- 381ca23: Update Active State for Session 14 handoff
-
-Session 14 Commits (pushed to main):
-- e0bb745: Fix mobile nav on partnership and origin pages
-- 5d9651c: Fix mobile horizontal overflow - hamburger now visible
-- 284252e: Add mobile hamburger menu for nav buttons
-- 18239c1: Polish presentation for VP meeting
-
 All changes committed and pushed to:
 https://github.com/WinnCook/flc-skunkworks-presentation
 
-DATA_VERSION: 13 (forces fresh localStorage on web visitors)
+IMPORTANT: HTML files are now at ROOT LEVEL ONLY (no more duplicates in initiatives folder)
+
+DATA_VERSION: 14 (forces fresh localStorage on web visitors)
 ```
 
 ---
