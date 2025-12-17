@@ -27,9 +27,10 @@
 
 ### 2. AI Meeting Assistant (Otter AI Replacement)
 - **Attends meetings for you:** Captures transcripts, notes, action items
-- **Better than Teams:** Superior searchability, auto-draft emails
-- **State/regulatory meetings:** Executive-level regulatory recaps
-- **FERPA compliant:** ~$2,500/year in savings
+- **Regulatory compliance:** Comprehensive documentation, executive-level recaps
+- **Internal communication:** Auto-drafted functional area updates
+- **PD opportunities:** Attend sessions otherwise missed due to scheduling conflicts
+- **Savings:** ~$2,500/year (Otter AI replacement)
 
 ### 3. Enrollment Forecasting v2
 - **Proven foundation:** v1 had <2% error rate
