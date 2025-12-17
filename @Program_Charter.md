@@ -131,7 +131,7 @@ This program uses a **stateless workflow** for AI-assisted sessions:
 | Metric | Target | Current |
 |--------|--------|---------|
 | Initiatives launched | 5+ by Q2 2026 | 3 |
-| $ Value delivered | $10,000+ annual | $4,000+ projected |
+| $ Value delivered | $15,000+ annual | $4,000+ projected |
 | Hours saved (campus-wide) | 100+ annual | TBD |
 | Stakeholder satisfaction | High | Pending |
 

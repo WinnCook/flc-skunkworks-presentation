@@ -659,7 +659,7 @@
         // ================== DATA MANAGEMENT ==================
 
         // Data version - increment when DEFAULT_DATA structure changes to force refresh
-        const DATA_VERSION = 10; // v10: Replaced stipend with cost, updated to $7,500
+        const DATA_VERSION = 11; // v11: Conservative defaults - removed speculative revenue
 
         const DEFAULT_DATA = {
             archived: [],
@@ -674,7 +674,7 @@
                     targetDate: '2026-04-01',
                     costs: { investment: 7500, ongoing: 1000 },
                     recurringStartsY1: false,
-                    value: { savings: 4000, revenue: 2000, productivity: 1000 },
+                    value: { savings: 4000, revenue: 0, productivity: 1000 },
                     stakeholders: ['vp', 'staff'],
                     valueProps: [
                         'Eliminate off-the-shelf subscriptions and vendor negotiations',
@@ -695,7 +695,7 @@
                     targetDate: '2026-05-01',
                     costs: { investment: 7500, ongoing: 1000 },
                     recurringStartsY1: false,
-                    value: { savings: 3000, revenue: 1000, productivity: 2000 },
+                    value: { savings: 2500, revenue: 0, productivity: 2000 },
                     stakeholders: ['vp', 'exec', 'faculty', 'staff'],
                     valueProps: [
                         'Replace expensive cloud transcription services',
@@ -716,7 +716,7 @@
                     targetDate: '2026-06-30',
                     costs: { investment: 7500, ongoing: 2000 },
                     recurringStartsY1: false,
-                    value: { savings: 15000, revenue: 4500, productivity: 3000 },
+                    value: { savings: 0, revenue: 0, productivity: 2800 },
                     stakeholders: ['vp', 'exec', 'enrollment'],
                     valueProps: [
                         'Replace expensive subscription-based what-if analysis tools',

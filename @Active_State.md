@@ -98,7 +98,7 @@
 ### The Ask (Two Options)
 
 **Option A: Stipend Model**
-- Per-project costs of **$7,500** during Phase 1 (Jan-June 2026)
+- Per-project costs of **$7,500** during Phase 1 (Jan-August 2026)
 - Processed through HR/compensation
 
 **Option B: Partnership Path (Altitude AI)** ← *Lower friction*

@@ -10,7 +10,7 @@
 |--------|-------|-------|
 | **Initiatives Active** | 3 | Whova, Otter AI, VP Presentation |
 | **Initiatives Completed** | 0 | Program just launched |
-| **Projected Annual Value** | **$10,000+** | Conservative estimate |
+| **Projected Annual Value** | **$15,000+** | Conservative estimate |
 | **Value Delivered to Date** | TBD | Pending first deliverables |
 
 ---

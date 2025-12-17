@@ -71,9 +71,9 @@
 9. The Ask - Specific requests
 
 ### Key Messaging
-- Stipend: ~$5K per project (negotiated based on work)
-- Phase 1 Investment: ~$15K total
-- Projected Annual Value: $10,000+
+- Per-project cost: $7,500
+- Phase 1 Investment: $22,500 total
+- Projected Annual Value: $15,000+
 - Risk: Low (no permanent commitments)
 
 ---
