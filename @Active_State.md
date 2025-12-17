@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-17 (Session 18)
+**Last Updated:** 2025-12-17 (Session 19)
 **AI Platform:** Claude (Opus 4.5)
-**Session Type:** Final Pre-Presentation Polish
+**Session Type:** Dashboard UX Fixes & Mobile Sidebar
 
 ---
 
@@ -13,6 +13,19 @@
 
 ## 1. SNAPSHOT
 
+- **Session 19 Dashboard UX Fixes & Mobile Sidebar:**
+  - **Removed Presentation Mode entirely** from dashboard:
+    - Deleted nav button, togglePresentationMode() function, keyboard shortcut 'p', initialization code
+  - **Fixed mobile sidebar** to be collapsed by default:
+    - Rewrote CSS using ID selectors (#sidebar, #hamburgerBtn) for higher specificity
+    - Removed conflicting Tailwind classes from sidebar element
+    - Removed 'hidden' class from hamburger button that was conflicting with CSS
+    - Desktop: sidebar visible, hamburger hidden
+    - Mobile: sidebar hidden by default, hamburger visible to toggle
+  - **Restored mobile zoom capability** (initial-scale=0.5, minimum-scale=0.3)
+  - **Executive content audit** - all pages passed (index.html, partnership-path.html, origin-story.html)
+  - DATA_VERSION bumped to 17
+  - All changes committed and pushed to GitHub Pages
 - **Session 18 Final Pre-Presentation Polish:**
   - **Fixed "Winn returns to" → "Winn continues in"** IR role language (worst case scenario)
   - **Fixed "Quarterly" → "Monthly"** progress updates
@@ -397,13 +410,20 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-16 | Claude (Opus 4.5) | Description Polish | AI Meeting Assistant pitch (compliance, PD), dashboard expand-all fix |
 | 2025-12-17 | Claude (Opus 4.5) | **Professional Overhaul** | 50/50 payment, accurate math ($9,300 Y1), FLC protections, worst case, monthly reports, repo cleanup |
 | 2025-12-17 | Claude (Opus 4.5) | **Final Polish** | "continues in IR", monthly updates, 6 benefit boxes, executive language |
+| 2025-12-17 | Claude (Opus 4.5) | **Dashboard UX** | Removed Presentation Mode, fixed mobile sidebar with ID selectors |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
+Session 19 Commits (pushed to main):
+- 419130c: Restore mobile zoom capability (initial-scale=0.5)
+- 0befc8b: Fix mobile sidebar properly with ID selectors
+- 83cdb43: Session 19: Remove Presentation Mode, fix mobile sidebar
+
 Session 18 Commits (pushed to main):
+- e9e61ef: Update Active State for Session 18 handoff
 - b9ef19f: Simplify No Institutional Commitment description
 - f223bec: Upgrade benefit box to executive language
 - 4891ee0: Session 18: Pre-presentation text fixes
@@ -424,7 +444,7 @@ https://github.com/WinnCook/flc-skunkworks-presentation
 
 IMPORTANT: HTML files are now at ROOT LEVEL ONLY (no more duplicates in initiatives folder)
 
-DATA_VERSION: 15 (forces fresh localStorage on web visitors)
+DATA_VERSION: 17 (forces fresh localStorage on web visitors)
 ```
 
 ---
