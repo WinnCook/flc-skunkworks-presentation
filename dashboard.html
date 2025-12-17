@@ -153,11 +153,6 @@
             box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
         }
 
-        /* Expanded initiative card spans full row */
-        .initiative-card.expanded-card {
-            grid-column: 1 / -1;
-        }
-
         /* Mobile Sidebar Styles */
         @media (max-width: 767px) {
             .sidebar {
@@ -1050,9 +1045,9 @@
             const grid = document.getElementById('initiativesGrid');
             grid.innerHTML = appData.initiatives.map(init => {
                 const totalValue = (init.value.savings + init.value.revenue + init.value.productivity);
-                const isExpanded = appData.settings.expandedProjects?.[init.id] || false;
+                const isExpanded = appData.settings.allInitiativesExpanded || false;
                 return `
-                <div class="initiative-card ${isExpanded ? 'expanded-card' : ''} bg-gray-800 rounded-xl border border-gray-700 hover:border-flc-gold/50 transition relative overflow-hidden"
+                <div class="initiative-card bg-gray-800 rounded-xl border border-gray-700 hover:border-flc-gold/50 transition relative overflow-hidden"
                      id="card-${init.id}" style="border-left: 4px solid ${init.color}">
                     <!-- Clickable Header -->
                     <div onclick="toggleInitiativeCard('${init.id}')"
@@ -1149,22 +1144,29 @@
             `}).join('');
         }
 
-        // Toggle initiative card expansion
+        // Toggle ALL initiative cards expansion (clicking any card expands/collapses all)
         function toggleInitiativeCard(id) {
-            if (!appData.settings.expandedProjects) {
-                appData.settings.expandedProjects = {};
+            // Use a single global expanded state for all cards
+            if (!appData.settings.allInitiativesExpanded) {
+                appData.settings.allInitiativesExpanded = false;
             }
-            appData.settings.expandedProjects[id] = !appData.settings.expandedProjects[id];
+            appData.settings.allInitiativesExpanded = !appData.settings.allInitiativesExpanded;
             saveData(appData);
 
-            const card = document.getElementById(`card-${id}`);
-            const panel = document.getElementById(`panel-${id}`);
-            const chevron = document.getElementById(`chevron-${id}`);
-            if (card && panel && chevron) {
-                card.classList.toggle('expanded-card');
-                panel.classList.toggle('expanded');
-                chevron.classList.toggle('rotate-180');
-            }
+            // Toggle all initiative cards
+            appData.initiatives.forEach(init => {
+                const panel = document.getElementById(`panel-${init.id}`);
+                const chevron = document.getElementById(`chevron-${init.id}`);
+                if (panel && chevron) {
+                    if (appData.settings.allInitiativesExpanded) {
+                        panel.classList.add('expanded');
+                        chevron.classList.add('rotate-180');
+                    } else {
+                        panel.classList.remove('expanded');
+                        chevron.classList.remove('rotate-180');
+                    }
+                }
+            });
         }
 
         // Quick update initiative value
