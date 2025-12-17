@@ -1,18 +1,42 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-16 (Session 13)
+**Last Updated:** 2025-12-16 (Session 14)
 **AI Platform:** Claude (Opus 4.5)
-**Session Type:** Pitch Perfection & Conservative Defaults Audit
+**Session Type:** Final Polish & Mobile Optimization
 
 ---
 
 ## 0. CURRENT PHASE
 
-**READY** - Presentation polished and ready for VP presentation Thursday
+**READY** - Presentation polished and ready for VP presentation Wednesday 12/18
 
 ---
 
 ## 1. SNAPSHOT
 
+- **Session 14 Final Polish & Mobile Optimization:**
+  - **Dashboard redesign for presenting:**
+    - Removed Executive Summary and Activity Log from main dashboard view
+    - Redesigned initiatives as expandable cards with inline $ editing
+    - Click to expand: edit savings/revenue/productivity/costs directly
+    - All changes update 5-Year Financial Projection table in real-time
+    - DATA_VERSION bumped to 12
+  - **Partnership-path.html improvements:**
+    - Combined Steps 2 & 3 into single "Vendor Setup & Onboarding" step (3 steps now)
+    - Restructured "Preferred Partner Offer" → "Founding Partner Advantage"
+    - Left column: Strategic Value (time-to-value, budget flexibility, exit ramp, rates)
+    - Right column: Operational Assurances (no repetition, exec-focused)
+    - Added overflow-x fix for mobile
+  - **Index.html improvements:**
+    - Removed Interactive ROI Calculator (duplicative with Command Center)
+    - Removed 3-Year Value Projection chart
+    - Changed "Strategic Positioning: Priceless" → "Aligned" (more professional)
+    - Added mobile hamburger menu for nav buttons
+    - Added overflow-x: hidden to prevent horizontal scroll on mobile
+  - **Mobile nav fixes (all pages):**
+    - Origin-story & partnership-path: simplified to logo + back arrow
+    - Text hidden on mobile, full text on desktop
+    - All pages now have overflow-x: hidden
+  - All changes pushed to GitHub Pages
 - **Session 13 Pitch Perfection & Conservative Defaults:**
   - Conducted multi-perspective audit (CEO view, VP view) of entire pitch
   - Updated **Annual Value Potential** from $10,000+ to **$15,000+** (conservative, defensible)
@@ -280,12 +304,20 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-16 | Claude | Partnership Path | Altitude AI entity, vendor approach, simplified nav, 7 benefits |
 | 2025-12-16 | Claude | Pricing & Financials | $7,500/project, 5-yr table, valueProps, stipend→cost |
 | 2025-12-16 | Claude (Opus 4.5) | Pitch Perfection | Conservative defaults, $15K+ value, Jan-Aug timeline, pitch-script.md |
+| 2025-12-16 | Claude (Opus 4.5) | Final Polish | Expandable initiatives, mobile hamburger menu, ROI calc removed, exec-focused partnership section |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
+Session 14 Commits (pushed to main):
+- e0bb745: Fix mobile nav on partnership and origin pages
+- 5d9651c: Fix mobile horizontal overflow - hamburger now visible
+- 284252e: Add mobile hamburger menu for nav buttons
+- 18239c1: Polish presentation for VP meeting
+- cd38702: Streamline dashboard and partnership-path for VP presentation
+
 Session 13 Commits (pushed to main):
 - ea1fbe1: Finalize presentation with conservative defaults and pitch script
 
@@ -293,16 +325,10 @@ Session 12 Commits (pushed to main):
 - 1eb7ca3: Sync root HTML files with showcase folder for GitHub Pages
 - c23b91d: Update pricing to $7,500 per project, add value propositions
 
-Session 11 Commits (pushed to main):
-- 7d6c485: Update Active State for Session 11 handoff
-- 36e0001: Simplify nav: remove scroll links, make logo clickable home button
-- 53e794a: Shorten nav labels and add equipment benefit to Partnership Path
-- b865b13: Add Partnership Path page (Altitude AI entity alternative)
-
 All changes committed and pushed to:
 https://github.com/WinnCook/flc-skunkworks-presentation
 
-DATA_VERSION: 11 (forces fresh localStorage on web visitors)
+DATA_VERSION: 12 (forces fresh localStorage on web visitors)
 ```
 
 ---
