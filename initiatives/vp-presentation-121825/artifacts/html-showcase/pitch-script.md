@@ -2,19 +2,22 @@
 
 ## Your Numbers (Memorize These)
 - **Investment:** $22,500 (3 projects × $7,500)
+- **Payment:** 50/50 — $3,750 on approval, $3,750 on delivery
 - **Timeline:** Jan - August 2026
-- **Annual Value:** $15,000+ (conservative)
-- **5-Year ROI:** Auto-calculated in dashboard
+- **Year 1 Value:** $9,300+ (conservative hard numbers)
+- **Year 2+ Value:** $15,000+ with adoption
+- **IP:** All deliverables owned by FLC
 
 ---
 
 ## Opening (2 min)
-> "Thank you for this opportunity. I'm asking for $22,500 to fund three AI innovation projects over the next eight months. This is a measured experiment with clear decision points and zero permanent commitments."
+> "Thank you for this opportunity. I'm asking for $22,500 to fund three AI innovation projects over the next eight months. Payment is 50/50 — half on approval, half when I deliver. FLC owns everything I build. Monthly progress reports. Zero permanent commitments."
 
 **Hit:**
 - Direct ask upfront - don't bury the lede
-- Frame as "measured experiment" not "risky bet"
-- Zero permanent commitments = low risk
+- 50/50 payment = FLC holds leverage until results delivered
+- IP ownership upfront = FLC keeps everything regardless of outcome
+- Monthly reporting = full transparency, no surprises
 
 ---
 
@@ -69,10 +72,10 @@
 ## Objection Responses
 
 **"That's a lot of money"**
-> "I understand. The investment pays for itself in year one with hard savings alone - $4K Event Management + $2.5K Meeting Assistant = $6.5K. Everything else is upside."
+> "I understand. And you only pay half upfront — the other half when I deliver. Year 1 conservative value is $9,300 in hard savings alone. Plus FLC owns everything regardless of outcome."
 
 **"What if it doesn't work?"**
-> "Then we've learned something valuable and I go back to normal IR. No harm done. But based on v1 forecasting success, I'm confident we'll deliver."
+> "Then you've spent at most $22,500 and own three working applications. I go back to normal IR. You keep everything I built. But based on v1 forecasting success, I'm confident we'll deliver."
 
 **"Why do you need an LLC?"**
 > "It simplifies procurement for you - uses existing vendor processes, no HR policy questions, cleaner accounting. For me it's more paperwork, but for FLC it's actually simpler."
@@ -80,8 +83,14 @@
 **"What about conflict of interest?"**
 > "I've reviewed the guidelines and I'm prepared to file full disclosure with HR. All work stays FLC's intellectual property."
 
+**"What about IP ownership?"**
+> "FLC owns everything — code, documentation, all deliverables. That's built into the terms. If I leave tomorrow, you keep it all."
+
 **"Why can't this be done in your normal role?"**
 > "These projects require dedicated focus time outside normal IR responsibilities. The contract compensates for evenings/weekends and signals institutional commitment to innovation."
+
+**"How do we know you'll deliver?"**
+> "50/50 payment. You hold half the money until I deliver. Monthly progress reports so you see exactly where things stand. No surprises."
 
 ---
 
