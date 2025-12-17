@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-16 (Session 15)
+**Last Updated:** 2025-12-16 (Session 16)
 **AI Platform:** Claude (Opus 4.5)
-**Session Type:** Scenario Presets & Executive Descriptions
+**Session Type:** Description Polish & Dashboard UX Fix
 
 ---
 
@@ -13,6 +13,23 @@
 
 ## 1. SNAPSHOT
 
+- **Session 16 Description Polish & Dashboard UX:**
+  - **AI Meeting Assistant pitch strengthened:**
+    - Emphasizes regulatory compliance through comprehensive documentation
+    - Highlights internal communication (auto-drafted functional area updates)
+    - Adds PD attendance for scheduling conflicts (key VP value prop)
+    - Removed FERPA reference (not relevant to meeting data)
+  - **Event Management App description polished:**
+    - More professional and concise
+    - Direct pitch: build Whova replica, licensable to partners for revenue
+  - **Dashboard initiative cards fixed:**
+    - Clicking ANY card now expands/collapses ALL THREE together
+    - Removed broken single-card full-row spanning behavior
+    - Uses global `allInitiativesExpanded` state
+  - **Dashboard mobile zoom-to-fit:**
+    - Updated viewport meta: `initial-scale=0.8, minimum-scale=0.5`
+    - Users can now see full dashboard and zoom as needed
+  - All changes pushed to GitHub Pages
 - **Session 15 Scenario Presets & Executive Descriptions:**
   - **Renamed initiatives across all files:**
     - "Conference App" → **Event Management App** (Institutional Asset)
@@ -328,30 +345,31 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-16 | Claude | Pricing & Financials | $7,500/project, 5-yr table, valueProps, stipend→cost |
 | 2025-12-16 | Claude (Opus 4.5) | Pitch Perfection | Conservative defaults, $15K+ value, Jan-Aug timeline, pitch-script.md |
 | 2025-12-16 | Claude (Opus 4.5) | Final Polish | Expandable initiatives, mobile hamburger menu, ROI calc removed, exec-focused partnership section |
+| 2025-12-16 | Claude (Opus 4.5) | Description Polish | AI Meeting Assistant pitch (compliance, PD), dashboard expand-all fix |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
+Session 16 Commits (pushed to main):
+- c93726e: Fix initiative cards - click expands all three together
+- 301d69f: Strengthen AI Meeting Assistant pitch
+- 71c3c6c: Polish initiative descriptions, improve dashboard UX
+
+Session 15 Commits (pushed to main):
+- 381ca23: Update Active State for Session 14 handoff
+
 Session 14 Commits (pushed to main):
 - e0bb745: Fix mobile nav on partnership and origin pages
 - 5d9651c: Fix mobile horizontal overflow - hamburger now visible
 - 284252e: Add mobile hamburger menu for nav buttons
 - 18239c1: Polish presentation for VP meeting
-- cd38702: Streamline dashboard and partnership-path for VP presentation
-
-Session 13 Commits (pushed to main):
-- ea1fbe1: Finalize presentation with conservative defaults and pitch script
-
-Session 12 Commits (pushed to main):
-- 1eb7ca3: Sync root HTML files with showcase folder for GitHub Pages
-- c23b91d: Update pricing to $7,500 per project, add value propositions
 
 All changes committed and pushed to:
 https://github.com/WinnCook/flc-skunkworks-presentation
 
-DATA_VERSION: 12 (forces fresh localStorage on web visitors)
+DATA_VERSION: 13 (forces fresh localStorage on web visitors)
 ```
 
 ---
