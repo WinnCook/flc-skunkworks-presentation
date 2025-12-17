@@ -153,8 +153,9 @@
             box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
         }
 
-        /* Mobile Sidebar Styles - MOBILE FIRST */
-        /* Default: hamburger hidden, sidebar visible (desktop) */
+        /* Mobile Sidebar Styles - JavaScript controlled via .is-mobile class on body */
+
+        /* Default: desktop - hamburger hidden, sidebar visible */
         #hamburgerBtn {
             display: none;
         }
@@ -166,64 +167,53 @@
             width: 256px;
             transform: translateX(0);
         }
-
-        /* Mobile: hamburger visible, sidebar hidden by default */
-        @media (max-width: 767px) {
-            #hamburgerBtn {
-                display: flex !important;
-            }
-            #sidebar {
-                position: fixed;
-                left: 0;
-                top: 64px;
-                bottom: 0;
-                width: 256px;
-                transform: translateX(-100%);
-                transition: transform 0.3s ease-in-out;
-                z-index: 40;
-                background: rgba(31, 41, 55, 0.98);
-            }
-            #sidebar.open {
-                transform: translateX(0);
-            }
-            .sidebar-overlay {
-                position: fixed;
-                inset: 0;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 35;
-                opacity: 0;
-                visibility: hidden;
-                transition: opacity 0.3s ease, visibility 0.3s ease;
-            }
-            .sidebar-overlay.active {
-                opacity: 1;
-                visibility: visible;
-            }
-            .main-content {
-                margin-left: 0 !important;
-            }
-            .footer-bar {
-                left: 0 !important;
-            }
-            .nav-btn-text {
-                display: none;
-            }
-            .main-content {
-                padding: 1rem !important;
-            }
+        .sidebar-overlay {
+            display: none;
         }
 
-        /* Desktop: hamburger hidden, sidebar visible */
-        @media (min-width: 768px) {
-            #hamburgerBtn {
-                display: none !important;
-            }
-            #sidebar {
-                transform: translateX(0) !important;
-            }
-            .sidebar-overlay {
-                display: none !important;
-            }
+        /* Mobile: when body has .is-mobile class (set by JavaScript) */
+        body.is-mobile #hamburgerBtn {
+            display: flex !important;
+        }
+        body.is-mobile #sidebar {
+            position: fixed;
+            left: 0;
+            top: 64px;
+            bottom: 0;
+            width: 256px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 40;
+            background: rgba(31, 41, 55, 0.98);
+        }
+        body.is-mobile #sidebar.open {
+            transform: translateX(0);
+        }
+        body.is-mobile .sidebar-overlay {
+            display: block;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 35;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        body.is-mobile .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        body.is-mobile .main-content {
+            margin-left: 0 !important;
+        }
+        body.is-mobile .footer-bar {
+            left: 0 !important;
+        }
+        body.is-mobile .nav-btn-text {
+            display: none;
+        }
+        body.is-mobile .main-content {
+            padding: 1rem !important;
         }
     </style>
 </head>
@@ -2142,9 +2132,27 @@
             }, 3000);
         }
 
-        // ================== MOBILE SIDEBAR MANAGEMENT ==================
+        // ================== MOBILE DETECTION & SIDEBAR MANAGEMENT ==================
 
         let sidebarOpen = false;
+
+        // Detect mobile using touch capability and screen size
+        function isMobileDevice() {
+            // Check for touch capability
+            const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            // Check actual screen width (not viewport which is affected by initial-scale)
+            const smallScreen = window.screen.width < 1024;
+            return hasTouch && smallScreen;
+        }
+
+        // Apply mobile class to body
+        function applyMobileClass() {
+            if (isMobileDevice()) {
+                document.body.classList.add('is-mobile');
+            } else {
+                document.body.classList.remove('is-mobile');
+            }
+        }
 
         function toggleSidebar() {
             sidebarOpen = !sidebarOpen;
@@ -2182,9 +2190,11 @@
             }
         }
 
-        // Close sidebar on resize to desktop
+        // Recheck mobile status on resize
         window.addEventListener('resize', function() {
-            if (window.innerWidth >= 768 && sidebarOpen) {
+            applyMobileClass();
+            // Close sidebar if we switched to desktop
+            if (!isMobileDevice() && sidebarOpen) {
                 closeSidebar();
             }
         });
@@ -2212,11 +2222,14 @@
         // ================== INITIALIZE ==================
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Detect mobile and apply class FIRST
+            applyMobileClass();
+
             loadScenarioFromURL();
             showView('dashboard');
 
-            // Ensure sidebar is closed on mobile
-            if (window.innerWidth < 768) {
+            // Ensure sidebar starts closed on mobile
+            if (isMobileDevice()) {
                 closeSidebar();
             }
         });
