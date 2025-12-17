@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-17 (Session 19)
+**Last Updated:** 2025-12-17 (Session 20)
 **AI Platform:** Claude (Opus 4.5)
-**Session Type:** Dashboard UX Fixes & Mobile Sidebar
+**Session Type:** Mobile Sidebar Final Fix
 
 ---
 
@@ -13,6 +13,22 @@
 
 ## 1. SNAPSHOT
 
+- **Session 20 Mobile Sidebar Final Fix:**
+  - **ROOT CAUSE IDENTIFIED:** CSS media queries don't work reliably with `initial-scale=0.5`
+    - The viewport scaling causes browser to report doubled viewport width to media queries
+    - A 390px phone reports as ~780px, breaking `max-width: 767px` breakpoints
+  - **SOLUTION: JavaScript-based mobile detection:**
+    - Replaced CSS media queries with JavaScript touch + screen detection
+    - Uses `screen.width` (actual device size, NOT affected by viewport scaling)
+    - Uses touch capability (`ontouchstart` or `maxTouchPoints > 0`)
+    - Adds `.is-mobile` class to body element
+    - CSS now targets `body.is-mobile #sidebar` instead of media queries
+  - **Result:** Mobile sidebar now works correctly:
+    - Hamburger button visible on mobile
+    - Sidebar hidden by default, slides in on tap
+    - Zoom still works (viewport meta unchanged)
+    - Desktop behavior unchanged
+  - All changes committed and pushed to GitHub Pages (commit `1e3760e`)
 - **Session 19 Dashboard UX Fixes & Mobile Sidebar:**
   - **Removed Presentation Mode entirely** from dashboard:
     - Deleted nav button, togglePresentationMode() function, keyboard shortcut 'p', initialization code
@@ -411,12 +427,16 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-17 | Claude (Opus 4.5) | **Professional Overhaul** | 50/50 payment, accurate math ($9,300 Y1), FLC protections, worst case, monthly reports, repo cleanup |
 | 2025-12-17 | Claude (Opus 4.5) | **Final Polish** | "continues in IR", monthly updates, 6 benefit boxes, executive language |
 | 2025-12-17 | Claude (Opus 4.5) | **Dashboard UX** | Removed Presentation Mode, fixed mobile sidebar with ID selectors |
+| 2025-12-17 | Claude (Opus 4.5) | **Mobile Sidebar Fix** | JS touch detection replaces broken CSS media queries |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
+Session 20 Commits (pushed to main):
+- 1e3760e: Fix mobile sidebar: use JS touch detection instead of CSS media queries
+
 Session 19 Commits (pushed to main):
 - 419130c: Restore mobile zoom capability (initial-scale=0.5)
 - 0befc8b: Fix mobile sidebar properly with ID selectors
