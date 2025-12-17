@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-17 (Session 17)
+**Last Updated:** 2025-12-17 (Session 18)
 **AI Platform:** Claude (Opus 4.5)
-**Session Type:** Professional Pitch Overhaul & Repo Cleanup
+**Session Type:** Final Pre-Presentation Polish
 
 ---
 
@@ -13,6 +13,16 @@
 
 ## 1. SNAPSHOT
 
+- **Session 18 Final Pre-Presentation Polish:**
+  - **Fixed "Winn returns to" → "Winn continues in"** IR role language (worst case scenario)
+  - **Fixed "Quarterly" → "Monthly"** progress updates
+  - **Combined 2 benefit boxes into 1** on partnership-path.html:
+    - Merged "No Long-term Commitment" + "No Benefits Burden"
+    - New title: "No Institutional Commitment"
+    - Executive-grade copy: "Operates strictly on deliverables, not salary..."
+    - Now 6 clean boxes (2 rows × 3)
+  - DATA_VERSION bumped to 15
+  - All changes committed and pushed to GitHub Pages
 - **Session 17 Professional Pitch Overhaul & Repo Cleanup:**
   - **Critical audit performed** - identified and fixed math inconsistencies, gaps, and flaws
   - **Fixed inflated value claims:**
@@ -386,13 +396,20 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-16 | Claude (Opus 4.5) | Final Polish | Expandable initiatives, mobile hamburger menu, ROI calc removed, exec-focused partnership section |
 | 2025-12-16 | Claude (Opus 4.5) | Description Polish | AI Meeting Assistant pitch (compliance, PD), dashboard expand-all fix |
 | 2025-12-17 | Claude (Opus 4.5) | **Professional Overhaul** | 50/50 payment, accurate math ($9,300 Y1), FLC protections, worst case, monthly reports, repo cleanup |
+| 2025-12-17 | Claude (Opus 4.5) | **Final Polish** | "continues in IR", monthly updates, 6 benefit boxes, executive language |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
+Session 18 Commits (pushed to main):
+- b9ef19f: Simplify No Institutional Commitment description
+- f223bec: Upgrade benefit box to executive language
+- 4891ee0: Session 18: Pre-presentation text fixes
+
 Session 17 Commits (pushed to main):
+- a58b505: Update Active State for Session 17 handoff
 - 6e255a8: Remove duplicate HTML files from nested folder (SINGLE SOURCE OF TRUTH)
 - 35367a4: Sync root files with showcase updates for GitHub Pages
 - 360e837: Professional pitch overhaul: accurate math, 50/50 payment terms, FLC protections
