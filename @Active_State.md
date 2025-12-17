@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-16 (Session 14)
+**Last Updated:** 2025-12-16 (Session 15)
 **AI Platform:** Claude (Opus 4.5)
-**Session Type:** Final Polish & Mobile Optimization
+**Session Type:** Scenario Presets & Executive Descriptions
 
 ---
 
@@ -13,6 +13,29 @@
 
 ## 1. SNAPSHOT
 
+- **Session 15 Scenario Presets & Executive Descriptions:**
+  - **Renamed initiatives across all files:**
+    - "Conference App" → **Event Management App** (Institutional Asset)
+    - "AI Transcription" → **AI Meeting Assistant** (Otter AI Replacement)
+    - Enrollment Forecasting v2 updated with executive focus
+  - **Dashboard scenario toggle:**
+    - Added 3-preset toggle: Conservative / Moderate / Optimistic
+    - Each scenario applies different value projections to all initiatives
+    - URL sharing support for scenarios (?scenario=moderate)
+    - Share button copies link to clipboard
+  - **Dashboard mobile improvements:**
+    - Added hamburger menu for collapsible sidebar
+    - Sidebar hidden by default on mobile, slides in on tap
+    - Responsive grids for value cards and initiative cards
+    - Back button in top nav with icon-only on mobile
+    - overflow-x: hidden prevents horizontal scroll
+  - **Executive-friendly descriptions (index.html):**
+    - Event Management App: 2 years of Whova, institutional asset, community partners
+    - AI Meeting Assistant: Attends meetings, better than Teams, auto-draft emails, regulatory recaps
+    - Enrollment v2: Executive web dashboard, scenario modeling, finance team access
+  - **Consistency updates:**
+    - partnership-path.html, pitch-script.md, @Active_State.md all updated
+  - DATA_VERSION bumped to 13
 - **Session 14 Final Polish & Mobile Optimization:**
   - **Dashboard redesign for presenting:**
     - Removed Executive Summary and Activity Log from main dashboard view
@@ -42,8 +65,8 @@
   - Updated **Annual Value Potential** from $10,000+ to **$15,000+** (conservative, defensible)
   - Extended timeline from **Jan-June → Jan-August 2026** (more realistic)
   - Made ALL dashboard defaults conservative (removed speculative revenue):
-    - Conference App: revenue $2,000→$0
-    - AI Transcription: savings $3,000→$2,500, revenue $1,000→$0
+    - Event Management App: revenue $2,000→$0
+    - AI Meeting Assistant: savings $3,000→$2,500, revenue $1,000→$0
     - Enrollment v2: savings $15,000→$0, revenue $4,500→$0, productivity $3,000→$2,800
   - Made ROI calculator defaults conservative:
     - College licenses slider: 5→0
@@ -152,7 +175,7 @@
 **Total Phase 1 Investment:** $22,500 (3 projects × $7,500)
 
 **Both Options Include:**
-- 3 Phase 1 projects: Conference App, AI Transcription, Enrollment Forecasting v2
+- 3 Phase 1 projects: Event Management App, AI Meeting Assistant, Enrollment Forecasting v2
 - Formal designation of AI Exploration Initiative
 - Quarterly review meetings
 
@@ -242,8 +265,8 @@
 | Initiative | Status | Next Action | Priority |
 |------------|--------|-------------|----------|
 | VP Presentation 12/18 | **READY** | Practice flow, deliver | CRITICAL |
-| Conference App (Phase 1) | PLANNING | Await VP approval | High |
-| AI Transcription (Phase 1) | PLANNING | Await VP approval | High |
+| Event Management App (Phase 1) | PLANNING | Await VP approval | High |
+| AI Meeting Assistant (Phase 1) | PLANNING | Await VP approval | High |
 | Enrollment Forecasting v2 (Phase 1) | PLANNING | Await VP approval | High |
 
 ---
@@ -277,7 +300,7 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 2. About Winn - Credentials and track record
 3. Program Overview - Mission + 5 principles (incl. Measured Risk, Transparency)
 4. Phased Approach - Timeline, decision point, three paths
-5. Phase 1 Projects - Conference App, AI Transcription, Enrollment Forecasting v2
+5. Phase 1 Projects - Event Management App, AI Meeting Assistant, Enrollment Forecasting v2
 6. ROI - Investment vs. Return breakdown
 7. AI Capabilities - What we can build
 8. Future Vision - Foundation entity, revenue, data security

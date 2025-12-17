@@ -20,20 +20,21 @@
 
 ## The Three Projects (4 min)
 
-### 1. Conference App (Whova Replacement)
-- **Hard savings:** $4,000/year (eliminate Whova license)
-- **Built for FLC:** Custom features, no vendor lock-in
-- **Ready to build:** I know exactly how to do this
+### 1. Event Management App (Whova Replacement)
+- **Hard savings:** $4,000/year (eliminate Whova license after 2 years)
+- **Institutional asset:** Customizable for events of any scale
+- **Community value:** Supports campus and partner engagements
 
-### 2. AI Transcription (Otter AI Replacement)
-- **Campus-wide productivity:** Meeting transcription for everyone
-- **FERPA compliant:** Data stays local, not in vendor cloud
-- **Cost avoidance:** ~$2,500/year in subscriptions
+### 2. AI Meeting Assistant (Otter AI Replacement)
+- **Attends meetings for you:** Captures transcripts, notes, action items
+- **Better than Teams:** Superior searchability, auto-draft emails
+- **State/regulatory meetings:** Executive-level regulatory recaps
+- **FERPA compliant:** ~$2,500/year in savings
 
 ### 3. Enrollment Forecasting v2
 - **Proven foundation:** v1 had <2% error rate
-- **Strategic planning:** What-if scenarios for enrollment
-- **Competitive advantage:** Tools that inform decisions
+- **Executive web dashboard:** Leadership can model scenarios in real time
+- **Finance team access:** Budget implications analysis
 
 **Key phrase:** "These aren't theoretical. I know how to build each one."
 
@@ -67,7 +68,7 @@
 ## Objection Responses
 
 **"That's a lot of money"**
-> "I understand. The investment pays for itself in year one with hard savings alone - $4K Whova + $2.5K transcription = $6.5K. Everything else is upside."
+> "I understand. The investment pays for itself in year one with hard savings alone - $4K Event Management + $2.5K Meeting Assistant = $6.5K. Everything else is upside."
 
 **"What if it doesn't work?"**
 > "Then we've learned something valuable and I go back to normal IR. No harm done. But based on v1 forecasting success, I'm confident we'll deliver."
