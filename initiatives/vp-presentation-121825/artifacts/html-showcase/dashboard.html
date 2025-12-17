@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes">
     <title>FLC Skunk Works | Command Center</title>
 
     <!-- Tailwind CSS -->
@@ -153,6 +153,11 @@
             box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
         }
 
+        /* Expanded initiative card spans full row */
+        .initiative-card.expanded-card {
+            grid-column: 1 / -1;
+        }
+
         /* Mobile Sidebar Styles */
         @media (max-width: 767px) {
             .sidebar {
@@ -188,6 +193,14 @@
             }
             .nav-btn-text {
                 display: none;
+            }
+            /* Mobile zoom to fit */
+            body {
+                min-width: 100vw;
+                transform-origin: top left;
+            }
+            .main-content {
+                padding: 1rem !important;
             }
         }
         @media (min-width: 768px) {
@@ -810,7 +823,7 @@
                 {
                     id: 'event-management',
                     name: 'Event Management App (Phase 1 Project)',
-                    description: 'FLC-owned event platform replacing Whova. Customizable for any event scale, from departmental gatherings to community partner engagements. $7,500 project.',
+                    description: 'FLC-owned conference and event platform with full Whova functionality. Scalable, customizable, and licensable for revenue.',
                     status: 'planning',
                     priority: 'high',
                     startDate: '2026-01-15',
@@ -820,10 +833,10 @@
                     value: { savings: 4000, revenue: 0, productivity: 0 },
                     stakeholders: ['vp', 'staff'],
                     valueProps: [
-                        'Replace recurring Whova licensing after 2 years of use',
-                        'Customizable to FLC specific needs - events of any scale',
-                        'Valuable institutional asset for campus and community partners',
-                        'Potential licensing revenue from regional institutions'
+                        'Full Whova functionality - owned by FLC',
+                        'Scalable for any event size',
+                        'Licensable to community partners for revenue',
+                        'Full institutional control over data and features'
                     ],
                     color: '#3b82f6',
                     costRange: '$7,500'
@@ -831,7 +844,7 @@
                 {
                     id: 'ai-meeting-assistant',
                     name: 'AI Meeting Assistant (Phase 1 Project)',
-                    description: 'Replace Otter AI with institutionally-controlled meeting assistant. Superior searchability, auto-draft emails, executive regulatory recaps. $7,500 project.',
+                    description: 'AI assistant that joins meetings, captures transcripts, generates summaries, and produces auto-drafted communications.',
                     status: 'planning',
                     priority: 'high',
                     startDate: '2026-02-01',
@@ -841,10 +854,10 @@
                     value: { savings: 2500, revenue: 0, productivity: 0 },
                     stakeholders: ['vp', 'exec', 'faculty', 'staff'],
                     valueProps: [
-                        'Attends meetings on your behalf, captures transcripts and notes',
-                        'Superior searchability compared to Teams transcripts',
-                        'Auto-draft emails for functional areas and executive recaps',
-                        'FERPA compliant - data stays within FLC infrastructure'
+                        'Joins meetings and captures transcripts with notes',
+                        'Generates summaries with action items',
+                        'Auto-drafts communications by functional area',
+                        'Executive-level regulatory recaps on demand'
                     ],
                     color: '#22c55e',
                     costRange: '$7,500'
@@ -1039,8 +1052,8 @@
                 const totalValue = (init.value.savings + init.value.revenue + init.value.productivity);
                 const isExpanded = appData.settings.expandedProjects?.[init.id] || false;
                 return `
-                <div class="initiative-card bg-gray-800 rounded-xl border border-gray-700 hover:border-flc-gold/50 transition relative overflow-hidden"
-                     style="border-left: 4px solid ${init.color}">
+                <div class="initiative-card ${isExpanded ? 'expanded-card' : ''} bg-gray-800 rounded-xl border border-gray-700 hover:border-flc-gold/50 transition relative overflow-hidden"
+                     id="card-${init.id}" style="border-left: 4px solid ${init.color}">
                     <!-- Clickable Header -->
                     <div onclick="toggleInitiativeCard('${init.id}')"
                          class="p-5 cursor-pointer hover:bg-gray-700/30 transition">
@@ -1144,9 +1157,11 @@
             appData.settings.expandedProjects[id] = !appData.settings.expandedProjects[id];
             saveData(appData);
 
+            const card = document.getElementById(`card-${id}`);
             const panel = document.getElementById(`panel-${id}`);
             const chevron = document.getElementById(`chevron-${id}`);
-            if (panel && chevron) {
+            if (card && panel && chevron) {
+                card.classList.toggle('expanded-card');
                 panel.classList.toggle('expanded');
                 chevron.classList.toggle('rotate-180');
             }
