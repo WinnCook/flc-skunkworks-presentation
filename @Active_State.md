@@ -28,7 +28,7 @@
   - **Added Worst Case Scenario callout:**
     - Maximum exposure: $22,500
     - FLC keeps all work products
-    - Winn returns to normal IR role
+    - Winn continues in IR role — no harm done
   - **Changed quarterly → monthly progress reports**
   - **Simplified AI Meeting Assistant description** (4 lines → 2)
   - **Removed speculative revenue** from Event Management App
@@ -224,7 +224,7 @@
 **Both Options Include:**
 - 3 Phase 1 projects: Event Management App, AI Meeting Assistant, Enrollment Forecasting v2
 - Formal designation of AI Exploration Initiative
-- Quarterly review meetings
+- Monthly progress updates
 
 ### Summer Decision Framework
 - **Sparse results** → Back to normal IR (no harm done)
@@ -407,7 +407,7 @@ https://github.com/WinnCook/flc-skunkworks-presentation
 
 IMPORTANT: HTML files are now at ROOT LEVEL ONLY (no more duplicates in initiatives folder)
 
-DATA_VERSION: 14 (forces fresh localStorage on web visitors)
+DATA_VERSION: 15 (forces fresh localStorage on web visitors)
 ```
 
 ---
