@@ -286,6 +286,61 @@
     <!-- Sidebar Overlay (mobile only) -->
     <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
 
+    <!-- Executive Disclaimer Popup -->
+    <div id="disclaimerModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeDisclaimer()"></div>
+        <div class="relative bg-gray-800 rounded-2xl max-w-lg w-full border border-purple-500/30 shadow-2xl overflow-hidden">
+            <!-- Purple accent bar (matching Dashboard button) -->
+            <div class="h-1 bg-gradient-to-r from-purple-600 to-cyan-600"></div>
+
+            <div class="p-6 sm:p-8">
+                <!-- Header -->
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">Financial Command Center</h2>
+                </div>
+
+                <!-- Description -->
+                <p class="text-gray-300 mb-4">
+                    An interactive dashboard showing <strong class="text-white">hypothetical ROI projections</strong> and project tracking for the proposed AI initiative.
+                </p>
+
+                <!-- How to Use -->
+                <div class="bg-gray-700/50 rounded-lg p-4 mb-4">
+                    <p class="text-sm text-gray-300">
+                        <span class="text-purple-400 font-semibold">How to Use:</span> Click initiative cards to expand details. Use the sidebar to navigate different views. Adjust scenario toggles to see different projections.
+                    </p>
+                </div>
+
+                <!-- Disclaimer -->
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mb-6">
+                    <p class="text-sm text-amber-200">
+                        <svg class="w-4 h-4 inline mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                        <strong>Important:</strong> All financial figures are illustrative estimates. Actual costs and returns would be determined through formal institutional planning and approval processes.
+                    </p>
+                </div>
+
+                <!-- Next Step -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="closeDisclaimer()" class="flex-1 bg-gradient-to-r from-purple-600 to-cyan-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-500 hover:to-cyan-500 transition">
+                        Got It - Explore the Dashboard
+                    </button>
+                </div>
+
+                <!-- Next Page Hint -->
+                <p class="text-xs text-gray-500 mt-4 text-center">
+                    After reviewing projections, click <strong class="text-amber-400">Origins</strong> in the nav bar to learn about the Skunk Works philosophy.
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Layout -->
     <div class="flex pt-16">
         <!-- Sidebar -->
@@ -2268,6 +2323,12 @@
                     break;
             }
         });
+
+        // ================== DISCLAIMER POPUP ==================
+
+        function closeDisclaimer() {
+            document.getElementById('disclaimerModal').style.display = 'none';
+        }
 
         // ================== INITIALIZE ==================
 

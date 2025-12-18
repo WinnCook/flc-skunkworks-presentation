@@ -1204,6 +1204,61 @@
         </div>
     </section>
 
+    <!-- Executive Disclaimer Popup -->
+    <div id="disclaimerModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeDisclaimer()"></div>
+        <div class="relative bg-gray-800 rounded-2xl max-w-lg w-full border border-flc-gold/30 shadow-2xl overflow-hidden">
+            <!-- Gold accent bar -->
+            <div class="h-1 bg-gradient-to-r from-flc-gold to-yellow-500"></div>
+
+            <div class="p-6 sm:p-8">
+                <!-- Header -->
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-flc-gold rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-flc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">Welcome to the AI Exploration Initiative</h2>
+                </div>
+
+                <!-- Description -->
+                <p class="text-gray-300 mb-4">
+                    This presentation outlines a <strong class="text-white">proposed pilot program</strong> for AI innovation at Fort Lewis College.
+                </p>
+
+                <!-- How to Use -->
+                <div class="bg-gray-700/50 rounded-lg p-4 mb-4">
+                    <p class="text-sm text-gray-300">
+                        <span class="text-flc-gold font-semibold">How to Use:</span> Scroll down to explore the vision, proposed projects, and investment framework.
+                    </p>
+                </div>
+
+                <!-- Disclaimer -->
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mb-6">
+                    <p class="text-sm text-amber-200">
+                        <svg class="w-4 h-4 inline mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                        <strong>Important:</strong> All content is conceptual. Project ideas, costs, timelines, and compensation structures are illustrative proposals for discussion purposes only.
+                    </p>
+                </div>
+
+                <!-- Next Step -->
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="closeDisclaimer()" class="flex-1 bg-flc-gold text-flc-blue px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition">
+                        Got It - Explore the Pitch
+                    </button>
+                </div>
+
+                <!-- Next Page Hint -->
+                <p class="text-xs text-gray-500 mt-4 text-center">
+                    After reviewing this page, click <strong class="text-purple-400">Dashboard</strong> in the nav bar to see interactive financial projections.
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-gray-900 border-t border-gray-800 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -1223,6 +1278,11 @@
     </footer>
 
     <script>
+        // Disclaimer popup close function
+        function closeDisclaimer() {
+            document.getElementById('disclaimerModal').style.display = 'none';
+        }
+
         // Initialize AOS animations
         AOS.init({
             once: true,
