@@ -31,7 +31,8 @@
     - Detailed section-by-section flow for main presentation
     - When to show each secondary page (Dashboard, Partnership, Origins, Horizon)
     - Key phrases and timing guidance for each page
-  - All changes committed and pushed to GitHub Pages (commit `0008bec`)
+  - **Changed "Investment recovered by Year 3" → "Year 2-3"** (more accurate)
+  - All changes committed and pushed to GitHub Pages (final commit `22cdfa1`)
 - **Session 20 Mobile Sidebar Final Fix:**
   - **ROOT CAUSE IDENTIFIED:** CSS media queries don't work reliably with `initial-scale=0.5`
     - The viewport scaling causes browser to report doubled viewport width to media queries
@@ -455,6 +456,7 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 
 ```
 Session 21 Commits (pushed to main):
+- 22cdfa1: Change recovery timeline to Year 2-3
 - 0008bec: Session 21: Mobile fixes, Horizon button, pitch walkthrough
 
 Session 20 Commits (pushed to main):
