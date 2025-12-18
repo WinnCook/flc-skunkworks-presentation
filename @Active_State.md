@@ -1,18 +1,37 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-17 (Session 20)
+**Last Updated:** 2025-12-18 (Session 21)
 **AI Platform:** Claude (Opus 4.5)
-**Session Type:** Mobile Sidebar Final Fix
+**Session Type:** Final Mobile Polish & Horizon Button
 
 ---
 
 ## 0. CURRENT PHASE
 
-**READY** - Presentation polished and ready for VP presentation Wednesday 12/18
+**READY** - Presentation polished and ready for VP presentation TODAY 12/18
 
 ---
 
 ## 1. SNAPSHOT
 
+- **Session 21 Final Mobile Polish & Horizon Button:**
+  - **Fixed mobile yellow banner cutoff** at bottom of main page:
+    - Changed from inline-flex horizontal to flex-col on mobile
+    - Horizontal arrows (→) on desktop, vertical arrows (↓) on mobile
+    - All three value sections now fully visible on any screen size
+  - **Added Horizon (Concept) button:**
+    - Sky-blue to indigo gradient with lightbulb icon
+    - Links to: https://winncook.github.io/concept-demo-flc-website-prototype/
+    - Added to both desktop nav and mobile hamburger menu
+  - **Redesigned mobile hamburger menu:**
+    - Unified gray background for all items (bg-gray-700/80)
+    - Each item has colored icon matching its desktop button
+    - Cleaner spacing (py-2.5, space-y-1)
+    - More aesthetically pleasing and consistent
+  - **Added page-by-page walkthrough to pitch-script.md:**
+    - Detailed section-by-section flow for main presentation
+    - When to show each secondary page (Dashboard, Partnership, Origins, Horizon)
+    - Key phrases and timing guidance for each page
+  - All changes committed and pushed to GitHub Pages (commit `0008bec`)
 - **Session 20 Mobile Sidebar Final Fix:**
   - **ROOT CAUSE IDENTIFIED:** CSS media queries don't work reliably with `initial-scale=0.5`
     - The viewport scaling causes browser to report doubled viewport width to media queries
@@ -428,12 +447,16 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-17 | Claude (Opus 4.5) | **Final Polish** | "continues in IR", monthly updates, 6 benefit boxes, executive language |
 | 2025-12-17 | Claude (Opus 4.5) | **Dashboard UX** | Removed Presentation Mode, fixed mobile sidebar with ID selectors |
 | 2025-12-17 | Claude (Opus 4.5) | **Mobile Sidebar Fix** | JS touch detection replaces broken CSS media queries |
+| 2025-12-18 | Claude (Opus 4.5) | **Final Polish & Horizon** | Mobile banner fix, Horizon button, hamburger redesign, pitch walkthrough |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
+Session 21 Commits (pushed to main):
+- 0008bec: Session 21: Mobile fixes, Horizon button, pitch walkthrough
+
 Session 20 Commits (pushed to main):
 - 1e3760e: Fix mobile sidebar: use JS touch detection instead of CSS media queries
 
