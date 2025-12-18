@@ -21,6 +21,74 @@
 
 ---
 
+## Page-by-Page Walkthrough
+
+### Page 1: Main Presentation (index.html)
+**URL:** https://winncook.github.io/flc-skunkworks-presentation/
+
+**Flow through sections:**
+1. **Hero** — "AI Exploration Initiative" headline, 3 quick stats (3 projects, $7,500/each, Low Risk)
+2. **Building on AI Leadership** — FLC's existing momentum, the right practitioner (Winn's credentials)
+3. **The Skunk Works Model** — Mission + 5 operating principles (rapid iteration, measured risk, transparency, etc.)
+4. **Phased Approach** — Timeline Jan-Aug 2026, three outcome paths (sparse/moderate/high value)
+5. **Phase 1 Projects** — Click to expand each: Event Management, AI Meeting Assistant, Enrollment v2
+6. **ROI Section** — Investment vs. Return breakdown, Year 1: $9,300+ → Year 2+: $15,000+
+7. **AI Capabilities** — What we can build (quick scroll)
+8. **Future Vision** — Foundation entity, locally trained AI
+9. **The Ask** — Specific terms, FLC protections, worst case scenario, decision framework
+
+**Key moment:** Pause on the yellow value banner ($22,500 → $9,300+ → $15,000+)
+
+---
+
+### Page 2: Dashboard (dashboard.html)
+**When to show:** If they want to explore numbers or ask "how did you calculate that?"
+
+**Key points:**
+- Toggle between Conservative / Moderate / Optimistic scenarios
+- Click any initiative card to expand and see value breakdown
+- 5-Year Financial Projection table shows compound returns
+- "These numbers are editable — you can model your own scenarios"
+
+**Don't linger:** Dashboard is backup detail, not the main pitch.
+
+---
+
+### Page 3: Partnership Path (partnership-path.html)
+**When to show:** When discussing the structure (stipend vs vendor)
+
+**Key points:**
+- Two paths: Stipend Model vs. Partnership Path (Altitude AI)
+- 6 benefit boxes: Project accountability, procurement simplicity, no asset overhead, etc.
+- "How It Works" — 3 simple steps
+- "Founding Partner Advantage" — first-mover benefits
+
+**Key phrase:** "Partnership Path is simpler for FLC — uses existing vendor process, no HR policy questions."
+
+---
+
+### Page 4: Origins (origin-story.html)
+**When to show:** Only if asked "What is Skunk Works?" or as brief context
+
+**Key points:**
+- Lockheed 1943 story — small team, big results
+- Kelly Johnson's 6 rules
+- SR-71, F-117, U-2 — proof it works
+- FLC mapping — same principles applied here
+
+**Don't overdo it:** 30 seconds max unless they're engaged.
+
+---
+
+### Page 5: Horizon Concept Demo (external link)
+**When to show:** If they ask about web presence or want to see AI capabilities in action
+
+**URL:** https://winncook.github.io/concept-demo-flc-website-prototype/
+
+**Key point:** "This is a concept demo of what an FLC website redesign could look like — built in hours, not months."
+
+---
+
 ## The Three Projects (4 min)
 
 ### 1. Event Management App (Whova Replacement)
