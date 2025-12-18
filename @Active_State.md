@@ -1,7 +1,7 @@
 # FLC Skunk Works - Active State
-**Last Updated:** 2025-12-18 (Session 22)
+**Last Updated:** 2025-12-18 (Session 23)
 **AI Platform:** Claude (Opus 4.5)
-**Session Type:** Final Audit & Nav Unification
+**Session Type:** Dashboard Mobile Toolbar Cleanup
 
 ---
 
@@ -13,6 +13,16 @@
 
 ## 1. SNAPSHOT
 
+- **Session 23 Dashboard Mobile Toolbar Cleanup:**
+  - **Problem:** Dashboard mobile toolbar was cluttered with all nav buttons visible (CSS media queries don't work with `initial-scale=0.5` viewport scaling)
+  - **Solution:** Streamlined to single hamburger + logo layout:
+    - Added "Navigate" section to existing LEFT sidebar with all page links (The Ask, Main Pitch, Origins, Partnership, Horizon)
+    - Used JavaScript (not CSS) to hide desktop nav buttons on mobile
+    - Removed broken right hamburger button and unused mobile menu dropdown
+    - Navigation links only visible on mobile (hidden on desktop via JS)
+  - **Result:** Clean mobile toolbar: `[☰ Hamburger] [FLC Skunk Works logo]`
+  - **Desktop:** Unchanged - all 5 nav buttons still visible in top bar
+  - All changes committed and pushed to GitHub Pages (commits `884f665`, `ae86795`)
 - **Session 22 Final Audit & Nav Unification:**
   - **Performed comprehensive final audit** before VP presentation:
     - All financial numbers verified consistent across all pages ($7,500/project, $22,500 total, 50/50 payment, Year 1: $9,300+, Year 2+: $15,000+)
@@ -375,6 +385,7 @@
 - [x] Dashboard: 5-year executive-grade financial projection table
 - [x] Value props: Editable rationale bullets for each initiative
 - [x] Navigation: **Unified across all pages** (Session 22) - same 5 buttons on desktop, same hamburger menu on mobile
+- [x] Dashboard mobile: **Single hamburger + logo** (Session 23) - nav links in sidebar, JS-based visibility control
 
 ### Blocked Items
 - None
@@ -433,6 +444,11 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 
 **Handoff Notes:**
 - Presentation is DONE and ready for TODAY (Wednesday 12/18)
+- **Session 23 dashboard mobile fix:**
+  - Dashboard mobile toolbar now clean: `[☰ Hamburger] [FLC Skunk Works logo]`
+  - Navigation links moved to sidebar "Navigate" section (visible on mobile only)
+  - Desktop unchanged - all 5 nav buttons visible
+  - CSS media queries don't work with dashboard's `initial-scale=0.5` viewport - used JavaScript instead
 - **Session 22 final audit:**
   - All numbers consistent across pages
   - All links verified working
@@ -447,6 +463,7 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 - Objections pre-addressed in the content
 - **IMPORTANT:** HTML files are at ROOT LEVEL ONLY - no nested duplicates
 - **IMPORTANT:** Navigation bar is now IDENTICAL across all 4 pages (unified in Session 22)
+- **IMPORTANT:** Dashboard mobile uses JS-based detection (`.is-mobile` class) not CSS media queries
 - Goal: Get Mario to say YES to Phase 1 per-project structure (stipend or partnership)
 
 ### Session Log
@@ -471,12 +488,17 @@ C:\Users\winnl\Documents\FLC - Skunk Works\
 | 2025-12-17 | Claude (Opus 4.5) | **Mobile Sidebar Fix** | JS touch detection replaces broken CSS media queries |
 | 2025-12-18 | Claude (Opus 4.5) | **Final Polish & Horizon** | Mobile banner fix, Horizon button, hamburger redesign, pitch walkthrough |
 | 2025-12-18 | Claude (Opus 4.5) | **Final Audit & Nav Unification** | Full audit passed, unified nav across all pages |
+| 2025-12-18 | Claude (Opus 4.5) | **Dashboard Mobile Toolbar** | Streamlined mobile nav, added Navigate section to sidebar |
 
 ---
 
 ## 9. GIT STATUS
 
 ```
+Session 23 Commits (pushed to main):
+- ae86795: Remove unused right hamburger button from dashboard mobile
+- 884f665: Streamline dashboard mobile toolbar
+
 Session 22 Commits (pushed to main):
 - 3b4f8a9: Unify navigation bar across all pages
 
